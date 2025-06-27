@@ -49,7 +49,7 @@
   - Clics en Teléfono.
   - Total de interacciones por prestador.
 
-## Deploy</br>Este frontend está desplegado aqui 👉 [App-Servicios](https://app-servicios.vercel.app) 👈
+## 📌 Abrila desde el movil 👉 [App-Servicios](https://app-servicios.vercel.app) 👈
 
 <div align="end">
 
