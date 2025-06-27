@@ -1,6 +1,6 @@
 ## App-Servicios-Frontend
 
-- Actualmente en desaroollo
+- Actualmente en desarrollo
 
 ---
 
