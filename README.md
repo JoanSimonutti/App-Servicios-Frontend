@@ -20,14 +20,14 @@
 
 ## Funcionalidades implementadas
 
-### Home (`/`)
+### Home
 
 - Muestra listado de todos los prestadores.
 - Filtros dinámicos por:
   - Categoría.
   - Localidad.
 
-### Detalle de servicio (`/detalle/:id`)
+### Detalle de servicio
 
 - Vista individual de cada prestador.
 - Muestra:
@@ -42,18 +42,14 @@
   - Enviar mensaje por WhatsApp.
 - Cada clic se registra en el backend.
 
-### Panel administrativo (`/admin/clicks`)
+### Panel administrativo
 
 - Consulta estadísticas de contactos:
   - Clics en WhatsApp.
   - Clics en Teléfono.
   - Total de interacciones por prestador.
 
-## Deploy
-
-Este frontend está desplegado aqui 👉 [App-Servicios](https://app-servicios.vercel.app) 👈
-
----
+## Deploy</br>Este frontend está desplegado aqui 👉 [App-Servicios](https://app-servicios.vercel.app) 👈
 
 <div align="end">
 
