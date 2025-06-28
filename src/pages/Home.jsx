@@ -2,22 +2,16 @@
 // ¿Qué hace Home.jsx?
 //
 // Este archivo es la pantalla principal (Home) de tu app de servicios.
-// Ahora implementamos SCROLL INFINITO:
-// - Trae servicios de a tandas (limit + skip).
-// - Carga más servicios automáticamente cuando el usuario llega al final.
-// - Permite seguir filtrando por categoría y localidad.
-// - Muestra la cantidad de servicios encontrados (nueva feature).
-//
-// ¿Por qué es importante?
-// - Mejora la UX → más rápido y liviano.
-// - No sobrecarga la memoria trayendo todos los servicios de una sola vez.
-// - Profesional y moderno.
+// Ahora implementamos:
+// - Scroll infinito (traer datos de a tandas).
+// - Contador de resultados total.
+// - Indicador de cuántos servicios faltan por cargar.
 //
 // Con esto ganás:
-// - Performance.
-// - UX de apps modernas.
-// - Información clara para el usuario.
-// - Código limpio y escalable.
+// - UX profesional.
+// - Información clara al usuario.
+// - Rendimiento óptimo.
+// - Código impecable nivel Dios.
 ///////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -25,26 +19,14 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 
 import React, { useEffect, useState } from "react";
-// React → la librería principal para construir interfaces.
-// useEffect → hook para ejecutar código cuando el componente se monta o cambia.
-// useState → hook para manejar estados internos.
-
 import axios from "axios";
-// Axios → librería para hacer llamadas HTTP (GET, POST, etc.)
-
 import ServiceCard from "../components/ServiceCard";
-// Importamos el componente que renderiza cada tarjeta individual de servicio.
-
 import { useInView } from "react-intersection-observer";
-// Importamos el hook de Intersection Observer.
-// Nos dice si un elemento está visible en el viewport.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Configuración de la URL base de la API
 ///////////////////////////////////////////////////////////////////////////////////////
 
-// Obtenemos la URL base del backend desde variables de entorno (.env).
-// Esto permite cambiar entre local y producción sin tocar el código.
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -68,11 +50,13 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
   // Estado que indica si estamos cargando datos.
 
+  const [total, setTotal] = useState(null);
+  // Guarda el total de servicios disponibles (filtros incluidos).
+
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("todas");
   const [localidadSeleccionada, setLocalidadSeleccionada] = useState("todas");
 
   const [filtrados, setFiltrados] = useState([]);
-  // Guarda la lista final que se muestra (puede estar filtrada).
 
   //////////////////////////////////////////////////
   // Hook de Intersection Observer
@@ -81,8 +65,6 @@ export default function Home() {
   const { ref, inView } = useInView({
     threshold: 0,
   });
-  // ref → se asocia a un div invisible al final de la página.
-  // inView → true si ese div es visible en pantalla.
 
   //////////////////////////////////////////////////
   // Función para traer servicios paginados
@@ -94,18 +76,32 @@ export default function Home() {
     setLoading(true);
 
     try {
-      // Hacemos la llamada al backend con paginación.
-      const response = await axios.get(
-        `${API_BASE_URL}/serv?limit=10&skip=${skip}`
-      );
+      // Construimos la query string para filtros:
+      const params = new URLSearchParams();
 
-      if (response.data.length === 0) {
-        // Si no hay más datos, seteamos hasMore en false.
+      if (categoriaSeleccionada !== "todas") {
+        params.append("categoria", categoriaSeleccionada);
+      }
+      if (localidadSeleccionada !== "todas") {
+        params.append("localidad", localidadSeleccionada);
+      }
+      params.append("limit", 10);
+      params.append("skip", skip);
+
+      // Llamada al backend:
+      const response = await axios.get(`${API_BASE_URL}/serv?${params.toString()}`);
+
+      const nuevosServicios = response.data.data;
+
+      if (response.data.total !== undefined) {
+        setTotal(response.data.total);
+      }
+
+      if (nuevosServicios.length === 0) {
         setHasMore(false);
       } else {
-        // Agregamos los nuevos servicios al array existente.
-        setServicios((prev) => [...prev, ...response.data]);
-        setSkip((prev) => prev + response.data.length);
+        setServicios((prev) => [...prev, ...nuevosServicios]);
+        setSkip((prev) => prev + nuevosServicios.length);
       }
     } catch (error) {
       console.error("Error al obtener los servicios:", error);
@@ -182,9 +178,16 @@ export default function Home() {
       <h1 className="text-center mb-4">Buscar Servicios</h1>
 
       {/* Indicador de cantidad de resultados */}
-      {filtrados.length > 0 && (
+      {filtrados.length > 0 && total !== null && (
         <p className="text-center text-muted mb-4">
-          Se encontraron <strong>{filtrados.length}</strong> servicios.
+          Se muestran <strong>{filtrados.length}</strong> de{" "}
+          <strong>{total}</strong> servicios.
+          {total - filtrados.length > 0 && (
+            <>
+              {" "}
+              Faltan cargar <strong>{total - filtrados.length}</strong> más.
+            </>
+          )}
         </p>
       )}
 
@@ -195,7 +198,14 @@ export default function Home() {
           <select
             className="form-select"
             value={categoriaSeleccionada}
-            onChange={(e) => setCategoriaSeleccionada(e.target.value)}
+            onChange={(e) => {
+              setCategoriaSeleccionada(e.target.value);
+              // Reiniciamos scroll infinito al cambiar filtros
+              setServicios([]);
+              setSkip(0);
+              setHasMore(true);
+              setTotal(null);
+            }}
           >
             {categoriasDisponibles.map((categoria, idx) => (
               <option key={idx} value={categoria}>
@@ -210,7 +220,13 @@ export default function Home() {
           <select
             className="form-select"
             value={localidadSeleccionada}
-            onChange={(e) => setLocalidadSeleccionada(e.target.value)}
+            onChange={(e) => {
+              setLocalidadSeleccionada(e.target.value);
+              setServicios([]);
+              setSkip(0);
+              setHasMore(true);
+              setTotal(null);
+            }}
           >
             {localidadesDisponibles.map((localidad, idx) => (
               <option key={idx} value={localidad}>
@@ -247,7 +263,7 @@ export default function Home() {
       <div ref={ref}></div>
 
       {/* Mensaje si ya no hay más servicios */}
-      {!hasMore && (
+      {!hasMore && total !== null && (
         <p className="text-center text-muted mt-3">
           No hay más servicios para mostrar.
         </p>
@@ -255,10 +271,3 @@ export default function Home() {
     </div>
   );
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// Resultado:
-// - Home.jsx ahora muestra la cantidad de servicios encontrados.
-// - Perfectamente integrado con scroll infinito.
-// - Profesional y con comentarios nivel Dios.
-///////////////////////////////////////////////////////////////////////////////////////
