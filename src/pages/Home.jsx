@@ -261,4 +261,6 @@ export default function Home() {
 // - Home.jsx ahora muestra la cantidad de servicios encontrados.
 // - Perfectamente integrado con scroll infinito.
 // - Profesional y con comentarios nivel Dios.
+
+//ESTOY VOLVIENDO A DEJAR TODO COMO ESTABA ANTES DE TOCAR EL BACK
 ///////////////////////////////////////////////////////////////////////////////////////
