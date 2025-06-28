@@ -2,39 +2,40 @@
 // ¿Qué hace Home.jsx?
 
 // Este archivo es la pantalla principal (Home) de tu app de servicios.
-// Su objetivo es:
-// - Traer todos los servicios desde el backend.
-// - Mostrar esos servicios en forma de tarjetas (ServiceCard).
-// - Permitir que el usuario filtre servicios por categoría o localidad.
+// Ahora implementamos SCROLL INFINITO:
+// - Trae servicios de a tandas (limit + skip).
+// - Carga más servicios automáticamente cuando el usuario llega al final.
+// - Permite seguir filtrando por categoría y localidad.
 
 // ¿Por qué es importante?
-// Porque es la primera vista que ve el usuario:
-// - Tiene que ser rápida.
-// - Debe mostrar resultados reales.
-// - Permite filtrar fácilmente sin recargar la página.
-// - Es la base para que la app sea útil y profesional.
+// - Mejora la UX → más rápido y liviano.
+// - No sobrecarga la memoria trayendo todos los servicios de una sola vez.
+// - Profesional y moderno.
 
-// Con este archivo ganás:
-// - Experiencia de usuario ágil y profesional.
-// - Código organizado, mantenible y escalable.
-// - Consumo real de datos del backend.
-// - Separación clara de responsabilidades (datos vs presentación).
+// Con esto ganás:
+// - Performance.
+// - UX de apps modernas.
+// - Código limpio y escalable.
 ///////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Importaciones necesarias
 ///////////////////////////////////////////////////////////////////////////////////////
 
-import React, { useEffect, useState } from "react"; 
+import React, { useEffect, useState } from "react";
 // React → la librería principal para construir interfaces.
 // useEffect → hook para ejecutar código cuando el componente se monta o cambia.
 // useState → hook para manejar estados internos.
 
-import axios from "axios"; 
+import axios from "axios";
 // Axios → librería para hacer llamadas HTTP (GET, POST, etc.)
 
-import ServiceCard from "../components/ServiceCard"; 
+import ServiceCard from "../components/ServiceCard";
 // Importamos el componente que renderiza cada tarjeta individual de servicio.
+
+import { useInView } from "react-intersection-observer";
+// Importamos el hook de Intersection Observer.
+// Nos dice si un elemento está visible en el viewport.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Configuración de la URL base de la API
@@ -49,78 +50,109 @@ const API_BASE_URL = import.meta.env.VITE_API_URL;
 ///////////////////////////////////////////////////////////////////////////////////////
 
 export default function Home() {
-
   //////////////////////////////////////////////////
   // Definición de estados locales
   //////////////////////////////////////////////////
 
-  // Estado que guarda TODOS los servicios que trae el backend.
-  const [servicios, setServicios] = useState([]);
+  const [servicios, setServicios] = useState([]); 
+  // Guarda todos los servicios que vamos trayendo.
 
-  // Estados para los filtros seleccionados por el usuario.
+  const [skip, setSkip] = useState(0);
+  // Cuántos registros nos estamos saltando. Sirve para paginación.
+
+  const [hasMore, setHasMore] = useState(true);
+  // Indica si todavía hay más datos para traer.
+
+  const [loading, setLoading] = useState(false);
+  // Estado que indica si estamos cargando datos.
+
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("todas");
   const [localidadSeleccionada, setLocalidadSeleccionada] = useState("todas");
 
-  // Estado para la lista de servicios que se va a mostrar filtrada.
   const [filtrados, setFiltrados] = useState([]);
+  // Guarda la lista final que se muestra (puede estar filtrada).
 
   //////////////////////////////////////////////////
-  // Función para traer los servicios del backend
+  // Hook de Intersection Observer
   //////////////////////////////////////////////////
 
-  const fetchServices = async () => {
+  const { ref, inView } = useInView({
+    threshold: 0,
+  });
+  // ref → se asocia a un div invisible al final de la página.
+  // inView → true si ese div es visible en pantalla.
+
+  //////////////////////////////////////////////////
+  // Función para traer servicios paginados
+  //////////////////////////////////////////////////
+
+  const fetchMoreServices = async () => {
+    if (loading || !hasMore) return;
+
+    setLoading(true);
+
     try {
-      // Hacemos la llamada al backend:
-      // GET → obtiene datos.
-      // URL → /serv (endpoint real).
-      const response = await axios.get(`${API_BASE_URL}/serv`);
+      // Hacemos la llamada al backend con paginación.
+      const response = await axios.get(
+        `${API_BASE_URL}/serv?limit=10&skip=${skip}`
+      );
 
-      // Guardamos el resultado en el estado original.
-      setServicios(response.data);
-
-      // Inicialmente, mostramos todos los servicios.
-      setFiltrados(response.data);
+      if (response.data.length === 0) {
+        // Si no hay más datos, seteamos hasMore en false.
+        setHasMore(false);
+      } else {
+        // Agregamos los nuevos servicios al array existente.
+        setServicios((prev) => [...prev, ...response.data]);
+        setSkip((prev) => prev + response.data.length);
+      }
     } catch (error) {
-      // Si ocurre un error, lo mostramos en consola.
       console.error("Error al obtener los servicios:", error);
     }
+
+    setLoading(false);
   };
 
   //////////////////////////////////////////////////
-  // useEffect → Se ejecuta UNA SOLA VEZ
+  // useEffect → Llama fetchMoreServices al cargar
   //////////////////////////////////////////////////
 
-  // Apenas se monta el componente (Home), trae los servicios del backend.
   useEffect(() => {
-    fetchServices();
+    fetchMoreServices();
   }, []);
 
   //////////////////////////////////////////////////
-  // useEffect → Ejecuta el filtrado cuando cambian:
-  // - La categoría seleccionada
-  // - La localidad seleccionada
-  // - La lista de servicios original
+  // useEffect → Llama fetchMoreServices si inView se activa
   //////////////////////////////////////////////////
 
   useEffect(() => {
-    // Hacemos una copia de todos los servicios.
+    if (inView && hasMore && !loading) {
+      fetchMoreServices();
+    }
+  }, [inView]);
+
+  //////////////////////////////////////////////////
+  // useEffect → Filtrado
+  //////////////////////////////////////////////////
+
+  useEffect(() => {
     let resultado = [...servicios];
 
-    // Si la categoría no es "todas", filtramos por la categoría elegida.
     if (categoriaSeleccionada !== "todas") {
       resultado = resultado.filter(
-        (s) => s.categoria.toLowerCase() === categoriaSeleccionada.toLowerCase()
+        (s) =>
+          s.categoria.toLowerCase() ===
+          categoriaSeleccionada.toLowerCase()
       );
     }
 
-    // Si la localidad no es "todas", filtramos por la localidad elegida.
     if (localidadSeleccionada !== "todas") {
       resultado = resultado.filter(
-        (s) => s.localidad.toLowerCase() === localidadSeleccionada.toLowerCase()
+        (s) =>
+          s.localidad.toLowerCase() ===
+          localidadSeleccionada.toLowerCase()
       );
     }
 
-    // Actualizamos el estado con la lista filtrada.
     setFiltrados(resultado);
   }, [categoriaSeleccionada, localidadSeleccionada, servicios]);
 
@@ -128,13 +160,11 @@ export default function Home() {
   // Listas únicas de categorías y localidades
   //////////////////////////////////////////////////
 
-  // Extraemos categorías únicas para el filtro, más la opción "todas".
   const categoriasDisponibles = [
     "todas",
     ...new Set(servicios.map((s) => s.categoria.toLowerCase())),
   ];
 
-  // Extraemos localidades únicas para el filtro, más la opción "todas".
   const localidadesDisponibles = [
     "todas",
     ...new Set(servicios.map((s) => s.localidad.toLowerCase())),
@@ -146,12 +176,11 @@ export default function Home() {
 
   return (
     <div className="container py-5">
-      {/* Título principal */}
+      {/* Título */}
       <h1 className="text-center mb-4">Buscar Servicios</h1>
 
       {/* Filtros */}
       <div className="row mb-4">
-        {/* Filtro por categoría */}
         <div className="col-md-6 mb-2">
           <label className="form-label">Filtrar por categoría:</label>
           <select
@@ -161,14 +190,12 @@ export default function Home() {
           >
             {categoriasDisponibles.map((categoria, idx) => (
               <option key={idx} value={categoria}>
-                {/* Mostramos la primera letra en mayúscula */}
                 {categoria.charAt(0).toUpperCase() + categoria.slice(1)}
               </option>
             ))}
           </select>
         </div>
 
-        {/* Filtro por localidad */}
         <div className="col-md-6 mb-2">
           <label className="form-label">Filtrar por localidad:</label>
           <select
@@ -185,7 +212,7 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Lista de resultados */}
+      {/* Lista de servicios */}
       {filtrados.length === 0 ? (
         <p className="text-muted text-center">
           No se encontraron servicios.
@@ -193,12 +220,28 @@ export default function Home() {
       ) : (
         <div className="row">
           {filtrados.map((servicio) => (
-            <div key={servicio._id} className="col-md-4 mb-1">
-              {/* Renderizamos la tarjeta individual del servicio */}
+            <div key={servicio._id} className="col-md-4 mb-3">
               <ServiceCard service={servicio} />
             </div>
           ))}
         </div>
+      )}
+
+      {/* Loader */}
+      {loading && (
+        <p className="text-center mt-3">
+          Cargando más servicios...
+        </p>
+      )}
+
+      {/* Sentinel invisible para Intersection Observer */}
+      <div ref={ref}></div>
+
+      {/* Mensaje si ya no hay más servicios */}
+      {!hasMore && (
+        <p className="text-center text-muted mt-3">
+          No hay más servicios para mostrar.
+        </p>
       )}
     </div>
   );
@@ -206,8 +249,8 @@ export default function Home() {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Resultado:
-// - Usa el endpoint real del backend (/serv).
-// - Está preparado para funcionar tanto en local como en producción.
-// - Listo para mantener un código profesional, limpio y entendible por cualquier
-//   desarrollador que se sume al proyecto.
+// - Home.jsx ahora implementa scroll infinito profesionalmente.
+// - Trae servicios de a 10 por vez.
+// - No sobrecarga la memoria ni el backend.
+// - Preparado para mantener el mismo nivel de código profesional y comentarios.
 ///////////////////////////////////////////////////////////////////////////////////////
