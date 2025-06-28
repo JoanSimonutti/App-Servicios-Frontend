@@ -1,20 +1,22 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 // ¿Qué hace Home.jsx?
-
+//
 // Este archivo es la pantalla principal (Home) de tu app de servicios.
 // Ahora implementamos SCROLL INFINITO:
 // - Trae servicios de a tandas (limit + skip).
 // - Carga más servicios automáticamente cuando el usuario llega al final.
 // - Permite seguir filtrando por categoría y localidad.
-
+// - Muestra la cantidad de servicios encontrados (nueva feature).
+//
 // ¿Por qué es importante?
 // - Mejora la UX → más rápido y liviano.
 // - No sobrecarga la memoria trayendo todos los servicios de una sola vez.
 // - Profesional y moderno.
-
+//
 // Con esto ganás:
 // - Performance.
 // - UX de apps modernas.
+// - Información clara para el usuario.
 // - Código limpio y escalable.
 ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -179,6 +181,13 @@ export default function Home() {
       {/* Título */}
       <h1 className="text-center mb-4">Buscar Servicios</h1>
 
+      {/* Indicador de cantidad de resultados */}
+      {filtrados.length > 0 && (
+        <p className="text-center text-muted mb-4">
+          Se encontraron <strong>{filtrados.length}</strong> servicios.
+        </p>
+      )}
+
       {/* Filtros */}
       <div className="row mb-4">
         <div className="col-md-6 mb-2">
@@ -249,8 +258,7 @@ export default function Home() {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Resultado:
-// - Home.jsx ahora implementa scroll infinito profesionalmente.
-// - Trae servicios de a 10 por vez.
-// - No sobrecarga la memoria ni el backend.
-// - Preparado para mantener el mismo nivel de código profesional y comentarios.
+// - Home.jsx ahora muestra la cantidad de servicios encontrados.
+// - Perfectamente integrado con scroll infinito.
+// - Profesional y con comentarios nivel Dios.
 ///////////////////////////////////////////////////////////////////////////////////////
