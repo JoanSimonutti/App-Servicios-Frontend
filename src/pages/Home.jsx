@@ -5,7 +5,7 @@
 // Ahora implementamos:
 // - Scroll infinito (traer datos de a tandas).
 // - Contador de resultados total.
-// - Indicador de cuántos servicios faltan por cargar.
+// - Corrección para recarga automática al cambiar filtros.
 //
 // Con esto ganás:
 // - UX profesional.
@@ -155,6 +155,19 @@ export default function Home() {
   }, [categoriaSeleccionada, localidadSeleccionada, servicios]);
 
   //////////////////////////////////////////////////
+  // useEffect → Detecta cambios en filtros y reinicia búsqueda
+  //////////////////////////////////////////////////
+
+  useEffect(() => {
+    // Cada vez que cambia el filtro, reiniciamos todo
+    setServicios([]);
+    setSkip(0);
+    setHasMore(true);
+    setTotal(null);
+    fetchMoreServices();
+  }, [categoriaSeleccionada, localidadSeleccionada]);
+
+  //////////////////////////////////////////////////
   // Listas únicas de categorías y localidades
   //////////////////////////////////////////////////
 
@@ -182,12 +195,6 @@ export default function Home() {
         <p className="text-center text-muted mb-4">
           Se muestran <strong>{filtrados.length}</strong> de{" "}
           <strong>{total}</strong> servicios.
-          {total - filtrados.length > 0 && (
-            <>
-              {" "}
-              Faltan cargar <strong>{total - filtrados.length}</strong> más.
-            </>
-          )}
         </p>
       )}
 
@@ -198,14 +205,7 @@ export default function Home() {
           <select
             className="form-select"
             value={categoriaSeleccionada}
-            onChange={(e) => {
-              setCategoriaSeleccionada(e.target.value);
-              // Reiniciamos scroll infinito al cambiar filtros
-              setServicios([]);
-              setSkip(0);
-              setHasMore(true);
-              setTotal(null);
-            }}
+            onChange={(e) => setCategoriaSeleccionada(e.target.value)}
           >
             {categoriasDisponibles.map((categoria, idx) => (
               <option key={idx} value={categoria}>
@@ -220,13 +220,7 @@ export default function Home() {
           <select
             className="form-select"
             value={localidadSeleccionada}
-            onChange={(e) => {
-              setLocalidadSeleccionada(e.target.value);
-              setServicios([]);
-              setSkip(0);
-              setHasMore(true);
-              setTotal(null);
-            }}
+            onChange={(e) => setLocalidadSeleccionada(e.target.value)}
           >
             {localidadesDisponibles.map((localidad, idx) => (
               <option key={idx} value={localidad}>
