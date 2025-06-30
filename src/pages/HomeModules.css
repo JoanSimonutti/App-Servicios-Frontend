@@ -4,20 +4,12 @@
 
 /* Título principal */
 .home-title {
-    font-size: 1.5rem;
+    font-size: 2.3rem;
     /* Grande y llamativo */
     font-weight: bold;
     text-align: center;
     color: #343a40;
     /* Bootstrap dark color */
-}
-
-/* Texto de cantidad de servicios encontrados */
-.home-count-text {
-    font-size: 1.2rem;
-    text-align: center;
-    color: #495057;
-    margin-bottom: 1rem;
 }
 
 /* Selects de filtros */
@@ -30,6 +22,14 @@
 /* Opciones dentro del select */
 .home-select option {
     font-size: 1.2rem;
+}
+
+/* Texto de cantidad de servicios encontrados */
+.home-count-text {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #495057;
+    margin-bottom: 1rem;
 }
 
 /* Fila de tarjetas */
