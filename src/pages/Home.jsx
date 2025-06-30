@@ -74,6 +74,12 @@ export default function Home() {
   const [filtrados, setFiltrados] = useState([]);
   // Guarda la lista final que se muestra (puede estar filtrada).
 
+  const [total, setTotal] = useState(null);
+  // Guarda la cantidad total de servicios en la base de datos (sin paginar).
+  // Permite mostrar:
+  // "Se muestran X de Y servicios"
+
+
   //////////////////////////////////////////////////
   // Hook de Intersection Observer
   //////////////////////////////////////////////////
@@ -98,6 +104,10 @@ export default function Home() {
       const response = await axios.get(
         `${API_BASE_URL}/serv?limit=10&skip=${skip}`
       );
+      // Si la respuesta incluye "total", lo guardamos en estado:
+      if (response.data.total !== undefined) {
+        setTotal(response.data.total);
+      }
 
       if (response.data.length === 0) {
         // Si no hay más datos, seteamos hasMore en false.
@@ -172,9 +182,9 @@ export default function Home() {
     ...new Set(servicios.map((s) => s.localidad.toLowerCase())),
   ];
 
-  //////////////////////////////////////////////////
-  // Render principal
-  //////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
+  // Render principal, osea lo que se muestra en pantalla
+  ////////////////////////////////////////////////////////
 
   return (
     <div className="container py-5">
@@ -182,10 +192,11 @@ export default function Home() {
       <h1 className="text-center mb-4">Buscar Servicios</h1>
 
       {/* Indicador de cantidad de resultados */}
-      {filtrados.length > 0 && (
-        <p className="text-center text-muted mb-4">
-          Se encontraron <strong>{filtrados.length}</strong> servicios.
-        </p>
+     {filtrados.length > 0 && total !== null && (
+      <p className="text-center text-muted mb-4">
+        Se muestran <strong>{filtrados.length}</strong> de{" "}
+        <strong>{total}</strong> servicios.
+      </p>
       )}
 
       {/* Filtros */}
