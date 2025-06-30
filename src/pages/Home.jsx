@@ -48,6 +48,16 @@ import { useInView } from "react-intersection-observer";
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 ///////////////////////////////////////////////////////////////////////////////////////
+// ⚠️ Variable fuera del componente
+// Esto evita doble ejecución de useEffect en React Strict Mode.
+// React 18 monta y desmonta los componentes dos veces en modo desarrollo.
+// Gracias a esta variable, aseguramos que solo se haga la carga inicial una vez.
+//
+///////////////////////////////////////////////////////////////////////////////////////
+
+let hasFetched = false;
+
+///////////////////////////////////////////////////////////////////////////////////////
 // Componente principal Home
 ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -127,23 +137,31 @@ export default function Home() {
 
   useEffect(() => {
     //////////////////////////////////////////////////
-    // Llamamos a la primera carga de datos manualmente
+    // Verificamos si ya hicimos la carga inicial.
+    // Si ya la hicimos (p.ej. por Strict Mode en React 18),
+    // NO volvemos a llamar fetchMoreServices.
     //////////////////////////////////////////////////
 
-    fetchMoreServices();
-    setInitialLoaded(true);
+    if (!hasFetched) {
+      hasFetched = true;
 
-    //////////////////////////////////////////////////
-    // Armamos un pequeño delay:
-    // Esto hace que observerReady se active en el próximo tick,
-    // evitando que el observer dispare en el mismo ciclo.
-    //////////////////////////////////////////////////
+      //////////////////////////////////////////////////
+      // Llamamos a la primera carga de datos manualmente
+      //////////////////////////////////////////////////
 
-    const timer = setTimeout(() => {
-      setObserverReady(true);
-    }, 0);
+      fetchMoreServices();
+      setInitialLoaded(true);
 
-    return () => clearTimeout(timer);
+      //////////////////////////////////////////////////
+      // Armamos un pequeño delay para activar el observer
+      //////////////////////////////////////////////////
+
+      const timer = setTimeout(() => {
+        setObserverReady(true);
+      }, 0);
+
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   //////////////////////////////////////////////////
@@ -214,14 +232,9 @@ export default function Home() {
       // Si es así, necesitamos resetear el scroll infinito
       //////////////////////////////////////////////////
 
-      // Ponemos skip en 0 → para empezar desde el principio
-      setSkip(0);
-
-      // Limpiamos servicios → para no mostrar servicios acumulados
-      setServicios([]);
-
-      // Indicamos que hay más datos para traer
-      setHasMore(true);
+      setSkip(0);                  // Reiniciamos el paginado
+      setServicios([]);            // Vaciamos la lista para evitar duplicados
+      setHasMore(true);            // Indicamos que hay más datos por cargar
 
       //////////////////////////////////////////////////
       // Volvemos a traer la primera página de servicios
@@ -339,5 +352,6 @@ export default function Home() {
 // Resultado:
 // - Home.jsx ahora muestra la cantidad de servicios encontrados.
 // - Perfectamente integrado con scroll infinito.
-// - Doble fetch inicial eliminado definitivamente.
-///////////////////////////////////////////////////////////////////////////////////////
+// - Doble fetch inicial eliminado DEFINITIVAMENTE.
+// - Compatible con React 18 Strict Mode.
+
