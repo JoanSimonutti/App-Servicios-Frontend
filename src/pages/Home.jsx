@@ -216,7 +216,6 @@ export default function Home() {
   // - Mantiene intacto el scroll infinito y los filtros existentes.
   // - No rompe ninguna parte de tu código actual.
   // - Profesional y sólido.
-  //
   ///////////////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
