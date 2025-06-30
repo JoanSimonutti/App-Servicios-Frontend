@@ -334,4 +334,3 @@ export default function Home() {
 // - Home.jsx ahora muestra la cantidad de servicios encontrados.
 // - Perfectamente integrado con scroll infinito.
 // - Doble fetch inicial corregido.
-///////////////////////////////////////////////////////////////////////////////////////
