@@ -1,0 +1,41 @@
+/* ///////////////////////////////////////////////////////////////////////////
+// HomeModules.css
+//////////////////////////////////////////////////////////////////////////// */
+
+/* Título principal */
+.home-title {
+    font-size: 1.5rem;
+    /* Grande y llamativo */
+    font-weight: bold;
+    text-align: center;
+    color: #343a40;
+    /* Bootstrap dark color */
+}
+
+/* Texto de cantidad de servicios encontrados */
+.home-count-text {
+    font-size: 1.2rem;
+    text-align: center;
+    color: #495057;
+    margin-bottom: 1rem;
+}
+
+/* Selects de filtros */
+.home-select {
+    font-size: 1.2rem;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+/* Opciones dentro del select */
+.home-select option {
+    font-size: 1.2rem;
+}
+
+/* Fila de tarjetas */
+.home-row {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+}

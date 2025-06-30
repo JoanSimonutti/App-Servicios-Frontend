@@ -2,15 +2,16 @@
 // Home.jsx
 ///////////////////////////////////////////////////////////////////////////////////////
 
-///////////////////////////////////////////////////////////////////////////////////////
-// Importaciones
-///////////////////////////////////////////////////////////////////////////////////////
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+
 import ServiceCard from "../components/ServiceCard";
 import Detalle from "./Detalle";
+
 import { Modal, Button } from "react-bootstrap";
+
+import "./HomeModules.css";
+// Importamos los estilos externos exclusivos de Home.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Configuración URL backend
@@ -27,18 +28,19 @@ export default function Home() {
   // Estados
   ////////////////////////////////////////////////////////////////////////////
 
-  const [services, setServices] = useState([]);      // Servicios traídos del backend
-  const [total, setTotal] = useState(0);             // Total de servicios
-  const [categorias, setCategorias] = useState([]);  // Categorías únicas
-  const [localidades, setLocalidades] = useState([]);// Localidades únicas
-  const [categoriaFiltro, setCategoriaFiltro] = useState(""); // Filtro categoría
-  const [localidadFiltro, setLocalidadFiltro] = useState(""); // Filtro localidad
+  const [services, setServices] = useState([]); // Todos los servicios desde backend
+  const [total, setTotal] = useState(0); // Total de servicios
+  const [categorias, setCategorias] = useState([]); // Categorías únicas
+  const [localidades, setLocalidades] = useState([]); // Localidades únicas
 
-  const [showModal, setShowModal] = useState(false); // Modal abierto/cerrado
-  const [selectedService, setSelectedService] = useState(null); // Servicio para mostrar en modal
+  const [categoriaFiltro, setCategoriaFiltro] = useState(""); // Filtro por categoría
+  const [localidadFiltro, setLocalidadFiltro] = useState(""); // Filtro por localidad
+
+  const [showModal, setShowModal] = useState(false); // Estado de apertura del modal
+  const [selectedService, setSelectedService] = useState(null); // Servicio a mostrar
 
   ////////////////////////////////////////////////////////////////////////////
-  // useEffect inicial → trae todos los servicios
+  // Efecto inicial → trae los servicios del backend
   ////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
@@ -46,7 +48,7 @@ export default function Home() {
   }, []);
 
   ////////////////////////////////////////////////////////////////////////////
-  // Función obtenerServicios → trae datos del backend
+  // Función para obtener servicios del backend
   ////////////////////////////////////////////////////////////////////////////
 
   const obtenerServicios = async () => {
@@ -55,7 +57,7 @@ export default function Home() {
       setServices(res.data);
       setTotal(res.data.length);
 
-      // Armamos listas únicas de categorías y localidades
+      // Creamos listas únicas para filtros
       const categoriasUnicas = [...new Set(res.data.map((s) => s.categoria))];
       setCategorias(categoriasUnicas);
 
@@ -82,34 +84,32 @@ export default function Home() {
   // Funciones para el modal
   ////////////////////////////////////////////////////////////////////////////
 
-  // Abre el modal con el servicio seleccionado
   const handleVerMas = (service) => {
     setSelectedService(service);
     setShowModal(true);
   };
 
-  // Cierra el modal
   const handleCloseModal = () => {
     setShowModal(false);
     setSelectedService(null);
   };
 
   ////////////////////////////////////////////////////////////////////////////
-  // Render
+  // Render principal
   ////////////////////////////////////////////////////////////////////////////
 
   return (
     <div className="container mt-4">
 
-      {/* Título */}
-      <h1 className="mb-4 text-center">Seleccionar Servicios</h1>
+      {/* Título principal */}
+      <h1 className="home-title">Seleccionar Servicios</h1>
 
       {/* Filtros */}
-      <div className="row mb-3">
-        {/* Filtro categoría */}
-        <div className="col-md-6 mb-2">
+      <div className="row mb-4">
+        {/* Filtro de categoría */}
+        <div className="col-md-6 mb-3">
           <select
-            className="form-select text-center"
+            className="form-select home-select"
             value={categoriaFiltro}
             onChange={(e) => setCategoriaFiltro(e.target.value)}
           >
@@ -122,10 +122,10 @@ export default function Home() {
           </select>
         </div>
 
-        {/* Filtro localidad */}
-        <div className="col-md-6">
+        {/* Filtro de localidad */}
+        <div className="col-md-6 mb-3">
           <select
-            className="form-select text-center"
+            className="form-select home-select"
             value={localidadFiltro}
             onChange={(e) => setLocalidadFiltro(e.target.value)}
           >
@@ -139,13 +139,13 @@ export default function Home() {
         </div>
       </div>
 
-        {/* Info de cantidad */}
-      <p className="mb-2 text-center">
+      {/* Texto de cantidad de resultados */}
+      <p className="home-count-text">
         Se encontraron <strong>{serviciosFiltrados.length}</strong> servicios.
       </p>
 
-      {/* Listado de tarjetas */}
-      <div className="row">
+      {/* Grilla de tarjetas */}
+      <div className="home-row">
         {serviciosFiltrados.map((service) => (
           <div key={service._id} className="col-md-4">
             <ServiceCard
@@ -156,30 +156,30 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Modal de detalle */}
-      <Modal show={showModal} onHide={handleCloseModal} size="lg" centered>
+      {/* Modal para detalle */}
+      <Modal
+        show={showModal}
+        onHide={handleCloseModal}
+        size="lg"
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title>Detalles del Servicio</Modal.Title>
         </Modal.Header>
-      <Modal.Body className="p-0">
-       {/* Renderizamos el componente Detalle solo si hay servicio seleccionado */}
-       {selectedService && (
-       <Detalle servicio={selectedService} />
-       )}
-      </Modal.Body>
+        <Modal.Body className="p-0">
+          {selectedService && (
+            <Detalle servicio={selectedService} />
+          )}
+        </Modal.Body>
         <Modal.Footer>
           <Button variant="dark" onClick={handleCloseModal}>
             Cerrar
           </Button>
         </Modal.Footer>
       </Modal>
-
     </div>
   );
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// Resultado:
-// - Home.jsx mantiene exactamente la lógica original.
-// - Modal funcionando para ver detalles.
-///////////////////////////////////////////////////////////////////////////////////////
+// - Estética unificada con ServiceCard y Detalle.
