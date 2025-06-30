@@ -34,7 +34,7 @@ export default function Home() {
   const [categoriaFiltro, setCategoriaFiltro] = useState(""); // Filtro categoría
   const [localidadFiltro, setLocalidadFiltro] = useState(""); // Filtro localidad
 
-  const [showModal, setShowModal] = useState(false);      // Modal abierto/cerrado
+  const [showModal, setShowModal] = useState(false); // Modal abierto/cerrado
   const [selectedService, setSelectedService] = useState(null); // Servicio para mostrar en modal
 
   ////////////////////////////////////////////////////////////////////////////
@@ -159,7 +159,7 @@ export default function Home() {
       {/* Modal de detalle */}
       <Modal show={showModal} onHide={handleCloseModal} size="lg" centered>
         <Modal.Header closeButton>
-          <Modal.Title>Detalle del Servicio</Modal.Title>
+          <Modal.Title>Detalles del Servicio</Modal.Title>
         </Modal.Header>
       <Modal.Body className="p-0">
        {/* Renderizamos el componente Detalle solo si hay servicio seleccionado */}

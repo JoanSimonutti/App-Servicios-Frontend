@@ -112,15 +112,15 @@ export default function Detalle({ servicio }) {
         </li>
         <li className="list-group-item">
           <strong>Horario:</strong>{" "}
-          {servicio.horaDesde}:00 a {servicio.horaHasta}:00 hs
+          {servicio.horaDesde}:00 a {servicio.horaHasta}:00 hs.
         </li>
         <li className="list-group-item">
           <strong>Urgencias 24hs:</strong>{" "}
-          {servicio.urgencias24hs ? "Sí" : "No"}
+          {servicio.urgencias24hs ? "Sí" : "No"}.
         </li>
         <li className="list-group-item">
           <strong>Atiende localidades cercanas:</strong>{" "}
-          {servicio.localidadesCercanas ? "Sí" : "No"}
+          {servicio.localidadesCercanas ? "Sí" : "No"}.
         </li>
       </ul>
 
@@ -128,14 +128,14 @@ export default function Detalle({ servicio }) {
       <div className="d-flex flex-wrap gap-2 justify-content-center">
         <button
           onClick={llamar}
-          className="btn btn-primary"
+          className="btn btn-primary btn-lg"
         >
           Llamar
         </button>
 
         <button
           onClick={whatsapp}
-          className="btn btn-success"
+          className="btn btn-success btn-lg"
         >
           WhatsApp
         </button>
