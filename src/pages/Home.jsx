@@ -10,6 +10,7 @@
 // - Mejora la UX → más rápido y liviano.
 // - No sobrecarga la memoria trayendo todos los servicios de una sola vez.
 // - Profesional y moderno.
+
 // Con esto ganás:
 // - Performance.
 // - UX de apps modernas.
@@ -154,28 +155,6 @@ export default function Home() {
 
     setFiltrados(resultado);
   }, [categoriaSeleccionada, localidadSeleccionada, servicios]);
-
-
-///////////////////////////////////////////////////////////////////////////////////////
-// useEffect → Cargar categorías únicas del backend
-///////////////////////////////////////////////////////////////////////////////////////
-
-useEffect(() => {
-  const fetchCategorias = async () => {
-    try {
-      const response = await axios.get(`${API_BASE_URL}/serv/categorias`);
-      setCategoriasDisponibles([
-        "todas",
-        ...response.data.map((c) => c.toLowerCase())
-      ]);
-    } catch (error) {
-      console.error("Error al obtener categorías:", error);
-    }
-  };
-
-  fetchCategorias();
-}, []);
-
 
   //////////////////////////////////////////////////
   // Listas únicas de categorías y localidades
