@@ -2,7 +2,7 @@
 // ¿Qué hace Home.jsx?
 //
 // Este archivo es la pantalla principal (Home) de tu app de servicios.
-// Ahora implementamos SCROLL INFINITO:
+// Implementamos SCROLL INFINITO:
 // - Trae servicios de a tandas (limit + skip).
 // - Carga más servicios automáticamente cuando el usuario llega al final.
 // - Permite seguir filtrando por categoría y localidad.
@@ -74,6 +74,10 @@ export default function Home() {
   const [filtrados, setFiltrados] = useState([]);
   // Guarda la lista final que se muestra (puede estar filtrada).
 
+  const [initialLoaded, setInitialLoaded] = useState(false);
+  // Bandera para saber si ya se hizo la carga inicial.
+  // Esto evita doble fetch al inicio.
+
   //////////////////////////////////////////////////
   // Hook de Intersection Observer
   //////////////////////////////////////////////////
@@ -119,7 +123,19 @@ export default function Home() {
   //////////////////////////////////////////////////
 
   useEffect(() => {
+    //////////////////////////////////////////////////
+    // Llamamos a la primera carga de datos manualmente
+    // Esto evita que el observer dispare dos veces al inicio.
+    //////////////////////////////////////////////////
+
     fetchMoreServices();
+
+    //////////////////////////////////////////////////
+    // Indicamos que ya hicimos la carga inicial.
+    // Esto bloquea el observer hasta después del primer render.
+    //////////////////////////////////////////////////
+
+    setInitialLoaded(true);
   }, []);
 
   //////////////////////////////////////////////////
@@ -127,10 +143,15 @@ export default function Home() {
   //////////////////////////////////////////////////
 
   useEffect(() => {
-    if (inView && hasMore && !loading) {
+    //////////////////////////////////////////////////
+    // El observer solo debe activarse después de la carga inicial.
+    // Si no, dispara inmediatamente al renderizar, generando doble fetch.
+    //////////////////////////////////////////////////
+
+    if (initialLoaded && inView && hasMore && !loading) {
       fetchMoreServices();
     }
-  }, [inView]);
+  }, [initialLoaded, inView]);
 
   //////////////////////////////////////////////////
   // useEffect → Filtrado
@@ -162,7 +183,7 @@ export default function Home() {
   // NUEVO useEffect → Detecta cuándo se vuelven a seleccionar "todas" las opciones
   // para resetear el scroll infinito y volver a traer los primeros datos.
   //
-  // ✅ Qué resuelve:
+  // Qué resuelve:
   // - Evita que queden acumulados datos viejos en el array servicios.
   // - Corrige que aparezcan 20 servicios en lugar de 10 al volver a "todas".
   // - Mantiene intacto el scroll infinito y los filtros existentes.
@@ -307,3 +328,10 @@ export default function Home() {
     </div>
   );
 }
+
+///////////////////////////////////////////////////////////////////////////////////////
+// Resultado:
+// - Home.jsx ahora muestra la cantidad de servicios encontrados.
+// - Perfectamente integrado con scroll infinito.
+// - Doble fetch inicial corregido.
+///////////////////////////////////////////////////////////////////////////////////////
