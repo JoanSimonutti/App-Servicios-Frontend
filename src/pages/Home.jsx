@@ -1,18 +1,17 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 // ¿Qué hace Home.jsx?
-//
 // Este archivo es la pantalla principal (Home) de tu app de servicios.
 // Implementamos SCROLL INFINITO:
 // - Trae servicios de a tandas (limit + skip).
 // - Carga más servicios automáticamente cuando el usuario llega al final.
 // - Permite seguir filtrando por categoría y localidad.
 // - Muestra la cantidad de servicios encontrados (nueva feature).
-//
+
 // ¿Por qué es importante?
 // - Mejora la UX → más rápido y liviano.
 // - No sobrecarga la memoria trayendo todos los servicios de una sola vez.
 // - Profesional y moderno.
-//
+
 // Con esto ganás:
 // - Performance.
 // - UX de apps modernas.
@@ -48,11 +47,10 @@ import { useInView } from "react-intersection-observer";
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// ⚠️ Variable fuera del componente
+// Variable fuera del componente
 // Esto evita doble ejecución de useEffect en React Strict Mode.
 // React 18 monta y desmonta los componentes dos veces en modo desarrollo.
 // Gracias a esta variable, aseguramos que solo se haga la carga inicial una vez.
-//
 ///////////////////////////////////////////////////////////////////////////////////////
 
 let hasFetched = false;
@@ -117,11 +115,21 @@ export default function Home() {
       );
 
       if (response.data.length === 0) {
-        // Si no hay más datos, seteamos hasMore en false.
         setHasMore(false);
       } else {
-        // Agregamos los nuevos servicios al array existente.
-        setServicios((prev) => [...prev, ...response.data]);
+        //////////////////////////////////////////////////
+        // Solución profesional:
+        // Filtramos duplicados para evitar datos repetidos
+        // incluso si el backend devuelve la misma página dos veces.
+        //////////////////////////////////////////////////
+
+        setServicios((prev) => {
+          const nuevos = response.data.filter(
+            (nuevo) => !prev.some((s) => s._id === nuevo._id)
+          );
+          return [...prev, ...nuevos];
+        });
+
         setSkip((prev) => prev + response.data.length);
       }
     } catch (error) {
@@ -136,12 +144,6 @@ export default function Home() {
   //////////////////////////////////////////////////
 
   useEffect(() => {
-    //////////////////////////////////////////////////
-    // Verificamos si ya hicimos la carga inicial.
-    // Si ya la hicimos (p.ej. por Strict Mode en React 18),
-    // NO volvemos a llamar fetchMoreServices.
-    //////////////////////////////////////////////////
-
     if (!hasFetched) {
       hasFetched = true;
 
@@ -169,12 +171,6 @@ export default function Home() {
   //////////////////////////////////////////////////
 
   useEffect(() => {
-    //////////////////////////////////////////////////
-    // El observer solo debe activarse después de la carga inicial
-    // y después de haber habilitado observerReady.
-    // Así evitamos doble fetch en el primer render.
-    //////////////////////////////////////////////////
-
     if (observerReady && inView && hasMore && !loading) {
       fetchMoreServices();
     }
@@ -206,47 +202,21 @@ export default function Home() {
     setFiltrados(resultado);
   }, [categoriaSeleccionada, localidadSeleccionada, servicios]);
 
-  ///////////////////////////////////////////////////////////////////////////////////////
-  // NUEVO useEffect → Detecta cuándo se vuelven a seleccionar "todas" las opciones
-  // para resetear el scroll infinito y volver a traer los primeros datos.
-  //
-  // Qué resuelve:
-  // - Evita que queden acumulados datos viejos en el array servicios.
-  // - Corrige que aparezcan 20 servicios en lugar de 10 al volver a "todas".
-  // - Mantiene intacto el scroll infinito y los filtros existentes.
-  // - No rompe ninguna parte de tu código actual.
-  // - Profesional y sólido.
-  ///////////////////////////////////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////
+  // useEffect → Detecta cuándo se vuelven a seleccionar "todas" las opciones
+  //////////////////////////////////////////////////
 
   useEffect(() => {
-    //////////////////////////////////////////////////
-    // Evaluamos si ambos filtros están en "todas"
-    //////////////////////////////////////////////////
-
     if (
       categoriaSeleccionada === "todas" &&
       localidadSeleccionada === "todas"
     ) {
-      //////////////////////////////////////////////////
-      // Si es así, necesitamos resetear el scroll infinito
-      //////////////////////////////////////////////////
-
       setSkip(0);                  // Reiniciamos el paginado
       setServicios([]);            // Vaciamos la lista para evitar duplicados
       setHasMore(true);            // Indicamos que hay más datos por cargar
 
-      //////////////////////////////////////////////////
-      // Volvemos a traer la primera página de servicios
-      //////////////////////////////////////////////////
-
       fetchMoreServices();
     }
-
-    //////////////////////////////////////////////////
-    // Dependencias:
-    // Queremos que este efecto se ejecute si cambian los filtros.
-    //////////////////////////////////////////////////
-
   }, [categoriaSeleccionada, localidadSeleccionada]);
 
   //////////////////////////////////////////////////
@@ -351,6 +321,6 @@ export default function Home() {
 // Resultado:
 // - Home.jsx ahora muestra la cantidad de servicios encontrados.
 // - Perfectamente integrado con scroll infinito.
-// - Doble fetch inicial eliminado DEFINITIVAMENTE.
+// - Doble fetch inicial eliminado.
+// - Duplicados eliminados DEFINITIVAMENTE.
 // - Compatible con React 18 Strict Mode.
-
