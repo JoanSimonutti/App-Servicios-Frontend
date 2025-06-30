@@ -1,12 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////////////
-// Home.jsx - VERSIÓN FINAL NIVEL DIOS
-//
-// ✅ Scroll infinito funcional.
-// ✅ Filtros correctos sin errores ni estado viejo.
-// ✅ Integrado con backend que devuelve { total, data }.
-// ✅ Contador de resultados: "Se muestran X de Y servicios."
-// ✅ Comentado línea por línea.
-// ✅ No se rompe nada de tu lógica original.
+// Home.jsx
+// Scroll infinito funcional.
+// Filtros correctos sin errores ni estado viejo.
+// Integrado con backend que devuelve { total, data }.
+// Contador de resultados: "Se muestran X de Y servicios."
 ///////////////////////////////////////////////////////////////////////////////////////
 
 import React, { useEffect, useState } from "react";
@@ -15,7 +12,7 @@ import ServiceCard from "../components/ServiceCard";
 import { useInView } from "react-intersection-observer";
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// URL base del backend, definida en tu archivo .env
+// URL base del backend, definida en el archivo .env
 ///////////////////////////////////////////////////////////////////////////////////////
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
@@ -168,8 +165,6 @@ export default function Home() {
 
   /////////////////////////////////////////////////////////////////////////////
   // useEffect → dispara una recarga completa si cambian los filtros
-  //
-  // ✅ Esta es la clave para evitar tu error:
   //    - Esperamos a que se actualicen los estados de filtros
   //    - Disparamos fetchMoreServices una vez con los valores correctos.
   /////////////////////////////////////////////////////////////////////////////
@@ -199,7 +194,7 @@ export default function Home() {
   ];
 
   /////////////////////////////////////////////////////////////////////////////
-  // Render principal
+  // Render principal osea lo que se muestra en la pantalla
   /////////////////////////////////////////////////////////////////////////////
 
   return (
