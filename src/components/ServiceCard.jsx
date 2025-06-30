@@ -107,7 +107,7 @@ export default function ServiceCard({ service, onVerMas }) {
           {/* Botón Teléfono */}
           <button
             onClick={() => handleClick("telefono", `tel:${service.telefono}`)}
-            className="btn btn-primary btn-sm"
+            className="btn btn-primary"
           >
             Teléfono
           </button>
@@ -117,7 +117,7 @@ export default function ServiceCard({ service, onVerMas }) {
             onClick={() =>
               handleClick("whatsapp", `https://wa.me/${service.telefono}`)
             }
-            className="btn btn-success btn-sm"
+            className="btn btn-success"
           >
             WhatsApp
           </button>
@@ -125,7 +125,7 @@ export default function ServiceCard({ service, onVerMas }) {
           {/* Botón Ver más */}
           <button
             onClick={() => onVerMas(service)}
-            className="btn btn-dark btn-sm"
+            className="btn btn-dark"
           >
             Ver más
           </button>
