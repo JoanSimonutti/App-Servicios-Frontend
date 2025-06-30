@@ -1,50 +1,20 @@
 ///////////////////////////////////////////////////////////////////////////////////////
-// ¿Qué hace Home.jsx?
-//
-// Este archivo es la pantalla principal (Home) de tu app de servicios.
-// Ahora implementamos SCROLL INFINITO:
-// - Trae servicios de a tandas (limit + skip).
-// - Carga más servicios automáticamente cuando el usuario llega al final.
-// - Permite seguir filtrando por categoría y localidad.
-// - Muestra la cantidad de servicios encontrados (nueva feature).
-//
-// ¿Por qué es importante?
-// - Mejora la UX → más rápido y liviano.
-// - No sobrecarga la memoria trayendo todos los servicios de una sola vez.
-// - Profesional y moderno.
-//
-// Con esto ganás:
-// - Performance.
-// - UX de apps modernas.
-// - Información clara para el usuario.
-// - Código limpio y escalable.
-///////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////
-// Importaciones necesarias
+// Home.jsx
+// Integrado con backend que devuelve { total, data }.
+// Scroll infinito funcional.
+// Filtros por categoría y localidad.
+// Contador de resultados preciso: "Se muestran X de Y servicios."
 ///////////////////////////////////////////////////////////////////////////////////////
 
 import React, { useEffect, useState } from "react";
-// React → la librería principal para construir interfaces.
-// useEffect → hook para ejecutar código cuando el componente se monta o cambia.
-// useState → hook para manejar estados internos.
-
 import axios from "axios";
-// Axios → librería para hacer llamadas HTTP (GET, POST, etc.)
-
 import ServiceCard from "../components/ServiceCard";
-// Importamos el componente que renderiza cada tarjeta individual de servicio.
-
 import { useInView } from "react-intersection-observer";
-// Importamos el hook de Intersection Observer.
-// Nos dice si un elemento está visible en el viewport.
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// Configuración de la URL base de la API
+// URL base del backend, definida en tu archivo .env
 ///////////////////////////////////////////////////////////////////////////////////////
 
-// Obtenemos la URL base del backend desde variables de entorno (.env).
-// Esto permite cambiar entre local y producción sin tocar el código.
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -52,71 +22,98 @@ const API_BASE_URL = import.meta.env.VITE_API_URL;
 ///////////////////////////////////////////////////////////////////////////////////////
 
 export default function Home() {
-  //////////////////////////////////////////////////
-  // Definición de estados locales
-  //////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+  // Estados locales
+  /////////////////////////////////////////////////////////////////////////////
 
-  const [servicios, setServicios] = useState([]); 
-  // Guarda todos los servicios que vamos trayendo.
+  const [servicios, setServicios] = useState([]);
+  // Acumula TODOS los servicios cargados (scroll infinito).
+
+  const [filtrados, setFiltrados] = useState([]);
+  // Es la lista que realmente se renderiza. Puede estar filtrada en el front.
 
   const [skip, setSkip] = useState(0);
-  // Cuántos registros nos estamos saltando. Sirve para paginación.
+  // Indica cuántos documentos saltarse en la próxima búsqueda (paginación).
 
   const [hasMore, setHasMore] = useState(true);
-  // Indica si todavía hay más datos para traer.
+  // Indica si todavía quedan datos por traer (para el scroll infinito).
 
   const [loading, setLoading] = useState(false);
-  // Estado que indica si estamos cargando datos.
+  // Para mostrar el texto de "Cargando más servicios..."
+
+  const [total, setTotal] = useState(null);
+  // Guarda el total de servicios que cumplen los filtros, sin paginar.
 
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState("todas");
   const [localidadSeleccionada, setLocalidadSeleccionada] = useState("todas");
+  // Estados de los filtros seleccionados.
 
-  const [filtrados, setFiltrados] = useState([]);
-  // Guarda la lista final que se muestra (puede estar filtrada).
-
-  const [total, setTotal] = useState(null);
-  // Guarda la cantidad total de servicios en la base de datos (sin paginar).
-  // Permite mostrar:
-  // "Se muestran X de Y servicios"
-
-
-  //////////////////////////////////////////////////
-  // Hook de Intersection Observer
-  //////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+  // Configuramos Intersection Observer
+  /////////////////////////////////////////////////////////////////////////////
 
   const { ref, inView } = useInView({
     threshold: 0,
   });
-  // ref → se asocia a un div invisible al final de la página.
-  // inView → true si ese div es visible en pantalla.
 
-  //////////////////////////////////////////////////
-  // Función para traer servicios paginados
-  //////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+  // Función principal para traer más servicios del backend
+  /////////////////////////////////////////////////////////////////////////////
 
   const fetchMoreServices = async () => {
     if (loading || !hasMore) return;
+    // Si ya estamos cargando o no hay más, no hacemos nada.
 
     setLoading(true);
 
     try {
-      // Hacemos la llamada al backend con paginación.
-      const response = await axios.get(
-        `${API_BASE_URL}/serv?limit=10&skip=${skip}`
-      );
-      // Si la respuesta incluye "total", lo guardamos en estado:
+      ////////////////////////////////////////////////////////
+      // Armamos query string dinámico con filtros
+      ////////////////////////////////////////////////////////
+
+      const params = new URLSearchParams();
+
+      if (categoriaSeleccionada !== "todas") {
+        params.append("categoria", categoriaSeleccionada);
+      }
+
+      if (localidadSeleccionada !== "todas") {
+        params.append("localidad", localidadSeleccionada);
+      }
+
+      params.append("limit", 10);
+      params.append("skip", skip);
+
+      ////////////////////////////////////////////////////////
+      // Hacemos la llamada a nuestro backend
+      ////////////////////////////////////////////////////////
+
+      const response = await axios.get(`${API_BASE_URL}/serv?${params.toString()}`);
+
+      ////////////////////////////////////////////////////////
+      // Nuevo backend devuelve un objeto, NO un array directo:
+      //
+      // {
+      //    total: <number>,
+      //    data: [ {...}, {...} ]
+      // }
+      ////////////////////////////////////////////////////////
+
       if (response.data.total !== undefined) {
         setTotal(response.data.total);
       }
 
-      if (response.data.length === 0) {
-        // Si no hay más datos, seteamos hasMore en false.
+      const nuevosServicios = response.data.data;
+
+      if (nuevosServicios.length === 0) {
+        // No hay más datos para traer.
         setHasMore(false);
       } else {
-        // Agregamos los nuevos servicios al array existente.
-        setServicios((prev) => [...prev, ...response.data]);
-        setSkip((prev) => prev + response.data.length);
+        // Sumamos los nuevos datos a los que ya teníamos.
+        setServicios((prev) => [...prev, ...nuevosServicios]);
+        setSkip((prev) => prev + nuevosServicios.length);
       }
+
     } catch (error) {
       console.error("Error al obtener los servicios:", error);
     }
@@ -124,17 +121,17 @@ export default function Home() {
     setLoading(false);
   };
 
-  //////////////////////////////////////////////////
-  // useEffect → Llama fetchMoreServices al cargar
-  //////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+  // useEffect → dispara la primera carga de datos al montar el componente
+  /////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     fetchMoreServices();
   }, []);
 
-  //////////////////////////////////////////////////
-  // useEffect → Llama fetchMoreServices si inView se activa
-  //////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+  // useEffect → dispara fetchMoreServices si se ve el sentinel (scroll infinito)
+  /////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     if (inView && hasMore && !loading) {
@@ -142,9 +139,12 @@ export default function Home() {
     }
   }, [inView]);
 
-  //////////////////////////////////////////////////
-  // useEffect → Filtrado
-  //////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+  // useEffect → Filtrado en frontend
+  //
+  // Esto permite que los filtros se apliquen sin necesidad de
+  // llamar al backend cada vez. Mantiene la UX instantánea.
+  /////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     let resultado = [...servicios];
@@ -152,80 +152,97 @@ export default function Home() {
     if (categoriaSeleccionada !== "todas") {
       resultado = resultado.filter(
         (s) =>
-          s.categoria.toLowerCase() ===
-          categoriaSeleccionada.toLowerCase()
+          s.categoria &&
+          s.categoria.toLowerCase() === categoriaSeleccionada.toLowerCase()
       );
     }
 
     if (localidadSeleccionada !== "todas") {
       resultado = resultado.filter(
         (s) =>
-          s.localidad.toLowerCase() ===
-          localidadSeleccionada.toLowerCase()
+          s.localidad &&
+          s.localidad.toLowerCase() === localidadSeleccionada.toLowerCase()
       );
     }
 
     setFiltrados(resultado);
   }, [categoriaSeleccionada, localidadSeleccionada, servicios]);
 
-  //////////////////////////////////////////////////
-  // Listas únicas de categorías y localidades
-  //////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+  // Listas únicas de categorías y localidades (para tus selects)
+  /////////////////////////////////////////////////////////////////////////////
 
   const categoriasDisponibles = [
     "todas",
-    ...new Set(servicios.map((s) => s.categoria.toLowerCase())),
+    ...new Set(servicios.map((s) => s.categoria?.toLowerCase())),
   ];
 
   const localidadesDisponibles = [
     "todas",
-    ...new Set(servicios.map((s) => s.localidad.toLowerCase())),
+    ...new Set(servicios.map((s) => s.localidad?.toLowerCase())),
   ];
 
-  ////////////////////////////////////////////////////////
-  // Render principal, osea lo que se muestra en pantalla
-  ////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////
+  // Render principal
+  /////////////////////////////////////////////////////////////////////////////
 
   return (
     <div className="container py-5">
-      {/* Título */}
+      {/* Título principal */}
       <h1 className="text-center mb-4">Buscar Servicios</h1>
 
-      {/* Indicador de cantidad de resultados */}
-     {filtrados.length > 0 && total !== null && (
-      <p className="text-center text-muted mb-4">
-        Se muestran <strong>{filtrados.length}</strong> de{" "}
-        <strong>{total}</strong> servicios.
-      </p>
+      {/* Indicador de resultados */}
+      {filtrados.length > 0 && total !== null && (
+        <p className="text-center text-muted mb-4">
+          Se muestran <strong>{filtrados.length}</strong> de{" "}
+          <strong>{total}</strong> servicios.
+        </p>
       )}
 
       {/* Filtros */}
       <div className="row mb-4">
+        {/* Filtro por categoría */}
         <div className="col-md-6 mb-2">
           <label className="form-label">Filtrar por categoría:</label>
           <select
             className="form-select"
             value={categoriaSeleccionada}
-            onChange={(e) => setCategoriaSeleccionada(e.target.value)}
+            onChange={(e) => {
+              setCategoriaSeleccionada(e.target.value);
+              // Reiniciamos scroll infinito al cambiar filtros
+              setServicios([]);
+              setSkip(0);
+              setHasMore(true);
+              setTotal(null);
+              fetchMoreServices();
+            }}
           >
             {categoriasDisponibles.map((categoria, idx) => (
               <option key={idx} value={categoria}>
-                {categoria.charAt(0).toUpperCase() + categoria.slice(1)}
+                {categoria?.charAt(0).toUpperCase() + categoria?.slice(1)}
               </option>
             ))}
           </select>
         </div>
 
+        {/* Filtro por localidad */}
         <div className="col-md-6 mb-2">
           <label className="form-label">Filtrar por localidad:</label>
           <select
             className="form-select"
             value={localidadSeleccionada}
-            onChange={(e) => setLocalidadSeleccionada(e.target.value)}
+            onChange={(e) => {
+              setLocalidadSeleccionada(e.target.value);
+              setServicios([]);
+              setSkip(0);
+              setHasMore(true);
+              setTotal(null);
+              fetchMoreServices();
+            }}
           >
             {localidadesDisponibles.map((localidad, idx) => (
               <option key={idx} value={localidad}>
-                {localidad.charAt(0).toUpperCase() + localidad.slice(1)}
+                {localidad?.charAt(0).toUpperCase() + localidad?.slice(1)}
               </option>
             ))}
           </select>
@@ -257,8 +274,8 @@ export default function Home() {
       {/* Sentinel invisible para Intersection Observer */}
       <div ref={ref}></div>
 
-      {/* Mensaje si ya no hay más servicios */}
-      {!hasMore && (
+      {/* Mensaje si no quedan más servicios */}
+      {!hasMore && total !== null && (
         <p className="text-center text-muted mt-3">
           No hay más servicios para mostrar.
         </p>
@@ -266,12 +283,3 @@ export default function Home() {
     </div>
   );
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// Resultado:
-// - Home.jsx ahora muestra la cantidad de servicios encontrados.
-// - Perfectamente integrado con scroll infinito.
-// - Profesional y con comentarios nivel Dios.
-
-//ESTOY VOLVIENDO A DEJAR TODO COMO ESTABA ANTES DE TOCAR EL BACK
-///////////////////////////////////////////////////////////////////////////////////////
