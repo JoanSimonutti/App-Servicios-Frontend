@@ -123,7 +123,7 @@ export default function Home() {
         </div>
 
         {/* Filtro localidad */}
-        <div className="col-md-6 mb-1">
+        <div className="col-md-6">
           <select
             className="form-select text-center"
             value={localidadFiltro}
