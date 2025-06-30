@@ -1,17 +1,18 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 // ¿Qué hace Home.jsx?
+//
 // Este archivo es la pantalla principal (Home) de tu app de servicios.
-// Implementamos SCROLL INFINITO:
+// Ahora implementamos SCROLL INFINITO:
 // - Trae servicios de a tandas (limit + skip).
 // - Carga más servicios automáticamente cuando el usuario llega al final.
 // - Permite seguir filtrando por categoría y localidad.
 // - Muestra la cantidad de servicios encontrados (nueva feature).
-
+//
 // ¿Por qué es importante?
 // - Mejora la UX → más rápido y liviano.
 // - No sobrecarga la memoria trayendo todos los servicios de una sola vez.
 // - Profesional y moderno.
-
+//
 // Con esto ganás:
 // - Performance.
 // - UX de apps modernas.
@@ -47,15 +48,6 @@ import { useInView } from "react-intersection-observer";
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 ///////////////////////////////////////////////////////////////////////////////////////
-// Variable fuera del componente
-// Esto evita doble ejecución de useEffect en React Strict Mode.
-// React 18 monta y desmonta los componentes dos veces en modo desarrollo.
-// Gracias a esta variable, aseguramos que solo se haga la carga inicial una vez.
-///////////////////////////////////////////////////////////////////////////////////////
-
-let hasFetched = false;
-
-///////////////////////////////////////////////////////////////////////////////////////
 // Componente principal Home
 ///////////////////////////////////////////////////////////////////////////////////////
 
@@ -81,13 +73,6 @@ export default function Home() {
 
   const [filtrados, setFiltrados] = useState([]);
   // Guarda la lista final que se muestra (puede estar filtrada).
-
-  const [initialLoaded, setInitialLoaded] = useState(false);
-  // Bandera para saber si ya se hizo la carga inicial.
-
-  const [observerReady, setObserverReady] = useState(false);
-  // Indica si el observer está habilitado.
-  // Esto evita que dispare en el mismo ciclo que la carga inicial.
 
   //////////////////////////////////////////////////
   // Hook de Intersection Observer
@@ -115,21 +100,11 @@ export default function Home() {
       );
 
       if (response.data.length === 0) {
+        // Si no hay más datos, seteamos hasMore en false.
         setHasMore(false);
       } else {
-        //////////////////////////////////////////////////
-        // Solución profesional:
-        // Filtramos duplicados para evitar datos repetidos
-        // incluso si el backend devuelve la misma página dos veces.
-        //////////////////////////////////////////////////
-
-        setServicios((prev) => {
-          const nuevos = response.data.filter(
-            (nuevo) => !prev.some((s) => s._id === nuevo._id)
-          );
-          return [...prev, ...nuevos];
-        });
-
+        // Agregamos los nuevos servicios al array existente.
+        setServicios((prev) => [...prev, ...response.data]);
         setSkip((prev) => prev + response.data.length);
       }
     } catch (error) {
@@ -144,26 +119,7 @@ export default function Home() {
   //////////////////////////////////////////////////
 
   useEffect(() => {
-    if (!hasFetched) {
-      hasFetched = true;
-
-      //////////////////////////////////////////////////
-      // Llamamos a la primera carga de datos manualmente
-      //////////////////////////////////////////////////
-
-      fetchMoreServices();
-      setInitialLoaded(true);
-
-      //////////////////////////////////////////////////
-      // Armamos un pequeño delay para activar el observer
-      //////////////////////////////////////////////////
-
-      const timer = setTimeout(() => {
-        setObserverReady(true);
-      }, 0);
-
-      return () => clearTimeout(timer);
-    }
+    fetchMoreServices();
   }, []);
 
   //////////////////////////////////////////////////
@@ -171,10 +127,10 @@ export default function Home() {
   //////////////////////////////////////////////////
 
   useEffect(() => {
-    if (observerReady && inView && hasMore && !loading) {
+    if (inView && hasMore && !loading) {
       fetchMoreServices();
     }
-  }, [observerReady, inView]);
+  }, [inView]);
 
   //////////////////////////////////////////////////
   // useEffect → Filtrado
@@ -201,23 +157,6 @@ export default function Home() {
 
     setFiltrados(resultado);
   }, [categoriaSeleccionada, localidadSeleccionada, servicios]);
-
-  //////////////////////////////////////////////////
-  // useEffect → Detecta cuándo se vuelven a seleccionar "todas" las opciones
-  //////////////////////////////////////////////////
-
-  useEffect(() => {
-    if (
-      categoriaSeleccionada === "todas" &&
-      localidadSeleccionada === "todas"
-    ) {
-      setSkip(0);                  // Reiniciamos el paginado
-      setServicios([]);            // Vaciamos la lista para evitar duplicados
-      setHasMore(true);            // Indicamos que hay más datos por cargar
-
-      fetchMoreServices();
-    }
-  }, [categoriaSeleccionada, localidadSeleccionada]);
 
   //////////////////////////////////////////////////
   // Listas únicas de categorías y localidades
@@ -321,6 +260,7 @@ export default function Home() {
 // Resultado:
 // - Home.jsx ahora muestra la cantidad de servicios encontrados.
 // - Perfectamente integrado con scroll infinito.
-// - Doble fetch inicial eliminado.
-// - Duplicados eliminados DEFINITIVAMENTE.
-// - Compatible con React 18 Strict Mode.
+// - Profesional y con comentarios nivel Dios.
+
+//ESTOY VOLVIENDO A DEJAR TODO COMO ESTABA ANTES DE TOCAR EL BACK
+///////////////////////////////////////////////////////////////////////////////////////
