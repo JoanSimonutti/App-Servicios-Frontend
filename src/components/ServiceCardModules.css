@@ -22,7 +22,7 @@
 
 /* Subtítulo (categoría y localidad) */
 .service-card-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     /* Subtítulo más grande (≈19px) */
     color: #6c757d;
     /* Bootstrap text-muted color */
