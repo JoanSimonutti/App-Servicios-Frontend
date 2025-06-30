@@ -83,7 +83,7 @@ export default function ServiceCard({ service, onVerMas }) {
           {/* Botón Teléfono */}
           <button
             onClick={() => handleClick("telefono", `tel:${service.telefono}`)}
-            className="btn btn-primary"
+            className="btn btn-telefono"
           >
             Teléfono
           </button>
@@ -101,9 +101,9 @@ export default function ServiceCard({ service, onVerMas }) {
           {/* Botón Ver más */}
           <button
             onClick={() => onVerMas(service)}
-            className="btn btn-dark"
+            className="btn btn-info"
           >
-            Ver más
+            + Info
           </button>
         </div>
       </div>

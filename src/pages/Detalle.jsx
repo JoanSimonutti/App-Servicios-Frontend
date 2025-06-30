@@ -94,14 +94,14 @@ export default function Detalle({ servicio }) {
       <div className="d-flex flex-wrap gap-2 justify-content-center mt-3">
         <button
           onClick={llamar}
-          className="btn btn-primary btn-lg"
+          className="btn btn-telefono btn-lg"
         >
-          Llamar
+          Teléfono
         </button>
 
         <button
           onClick={whatsapp}
-          className="btn btn-success btn-lg"
+          className="btn btn-whatsapp btn-lg"
         >
           WhatsApp
         </button>
