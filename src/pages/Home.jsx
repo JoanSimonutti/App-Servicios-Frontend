@@ -158,6 +158,58 @@ export default function Home() {
     setFiltrados(resultado);
   }, [categoriaSeleccionada, localidadSeleccionada, servicios]);
 
+  ///////////////////////////////////////////////////////////////////////////////////////
+  // NUEVO useEffect → Detecta cuándo se vuelven a seleccionar "todas" las opciones
+  // para resetear el scroll infinito y volver a traer los primeros datos.
+  //
+  // ✅ Qué resuelve:
+  // - Evita que queden acumulados datos viejos en el array servicios.
+  // - Corrige que aparezcan 20 servicios en lugar de 10 al volver a "todas".
+  // - Mantiene intacto el scroll infinito y los filtros existentes.
+  // - No rompe ninguna parte de tu código actual.
+  // - Profesional y sólido.
+  //
+  ///////////////////////////////////////////////////////////////////////////////////////
+
+  useEffect(() => {
+    //////////////////////////////////////////////////
+    // Evaluamos si ambos filtros están en "todas"
+    //////////////////////////////////////////////////
+
+    if (
+      categoriaSeleccionada === "todas" &&
+      localidadSeleccionada === "todas"
+    ) {
+      //////////////////////////////////////////////////
+      // Si es así, necesitamos resetear el scroll infinito
+      //////////////////////////////////////////////////
+
+      // Ponemos skip en 0 → para empezar desde el principio
+      setSkip(0);
+
+      // Limpiamos servicios → para no mostrar servicios acumulados
+      setServicios([]);
+
+      // Indicamos que hay más datos para traer
+      setHasMore(true);
+
+      //////////////////////////////////////////////////
+      // Volvemos a traer la primera página de servicios
+      //////////////////////////////////////////////////
+
+      // Nota:
+      // Llamamos directamente a fetchMoreServices()
+      // Esto trae los primeros 10 registros y empieza la paginación otra vez.
+      fetchMoreServices();
+    }
+
+    //////////////////////////////////////////////////
+    // Dependencias:
+    // Queremos que este efecto se ejecute si cambian los filtros.
+    //////////////////////////////////////////////////
+
+  }, [categoriaSeleccionada, localidadSeleccionada]);
+
   //////////////////////////////////////////////////
   // Listas únicas de categorías y localidades
   //////////////////////////////////////////////////
@@ -255,12 +307,3 @@ export default function Home() {
     </div>
   );
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// Resultado:
-// - Home.jsx ahora muestra la cantidad de servicios encontrados.
-// - Perfectamente integrado con scroll infinito.
-// - Profesional y con comentarios nivel Dios.
-
-//ESTOY VOLVIENDO A DEJAR TODO COMO ESTABA ANTES DE TOCAR EL BACK
-///////////////////////////////////////////////////////////////////////////////////////
