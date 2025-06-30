@@ -32,3 +32,17 @@
     /* Espacio inferior */
     text-decoration: underline;
 }
+
+/* Botón WhatsApp - sombra y levitar */
+.btn-whatsapp {
+    background-color: #25d366 !important;
+    color: #fff !important;
+    border: none !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3) !important;
+    transition: all 0.3s ease !important;
+}
+
+.btn-whatsapp:hover {
+    transform: translateY(-3px) !important;
+    background-color: #1ebe57 !important;
+}

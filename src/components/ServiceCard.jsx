@@ -93,7 +93,7 @@ export default function ServiceCard({ service, onVerMas }) {
             onClick={() =>
               handleClick("whatsapp", `https://wa.me/${service.telefono}`)
             }
-            className="btn btn-success"
+            className="btn btn-whatsapp"
           >
             WhatsApp
           </button>
