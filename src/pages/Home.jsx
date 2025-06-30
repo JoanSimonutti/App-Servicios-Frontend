@@ -76,7 +76,10 @@ export default function Home() {
 
   const [initialLoaded, setInitialLoaded] = useState(false);
   // Bandera para saber si ya se hizo la carga inicial.
-  // Esto evita doble fetch al inicio.
+
+  const [observerReady, setObserverReady] = useState(false);
+  // Indica si el observer está habilitado.
+  // Esto evita que dispare en el mismo ciclo que la carga inicial.
 
   //////////////////////////////////////////////////
   // Hook de Intersection Observer
@@ -125,17 +128,22 @@ export default function Home() {
   useEffect(() => {
     //////////////////////////////////////////////////
     // Llamamos a la primera carga de datos manualmente
-    // Esto evita que el observer dispare dos veces al inicio.
     //////////////////////////////////////////////////
 
     fetchMoreServices();
-
-    //////////////////////////////////////////////////
-    // Indicamos que ya hicimos la carga inicial.
-    // Esto bloquea el observer hasta después del primer render.
-    //////////////////////////////////////////////////
-
     setInitialLoaded(true);
+
+    //////////////////////////////////////////////////
+    // Armamos un pequeño delay:
+    // Esto hace que observerReady se active en el próximo tick,
+    // evitando que el observer dispare en el mismo ciclo.
+    //////////////////////////////////////////////////
+
+    const timer = setTimeout(() => {
+      setObserverReady(true);
+    }, 0);
+
+    return () => clearTimeout(timer);
   }, []);
 
   //////////////////////////////////////////////////
@@ -144,14 +152,15 @@ export default function Home() {
 
   useEffect(() => {
     //////////////////////////////////////////////////
-    // El observer solo debe activarse después de la carga inicial.
-    // Si no, dispara inmediatamente al renderizar, generando doble fetch.
+    // El observer solo debe activarse después de la carga inicial
+    // y después de haber habilitado observerReady.
+    // Así evitamos doble fetch en el primer render.
     //////////////////////////////////////////////////
 
-    if (initialLoaded && inView && hasMore && !loading) {
+    if (observerReady && inView && hasMore && !loading) {
       fetchMoreServices();
     }
-  }, [initialLoaded, inView]);
+  }, [observerReady, inView]);
 
   //////////////////////////////////////////////////
   // useEffect → Filtrado
@@ -218,9 +227,6 @@ export default function Home() {
       // Volvemos a traer la primera página de servicios
       //////////////////////////////////////////////////
 
-      // Nota:
-      // Llamamos directamente a fetchMoreServices()
-      // Esto trae los primeros 10 registros y empieza la paginación otra vez.
       fetchMoreServices();
     }
 
@@ -333,4 +339,5 @@ export default function Home() {
 // Resultado:
 // - Home.jsx ahora muestra la cantidad de servicios encontrados.
 // - Perfectamente integrado con scroll infinito.
-// - Doble fetch inicial corregido.
+// - Doble fetch inicial eliminado definitivamente.
+///////////////////////////////////////////////////////////////////////////////////////
