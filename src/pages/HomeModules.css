@@ -39,3 +39,19 @@
     flex-wrap: wrap;
     justify-content: center;
 }
+
+/* Botón Ver más - mobile-friendly, sin cambiar tamaño */
+.btn-info {
+    background-color: #212529 !important;
+    /* Bootstrap dark */
+    color: #fff !important;
+    border: none !important;
+    border-radius: 0.375rem !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-info:active {
+    transform: scale(0.95);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}

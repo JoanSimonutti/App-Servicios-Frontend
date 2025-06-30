@@ -172,7 +172,7 @@ export default function Home() {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="dark" onClick={handleCloseModal}>
+          <Button  className="btn btn-info" onClick={handleCloseModal}>
             Cerrar
           </Button>
         </Modal.Footer>
