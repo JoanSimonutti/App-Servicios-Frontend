@@ -10,7 +10,7 @@
 
 /* Título (nombre del servicio) */
 .service-card-title {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     /* Título más grande (≈24px) */
     font-weight: bold;
     /* Más peso visual */
@@ -22,7 +22,7 @@
 
 /* Subtítulo (categoría y localidad) */
 .service-card-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     /* Subtítulo más grande (≈19px) */
     color: #6c757d;
     /* Bootstrap text-muted color */
@@ -30,4 +30,5 @@
     /* Centrado */
     margin-bottom: 1rem;
     /* Espacio inferior */
+    text-decoration: underline;
 }
