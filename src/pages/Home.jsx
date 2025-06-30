@@ -167,7 +167,7 @@ export default function Home() {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleCloseModal}>
+          <Button variant="dark" onClick={handleCloseModal}>
             Cerrar
           </Button>
         </Modal.Footer>
