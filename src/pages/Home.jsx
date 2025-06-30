@@ -161,11 +161,12 @@ export default function Home() {
         <Modal.Header closeButton>
           <Modal.Title>Detalle del Servicio</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          {selectedService && (
-            <Detalle servicio={selectedService} />
-          )}
-        </Modal.Body>
+      <Modal.Body className="p-0">
+       {/* Renderizamos el componente Detalle solo si hay servicio seleccionado */}
+       {selectedService && (
+       <Detalle servicio={selectedService} />
+       )}
+      </Modal.Body>
         <Modal.Footer>
           <Button variant="dark" onClick={handleCloseModal}>
             Cerrar
