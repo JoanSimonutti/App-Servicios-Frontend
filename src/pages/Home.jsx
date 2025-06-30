@@ -102,7 +102,7 @@ export default function Home() {
     <div className="container mt-4">
 
       {/* Título principal */}
-      <h1 className="home-title">Seleccionar Servicios</h1>
+      <h1 className="home-title">App Servicios</h1>
 
       {/* Filtros */}
       <div className="row mb-4">
