@@ -31,15 +31,10 @@ export default function AppRoutes() {
 
       {/* Dentro de Routes, definimos cada ruta usando <Route> */}
       <Routes>
-
         {/* Ruta raíz "/" → renderiza el componente Home */}
         <Route path="/" element={<Home />} />
-
-        {/* Ruta dinámica "/detalle/:id" → muestra un detalle específico usando el parámetro :id */}
-        <Route path="/detalle/:id" element={<Detalle />} />
         <Route path="/admin/clicks" element={<AdminClicks />} />
-
-
+        
       </Routes>
     </BrowserRouter>
   );

@@ -7,7 +7,7 @@
 // - Tiene botones para:
 //    • Llamar al prestador (tel:)
 //    • Enviar WhatsApp
-//    • Ver más detalles (redirige a la ruta /detalle/:id)
+//    • Ver más detalles (abre un modal en lugar de navegar a otra página)
 // - Registra en el backend cada clic realizado (analítica).
 
 // ¿Por qué es importante?
@@ -15,12 +15,7 @@
 // - Permite al usuario interactuar directamente con el prestador.
 // - Registra los clics en el backend → fundamental para métricas.
 // - Mantiene la navegación SPA sin recargar la página.
-
-// Con este archivo ganás:
-// - Interfaz atractiva y funcional.
-// - Integración directa con el backend.
-// - Métricas reales de interacción de usuarios.
-// - Código profesional, ordenado y mantenible.
+// - Ahora se integra perfectamente con la lógica de modales.
 ///////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////////////////////////////////////////////////
@@ -32,9 +27,6 @@ import React from "react";
 
 import axios from "axios";
 // Axios → librería para hacer llamadas HTTP al backend.
-
-import { useNavigate } from "react-router-dom";
-// useNavigate → hook que permite navegar programáticamente en apps SPA.
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Configuración de la URL base de la API
@@ -70,11 +62,10 @@ const registrarClick = async (serviceId, tipo) => {
 ///////////////////////////////////////////////////////////////////////////////////////
 
 // Definimos un componente funcional llamado ServiceCard.
-// Recibe como prop un objeto "service" que contiene toda la info del prestador.
-export default function ServiceCard({ service }) {
-  // Hook de React Router que nos permite redireccionar a otras rutas.
-  const navigate = useNavigate();
-
+// Recibe como props:
+// - service → objeto con la info del prestador.
+// - onVerMas → función a ejecutar cuando se toca “Ver más” para abrir el modal.
+export default function ServiceCard({ service, onVerMas }) {
   //////////////////////////////////////////////////
   // Función handleClick
   //////////////////////////////////////////////////
@@ -94,16 +85,6 @@ export default function ServiceCard({ service }) {
   };
 
   //////////////////////////////////////////////////
-  // Función irADetalle
-  //////////////////////////////////////////////////
-
-  // Esta función redirige a la página de detalle del servicio.
-  // Construye la ruta dinámica: /detalle/:id
-  const irADetalle = () => {
-    navigate(`/detalle/${service._id}`);
-  };
-
-  //////////////////////////////////////////////////
   // Render principal
   //////////////////////////////////////////////////
 
@@ -112,17 +93,17 @@ export default function ServiceCard({ service }) {
       <div className="card-body">
         
         {/* Título → nombre del prestador */}
-        <h5 className="card-title mb-1">
+        <h5 className="card-title mb-1 text-center">
           {service.nombre}
         </h5>
 
         {/* Subtítulo → categoría y localidad */}
-        <p className="card-subtitle mb-3">
+        <p className="card-subtitle mb-3 text-center">
           {service.categoria} en {service.localidad}
         </p>
 
         {/* Botones de acción */}
-        <div className="d-flex flex-wrap gap-2">
+        <div className="d-flex flex-wrap gap-2 justify-content-center">
           {/* Botón Teléfono */}
           <button
             onClick={() => handleClick("telefono", `tel:${service.telefono}`)}
@@ -143,7 +124,7 @@ export default function ServiceCard({ service }) {
 
           {/* Botón Ver más */}
           <button
-            onClick={irADetalle}
+            onClick={() => onVerMas(service)}
             className="btn btn-dark btn-sm"
           >
             Ver más
@@ -156,8 +137,7 @@ export default function ServiceCard({ service }) {
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // Resultado:
-// - ServiceCard.jsx ahora está completamente documentado.
-// - Endpoints corregidos → usa /clic.
-// - Usa variable de entorno API_BASE_URL.
-// - Código limpio, profesional y listo para producción.
+// - ServiceCard.jsx mantiene tu diseño original.
+// - “Ver más” ahora abre el modal (no navega).
+// - Clicks de Teléfono y WhatsApp siguen registrándose en el backend.
 ///////////////////////////////////////////////////////////////////////////////////////
