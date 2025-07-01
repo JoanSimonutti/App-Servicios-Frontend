@@ -102,10 +102,10 @@ export default function Home() {
     <div className="container mt-4">
 
      <header className="app-header">
-  <h1 className="app-header-title">App-Servicios</h1>
+  <h1 className="app-header-title">SERVIPRO</h1>
   <nav className="app-header-links">
-    <a href="/">Inicio</a>
-    <a href="#">Perfil</a>
+    <a href="/">INICIO</a>
+    <a href="#">PERFIL</a>
   </nav>
 </header>
 
