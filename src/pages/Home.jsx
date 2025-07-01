@@ -142,7 +142,16 @@ export default function Home() {
     <div className="container mt-4">
       {/* Header */}
       <header className="app-header">
-        <h1 className="app-header-title">SERVIPRO</h1>
+        <h1 className="app-header-title">
+          <a
+            href="https://github.com/JoanSimonutti"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ color: "inherit", textDecoration: "none" }}
+          >
+            SERVIPRO
+          </a>
+        </h1>
         <nav className="app-header-links">
           <a
             href="https://www.linkedin.com/in/joansimonutti/"
