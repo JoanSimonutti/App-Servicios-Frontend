@@ -64,11 +64,11 @@
     background-color: #212529;
     color: #fff;
     padding: 0.5rem;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 0 0 0.5rem 0.5rem;
+    border-radius: 0 0 1.2rem 1.2rem;
 }
 
 .app-header-title {
