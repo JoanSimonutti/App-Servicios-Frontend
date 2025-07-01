@@ -104,14 +104,14 @@ export default function Home() {
      <header className="app-header">
   <h1 className="app-header-title">SERVIPRO</h1>
   <nav className="app-header-links">
-    <a href="/">INICIO</a>
+    <a href="#filtros">INICIO</a>
     <a href="#">PERFIL</a>
   </nav>
 </header>
 
 
       {/* Filtros */}
-      <div className="row mb-3 mt-5">
+      <div id="filtros" className="row mb-3 mt-5">
         {/* Filtro de categoría */}
         <div className="col-md-6 mb-3 mt-3">
           <select
