@@ -101,7 +101,7 @@ export default function Home() {
   return (
     <div className="container mt-4">
 
-     <header className="app-header">
+     <header id="filtros" className="app-header">
   <h1 className="app-header-title">SERVIPRO</h1>
   <nav className="app-header-links">
     <a href="#filtros">INICIO</a>
@@ -111,7 +111,7 @@ export default function Home() {
 
 
       {/* Filtros */}
-      <div id="filtros" className="row mb-3 mt-5">
+      <div className="row mb-3 mt-5">
         {/* Filtro de categoría */}
         <div className="col-md-6 mb-3 mt-3">
           <select
