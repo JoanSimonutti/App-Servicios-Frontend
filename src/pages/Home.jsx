@@ -144,7 +144,13 @@ export default function Home() {
       <header className="app-header">
         <h1 className="app-header-title">SERVIPRO</h1>
         <nav className="app-header-links">
-          <a href="#">Tu Perfil</a>
+          <a
+            href="https://www.linkedin.com/in/joansimonutti/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Tu Perfil
+          </a>
         </nav>
       </header>
 
