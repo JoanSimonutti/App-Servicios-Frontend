@@ -111,7 +111,7 @@ export default function Home() {
 
 
       {/* Filtros */}
-      <div className="row mb-4">
+      <div className="row mb-3 mt-5">
         {/* Filtro de categoría */}
         <div className="col-md-6 mb-3 mt-3">
           <select
