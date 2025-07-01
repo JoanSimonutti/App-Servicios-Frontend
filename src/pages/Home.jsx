@@ -101,13 +101,19 @@ export default function Home() {
   return (
     <div className="container mt-4">
 
-      {/* Título principal */}
-      <h1 className="home-title">App Servicios</h1>
+     <header className="app-header">
+  <h1 className="app-header-title">App-Servicios</h1>
+  <nav className="app-header-links">
+    <a href="/">Inicio</a>
+    <a href="#">Perfil</a>
+  </nav>
+</header>
+
 
       {/* Filtros */}
       <div className="row mb-4">
         {/* Filtro de categoría */}
-        <div className="col-md-6 mb-3">
+        <div className="col-md-6 mb-3 mt-3">
           <select
             className="form-select home-select"
             value={categoriaFiltro}
