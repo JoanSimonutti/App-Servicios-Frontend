@@ -25,7 +25,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 export default function Home() {
   ////////////////////////////////////////////////////////////////////////////
-  // Estados
+  // ESTADOS
   ////////////////////////////////////////////////////////////////////////////
 
   const [services, setServices] = useState([]); // Todos los servicios desde backend
@@ -39,8 +39,10 @@ export default function Home() {
   const [showModal, setShowModal] = useState(false); // Estado de apertura del modal
   const [selectedService, setSelectedService] = useState(null); // Servicio a mostrar
 
+  const [showButton, setShowButton] = useState(false); // Mostrar/Ocultar el botón de volver arriba
+
   ////////////////////////////////////////////////////////////////////////////
-  // Efecto inicial → trae los servicios del backend
+  // EFECTO inicial → trae los servicios del backend
   ////////////////////////////////////////////////////////////////////////////
 
   useEffect(() => {
@@ -48,7 +50,20 @@ export default function Home() {
   }, []);
 
   ////////////////////////////////////////////////////////////////////////////
-  // Función para obtener servicios del backend
+  // EFECTO para mostrar/ocultar botón flotante
+  ////////////////////////////////////////////////////////////////////////////
+
+  // useEffect SOLO puede estar dentro del componente Home, NUNCA dentro
+  // de una función normal como obtenerServicios. Aquí está bien ubicado.
+  useEffect(() => {
+    // Escuchamos el evento scroll
+    window.addEventListener("scroll", handleScroll);
+    // Limpiamos el listener cuando el componente se desmonta
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  ////////////////////////////////////////////////////////////////////////////
+  // FUNCIÓN para obtener servicios del backend
   ////////////////////////////////////////////////////////////////////////////
 
   const obtenerServicios = async () => {
@@ -63,14 +78,13 @@ export default function Home() {
 
       const localidadesUnicas = [...new Set(res.data.map((s) => s.localidad))];
       setLocalidades(localidadesUnicas);
-
     } catch (err) {
       console.error("Error al traer servicios:", err);
     }
   };
 
   ////////////////////////////////////////////////////////////////////////////
-  // Lógica de filtrado
+  // LÓGICA de filtrado
   ////////////////////////////////////////////////////////////////////////////
 
   const serviciosFiltrados = services.filter((s) => {
@@ -81,7 +95,7 @@ export default function Home() {
   });
 
   ////////////////////////////////////////////////////////////////////////////
-  // Funciones para el modal
+  // FUNCIONES para el modal
   ////////////////////////////////////////////////////////////////////////////
 
   const handleVerMas = (service) => {
@@ -94,31 +108,54 @@ export default function Home() {
     setSelectedService(null);
   };
 
-const handleScrollTop = (e) => {
-  e.preventDefault(); // Evita que haga reload o cambie el hash
-  window.scrollTo({
-    top: 0,
-    left: 0,
-    behavior: "smooth" // suave para mobile-friendly
-  });
-};
+  ////////////////////////////////////////////////////////////////////////////
+  // FUNCIÓN que detecta el scroll
+  ////////////////////////////////////////////////////////////////////////////
 
+  // Esta función la usa el useEffect para saber cuándo mostrar el botón flotante.
+  const handleScroll = () => {
+    if (window.scrollY > 100) {
+      setShowButton(true);
+    } else {
+      setShowButton(false);
+    }
+  };
 
   ////////////////////////////////////////////////////////////////////////////
-  // Render principal
+  // FUNCIÓN para volver arriba (scroll to top)
+  ////////////////////////////////////////////////////////////////////////////
+
+  const handleScrollTop = (e) => {
+    e.preventDefault(); // Evita reload o cambio de hash
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth", // suave para mobile-friendly
+    });
+  };
+
+  ////////////////////////////////////////////////////////////////////////////
+  // RENDER PRINCIPAL
   ////////////////////////////////////////////////////////////////////////////
 
   return (
     <div className="container mt-4">
+      {/* Header */}
+      <header className="app-header">
+        <h1 className="app-header-title">SERVIPRO</h1>
+        <nav className="app-header-links">
+          <a href="#">Tu Perfil</a>
+        </nav>
+      </header>
 
-     <header className="app-header">
-  <h1 className="app-header-title">SERVIPRO</h1>
-  <nav className="app-header-links">
-    <a href="#" onClick={handleScrollTop}>INICIO</a>
-    <a href="#">PERFIL</a>
-  </nav>
-</header>
-
+      {/* Botón flotante de volver arriba */}
+      <a
+        href="#"
+        className={`btn-floating ${showButton ? "visible" : ""}`}
+        onClick={handleScrollTop}
+      >
+        ↑
+      </a>
 
       {/* Filtros */}
       <div className="row mb-3 mt-5">
@@ -164,31 +201,21 @@ const handleScrollTop = (e) => {
       <div className="home-row">
         {serviciosFiltrados.map((service) => (
           <div key={service._id} className="col-md-4">
-            <ServiceCard
-              service={service}
-              onVerMas={handleVerMas}
-            />
+            <ServiceCard service={service} onVerMas={handleVerMas} />
           </div>
         ))}
       </div>
 
       {/* Modal para detalle */}
-      <Modal
-        show={showModal}
-        onHide={handleCloseModal}
-        size="lg"
-        centered
-      >
+      <Modal show={showModal} onHide={handleCloseModal} size="lg" centered>
         <Modal.Header closeButton>
           <Modal.Title>Detalles del Servicio</Modal.Title>
         </Modal.Header>
         <Modal.Body className="p-0">
-          {selectedService && (
-            <Detalle servicio={selectedService} />
-          )}
+          {selectedService && <Detalle servicio={selectedService} />}
         </Modal.Body>
         <Modal.Footer>
-          <Button  className="btn btn-info" onClick={handleCloseModal}>
+          <Button className="btn btn-info" onClick={handleCloseModal}>
             Cerrar
           </Button>
         </Modal.Footer>
@@ -196,6 +223,3 @@ const handleScrollTop = (e) => {
     </div>
   );
 }
-
-///////////////////////////////////////////////////////////////////////////////////////
-// - Estética unificada con ServiceCard y Detalle.
