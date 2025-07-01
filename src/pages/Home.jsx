@@ -94,6 +94,16 @@ export default function Home() {
     setSelectedService(null);
   };
 
+const handleScrollTop = (e) => {
+  e.preventDefault(); // Evita que haga reload o cambie el hash
+  window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "smooth" // suave para mobile-friendly
+  });
+};
+
+
   ////////////////////////////////////////////////////////////////////////////
   // Render principal
   ////////////////////////////////////////////////////////////////////////////
@@ -101,10 +111,10 @@ export default function Home() {
   return (
     <div className="container mt-4">
 
-     <header id="filtros" className="app-header">
+     <header className="app-header">
   <h1 className="app-header-title">SERVIPRO</h1>
   <nav className="app-header-links">
-    <a href="#filtros">INICIO</a>
+    <a href="#" onClick={handleScrollTop}>INICIO</a>
     <a href="#">PERFIL</a>
   </nav>
 </header>
