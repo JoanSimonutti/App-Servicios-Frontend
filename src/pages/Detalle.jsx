@@ -34,7 +34,6 @@ const registrarClick = async (serviceId, tipo) => {
 ////////////////////////////////////////////////////////////////////////////////////////
 
 export default function Detalle({ servicio }) {
-
   ////////////////////////////////////////////////////////////////////////////
   // Si NO hay datos de servicio, mostramos mensaje de error amigable.
   ////////////////////////////////////////////////////////////////////////////
@@ -67,42 +66,36 @@ export default function Detalle({ servicio }) {
 
   return (
     <div className="detalle-card">
-
       {/* Título principal */}
-      <h2 className="detalle-title">
-        {servicio.nombre}
-      </h2>
+      <h2 className="detalle-title">{servicio.nombre}</h2>
 
       {/* Bloques de texto (sin listas) */}
       <p className="detalle-text-1">
-        <strong>{servicio.categoria}</strong> en <strong>{servicio.localidad}</strong>
+        <strong>{servicio.categoria}</strong> en{" "}
+        <strong>{servicio.localidad}</strong>.
       </p>
       <p className="detalle-text">
-        <strong>{servicio.tipoServicio}</strong>
+        <strong>{servicio.tipoServicio}</strong>.
       </p>
       <p className="detalle-text">
-        <strong>Horario:</strong> {servicio.horaDesde}:00 a {servicio.horaHasta}:00 hs.
+        <strong>Horario:</strong> {servicio.horaDesde}:00 a {servicio.horaHasta}
+        :00 hs.
       </p>
       <p className="detalle-text">
         <strong>Urgencias 24hs:</strong> {servicio.urgencias24hs ? "Sí" : "No"}.
       </p>
       <p className="detalle-text">
-        <strong>Localidades cercanas:</strong> {servicio.localidadesCercanas ? "Sí" : "No"}.
+        <strong>Localidades cercanas:</strong>{" "}
+        {servicio.localidadesCercanas ? "Sí" : "No"}.
       </p>
 
       {/* Botones de acción */}
       <div className="d-flex flex-wrap gap-2 justify-content-center mt-3">
-        <button
-          onClick={llamar}
-          className="btn btn-telefono btn-lg"
-        >
+        <button onClick={llamar} className="btn btn-telefono btn-lg">
           Teléfono
         </button>
 
-        <button
-          onClick={whatsapp}
-          className="btn btn-whatsapp btn-lg"
-        >
+        <button onClick={whatsapp} className="btn btn-whatsapp btn-lg">
           WhatsApp
         </button>
       </div>
@@ -113,4 +106,3 @@ export default function Detalle({ servicio }) {
 ////////////////////////////////////////////////////////////////////////////////////////
 // Resultado:
 // - Estética unificada con ServiceCard.
-
