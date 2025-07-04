@@ -14,8 +14,9 @@
 .detalle-title {
     font-size: 1.6rem;
     font-weight: bold;
-    text-align: center;
+    text-align: start;
     margin-bottom: 1rem;
+    text-decoration: underline;
 }
 
 /* Texto de detalles alternativo*/
