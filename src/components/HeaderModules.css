@@ -1,0 +1,40 @@
+.app-header {
+    background-color: #212529;
+    color: #ffc107;
+    padding: 0.3rem 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 0 0.8rem 0.8rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 999;
+}
+
+.app-header-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0;
+}
+
+.app-header-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.app-header-links a {
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: color 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+.app-header-links a:active {
+    color: #ffc107;
+}

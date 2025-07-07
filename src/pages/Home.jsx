@@ -10,6 +10,8 @@ import Detalle from "./Detalle";
 
 import { Modal, Button } from "react-bootstrap";
 
+import Header from "../components/Header";
+
 import "./HomeModules.css";
 // Importamos los estilos externos exclusivos de Home.
 
@@ -141,27 +143,7 @@ export default function Home() {
   return (
     <div className="container mt-4">
       {/* Header */}
-      <header className="app-header">
-        <h1 className="app-header-title">
-          <a
-            href="https://github.com/JoanSimonutti"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{ color: "inherit", textDecoration: "none" }}
-          >
-            SERVIPRO
-          </a>
-        </h1>
-        <nav className="app-header-links">
-          <a
-            href="https://www.linkedin.com/in/joansimonutti/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Tu Perfil
-          </a>
-        </nav>
-      </header>
+      <Header />
 
       {/* Botón flotante de volver arriba */}
       <a

@@ -48,7 +48,9 @@ import Perfil from "../pages/Perfil";
 export default function AppRoutes() {
   return (
     // Usamos BrowserRouter para activar el modo SPA (Single Page Application)
-    <BrowserRouter>
+    <BrowserRouter
+      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+    >
       {/* Dentro de Routes, definimos cada ruta usando <Route> */}
       <Routes>
         {/* Ruta raíz "/" → renderiza el componente Home */}
