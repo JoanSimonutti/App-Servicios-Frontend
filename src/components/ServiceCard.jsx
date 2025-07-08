@@ -1,36 +1,26 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 // ServiceCard.jsx
-///////////////////////////////////////////////////////////////////////////////////////
-
-///////////////////////////////////////////////////////////////////////////////////////
-// Importaciones necesarias
+//
+// Qué hace:
+// - Muestra información resumida de un servicio.
+// - Permite acceder a:
+//   - Teléfono (abre enlace + registra clic)
+//   - WhatsApp (abre enlace + registra clic)
+//   - Ver más detalles
+//
+// Rediseñado:
+// - Elimina Bootstrap.
+// - Usa clases propias coherentes con header, login, home, etc.
+// - Diseño dark+gold profesional.
+// - Completamente responsive.
 ///////////////////////////////////////////////////////////////////////////////////////
 
 import React from "react";
-// Importamos React para definir componentes.
-
 import axios from "axios";
-// Axios → librería para hacer llamadas HTTP al backend.
-
 import "./ServiceCardModules.css";
-// Importamos nuestros estilos externos específicos para ServiceCard.
 
-///////////////////////////////////////////////////////////////////////////////////////
-// Configuración de la URL base de la API
-///////////////////////////////////////////////////////////////////////////////////////
-
-// Obtenemos la URL base del backend desde variables de entorno (.env).
 const API_BASE_URL = import.meta.env.VITE_API_URL;
 
-///////////////////////////////////////////////////////////////////////////////////////
-// Función auxiliar registrarClick
-///////////////////////////////////////////////////////////////////////////////////////
-
-// Registra un clic en el backend.
-//
-// Parámetros:
-// - serviceId → ID del servicio sobre el cual se hizo clic.
-// - tipo → puede ser "telefono" o "whatsapp".
 const registrarClick = async (serviceId, tipo) => {
   try {
     await axios.post(`${API_BASE_URL}/clic`, {
@@ -42,72 +32,43 @@ const registrarClick = async (serviceId, tipo) => {
   }
 };
 
-///////////////////////////////////////////////////////////////////////////////////////
-// Componente principal ServiceCard
-///////////////////////////////////////////////////////////////////////////////////////
-
 export default function ServiceCard({ service, onVerMas }) {
-  //////////////////////////////////////////////////
-  // Función handleClick
-  //////////////////////////////////////////////////
-
-  // Ejecutada cuando se hace clic en Teléfono o WhatsApp.
-  //
-  // Registra el clic en backend y abre el enlace.
   const handleClick = (tipo, enlace) => {
     registrarClick(service._id, tipo);
     window.open(enlace, "_blank");
   };
 
-  //////////////////////////////////////////////////
-  // Render principal
-  //////////////////////////////////////////////////
-
   return (
-    // ✅ Usamos clase personalizada .service-card para la sombra.
-    <div className="card mb-4 service-card">
-      <div className="card-body">
+    <div className="service-card">
+      <h5 className="service-card-title">{service.nombre}</h5>
+      <p className="service-card-subtitle">
+        {service.categoria} en {service.localidad}
+      </p>
 
-        {/* Título del servicio */}
-        <h5 className="service-card-title">
-          {service.nombre}
-        </h5>
+      <div className="service-card-buttons">
+        <button
+          onClick={() => handleClick("telefono", `tel:${service.telefono}`)}
+          className="service-card-btn service-card-btn-telefono"
+        >
+          Teléfono
+        </button>
 
-        {/* Subtítulo → categoría y localidad */}
-        <p className="service-card-subtitle">
-          {service.categoria} en {service.localidad}
-        </p>
+        <button
+          onClick={() =>
+            handleClick("whatsapp", `https://wa.me/${service.telefono}`)
+          }
+          className="service-card-btn service-card-btn-whatsapp"
+        >
+          WhatsApp
+        </button>
 
-        {/* Botones de acción */}
-        <div className="d-flex flex-wrap gap-2 justify-content-center">
-          {/* Botón Teléfono */}
-          <button
-            onClick={() => handleClick("telefono", `tel:${service.telefono}`)}
-            className="btn btn-telefono"
-          >
-            Teléfono
-          </button>
-
-          {/* Botón WhatsApp */}
-          <button
-            onClick={() =>
-              handleClick("whatsapp", `https://wa.me/${service.telefono}`)
-            }
-            className="btn btn-whatsapp"
-          >
-            WhatsApp
-          </button>
-
-          {/* Botón Ver más */}
-          <button
-            onClick={() => onVerMas(service)}
-            className="btn btn-info"
-          >
-            + Info
-          </button>
-        </div>
+        <button
+          onClick={() => onVerMas(service)}
+          className="service-card-btn service-card-btn-info"
+        >
+          + Info
+        </button>
       </div>
     </div>
   );
 }
-

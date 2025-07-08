@@ -1,82 +1,82 @@
 /* ///////////////////////////////////////////////////////////////////////////
-// servicecard.css
+// ServiceCardModules.css
+//
+// Estilos premium para ServiceCard.
+// Esquema dark + dorado, coherente con header, login, home, etc.
+// Totalmente responsive.
 //////////////////////////////////////////////////////////////////////////// */
 
-/* Clase para el contenedor de la tarjeta */
 .service-card {
-    /* Sombra personalizada → más profunda que shadow-sm de Bootstrap */
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
+    background-color: #1e1e1e;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Título (nombre del servicio) */
+.service-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6);
+}
+
 .service-card-title {
-    font-size: 1.6rem;
-    /* Título más grande (≈24px) */
-    font-weight: bold;
-    /* Más peso visual */
-    text-align: center;
-    /* Centramos el texto */
-    margin-bottom: 0.5rem;
-    /* Espacio inferior */
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffd700;
+    margin-bottom: 0.75rem;
 }
 
-/* Subtítulo (categoría y localidad) */
 .service-card-subtitle {
-    font-size: 1.4rem;
-    /* Subtítulo más grande (≈19px) */
-    color: #6c757d;
-    /* Bootstrap text-muted color */
-    text-align: center;
-    /* Centrado */
-    margin-bottom: 1rem;
-    /* Espacio inferior */
+    font-size: 1.3rem;
+    color: #cccccc;
+    margin-bottom: 1.5rem;
     text-decoration: underline;
 }
 
-/* Botón WhatsApp - mobile-friendly, sin cambiar tamaño */
-.btn-whatsapp {
-    background-color: #25d366 !important;
-    color: #fff !important;
-    border: none !important;
-    border-radius: 0.375rem !important;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+.service-card-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
-/* Efecto “pulse” al toque */
-.btn-whatsapp:active {
-    transform: scale(0.95);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.service-card-btn {
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    color: #ffffff;
 }
 
-/* Botón Teléfono - mobile-friendly, sin cambiar tamaño */
-.btn-telefono {
-    background-color: #007bff !important;
-    /* Bootstrap primary blue */
-    color: #fff !important;
-    border: none !important;
-    border-radius: 0.375rem !important;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+.service-card-btn:hover {
+    transform: scale(1.05);
 }
 
-.btn-telefono:active {
-    transform: scale(0.95);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.service-card-btn-telefono {
+    background-color: #007bff;
 }
 
-/* Botón Ver más - mobile-friendly, sin cambiar tamaño */
-.btn-info {
-    background-color: #212529 !important;
-    /* Bootstrap dark */
-    color: #fff !important;
-    border: none !important;
-    border-radius: 0.375rem !important;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+.service-card-btn-telefono:hover {
+    background-color: #0056b3;
 }
 
-.btn-info:active {
-    transform: scale(0.95);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.service-card-btn-whatsapp {
+    background-color: #25d366;
+}
+
+.service-card-btn-whatsapp:hover {
+    background-color: #1ebe5d;
+}
+
+.service-card-btn-info {
+    background-color: #ffd700;
+    color: #212529;
+}
+
+.service-card-btn-info:hover {
+    background-color: #ffc107;
 }

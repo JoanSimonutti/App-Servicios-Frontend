@@ -1,87 +1,73 @@
 /* ///////////////////////////////////////////////////////////////////////////
 // HomeModules.css
+//
+// Estilos premium para Home.
+// Esquema dark + dorado, coherente con header y demás.
+// Totalmente responsive.
 //////////////////////////////////////////////////////////////////////////// */
 
-/* Título principal */
+.home-container {
+    background-color: #121212;
+    color: #ffffff;
+    padding: 2rem;
+    min-height: calc(100vh - 80px);
+}
+
 .home-title {
-    font-size: 2.3rem;
-    /* Grande y llamativo */
-    font-weight: bold;
+    font-size: 2.5rem;
+    font-weight: 700;
     text-align: center;
-    color: #343a40;
-    /* Bootstrap dark color */
+    color: #ffd700;
+    margin-bottom: 2rem;
 }
 
-/* Selects de filtros */
-.home-select {
-    font-size: 1.2rem;
-    text-align: center;
-    padding: 0.5rem;
-}
-
-/* Opciones dentro del select */
-.home-select option {
-    font-size: 1.2rem;
-}
-
-/* Texto de cantidad de servicios encontrados */
-.home-count-text {
-    font-size: 1.2rem;
-    text-align: center;
-    color: #495057;
-    margin-bottom: 1rem;
-}
-
-/* Fila de tarjetas */
-.home-row {
+.home-filters {
     display: flex;
-    flex-direction: column;
     flex-wrap: wrap;
+    gap: 1.5rem;
     justify-content: center;
+    margin-bottom: 2rem;
 }
 
-/* Botón cerrar del modal - mobile-friendly, sin cambiar tamaño */
-.btn-info {
-    background-color: #212529 !important;
-    /* Bootstrap dark */
-    color: #fff !important;
-    border: none !important;
-    border-radius: 0.375rem !important;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+.home-filter {
+    flex: 1;
+    min-width: 250px;
 }
 
-.btn-info:active {
-    transform: scale(0.95);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.home-select {
+    width: 100%;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem 1rem;
+    font-size: 1.1rem;
 }
 
-
-/* Botón Ver más - mobile-friendly, sin cambiar tamaño */
-.btn-info {
-    background-color: #212529 !important;
-    color: #fff !important;
-    border: none !important;
-    border-radius: 0.375rem !important;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+.home-select option {
+    color: #000000;
 }
 
-.btn-info:active {
-    transform: scale(0.95);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.home-count-text {
+    text-align: center;
+    color: #cccccc;
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
 }
 
-/* ///////////////////////////////////////////////////////////////////////////
-// Boton flotante para regresar
-//////////////////////////////////////////////////////////////////////////// */
+.home-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
 
-.btn-floating {
+/* Botón flotante */
+.home-btn-floating {
     position: fixed;
     top: 82px;
-    right: 10px;
-    background-color: #212529;
-    color: #fff;
+    right: 20px;
+    background-color: #ffd700;
+    color: #212529;
     border: none;
     border-radius: 50%;
     width: 50px;
@@ -93,23 +79,57 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.3s ease;
     opacity: 0;
     pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.2s ease;
     z-index: 9999;
 }
 
-.btn-floating:hover {
-    background-color: #343a40;
-}
-
-.btn-floating:active {
-    transform: scale(0.95);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    color: #ffc107;
-}
-
-.btn-floating.visible {
+.home-btn-floating.visible {
     opacity: 1;
     pointer-events: auto;
+}
+
+.home-btn-floating:hover {
+    transform: scale(1.1);
+    background-color: #ffc107;
+}
+
+/* Modal overlay */
+.home-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.home-modal-content {
+    background-color: #1e1e1e;
+    padding: 2rem;
+    border-radius: 8px;
+    max-width: 800px;
+    width: 90%;
+    position: relative;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.home-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.home-modal-close:hover {
+    color: #ffd700;
 }

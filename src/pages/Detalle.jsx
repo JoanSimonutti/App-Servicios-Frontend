@@ -1,22 +1,24 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 // Detalle.jsx
+//
+// Qué hace:
+// - Muestra los datos de un servicio en detalle.
+// - Incluye botones Teléfono y WhatsApp.
+// - Registra clics en backend.
+//
+// Rediseñado:
+// - Elimina Bootstrap.
+// - Usa clases propias coherentes con header, login, etc.
+// - Diseño dark+gold profesional.
+// - Completamente responsive.
 ////////////////////////////////////////////////////////////////////////////////////////
 
 import React from "react";
 import axios from "axios";
 
 import "./DetalleModules.css";
-// Importamos nuestros estilos externos específicos para Detalle.
-
-////////////////////////////////////////////////////////////////////////////////////////
-// Configuración URL backend
-////////////////////////////////////////////////////////////////////////////////////////
 
 const API_BASE_URL = import.meta.env.VITE_API_URL;
-
-////////////////////////////////////////////////////////////////////////////////////////
-// Función auxiliar para registrar clics
-////////////////////////////////////////////////////////////////////////////////////////
 
 const registrarClick = async (serviceId, tipo) => {
   try {
@@ -29,26 +31,12 @@ const registrarClick = async (serviceId, tipo) => {
   }
 };
 
-////////////////////////////////////////////////////////////////////////////////////////
-// Componente Detalle
-////////////////////////////////////////////////////////////////////////////////////////
-
 export default function Detalle({ servicio }) {
-  ////////////////////////////////////////////////////////////////////////////
-  // Si NO hay datos de servicio, mostramos mensaje de error amigable.
-  ////////////////////////////////////////////////////////////////////////////
-
   if (!servicio) {
     return (
-      <p className="text-center text-muted">
-        No se encontró información del servicio.
-      </p>
+      <p className="detalle-empty">No se encontró información del servicio.</p>
     );
   }
-
-  ////////////////////////////////////////////////////////////////////////////
-  // Funciones manejadoras de los botones
-  ////////////////////////////////////////////////////////////////////////////
 
   const llamar = () => {
     registrarClick(servicio._id, "telefono");
@@ -60,16 +48,10 @@ export default function Detalle({ servicio }) {
     window.open(`https://wa.me/${servicio.telefono}`, "_blank");
   };
 
-  ////////////////////////////////////////////////////////////////////////////
-  // Render principal
-  ////////////////////////////////////////////////////////////////////////////
-
   return (
     <div className="detalle-card">
-      {/* Título principal */}
       <h2 className="detalle-title">{servicio.nombre}</h2>
 
-      {/* Bloques de texto (sin listas) */}
       <p className="detalle-text-1">
         <strong>{servicio.categoria}</strong> en{" "}
         <strong>{servicio.localidad}</strong>.
@@ -89,20 +71,14 @@ export default function Detalle({ servicio }) {
         {servicio.localidadesCercanas ? "Sí" : "No"}.
       </p>
 
-      {/* Botones de acción */}
-      <div className="d-flex flex-wrap gap-2 justify-content-center mt-3">
-        <button onClick={llamar} className="btn btn-telefono btn-lg">
+      <div className="detalle-buttons">
+        <button onClick={llamar} className="detalle-btn detalle-btn-telefono">
           Teléfono
         </button>
-
-        <button onClick={whatsapp} className="btn btn-whatsapp btn-lg">
+        <button onClick={whatsapp} className="detalle-btn detalle-btn-whatsapp">
           WhatsApp
         </button>
       </div>
     </div>
   );
 }
-
-////////////////////////////////////////////////////////////////////////////////////////
-// Resultado:
-// - Estética unificada con ServiceCard.

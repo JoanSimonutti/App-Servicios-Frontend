@@ -6,21 +6,12 @@
 // Hace GET /profile para traer datos actuales.
 // Permite modificar campos vía PUT /profile.
 // Permite eliminar la cuenta (soft delete) vía DELETE /profile.
-//
-// Flow:
-// → Al entrar, carga datos desde /profile.
-// → Permite modificar datos y guardarlos.
-// → Permite borrar cuenta (soft delete).
-//
-// Por qué es importante:
-// - Permite al prestador mantener actualizado su perfil.
-// - Profesionaliza la UX/UI.
-// - Completa la integración front-back.
 ///////////////////////////////////////////////////////////////////////////////////////
 
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import "./PerfilModules.css";
 
 const Perfil = () => {
   const [perfil, setPerfil] = useState(null);
@@ -30,7 +21,6 @@ const Perfil = () => {
 
   const navigate = useNavigate();
 
-  // Configuración inicial de Axios para incluir token automáticamente
   const axiosInstance = axios.create({
     baseURL: import.meta.env.VITE_API_URL,
     headers: {
@@ -38,7 +28,6 @@ const Perfil = () => {
     },
   });
 
-  // Cargar datos al entrar
   useEffect(() => {
     const fetchPerfil = async () => {
       try {
@@ -56,7 +45,6 @@ const Perfil = () => {
     fetchPerfil();
   }, []);
 
-  // Handler para cambios en el formulario
   const handleChange = (e) => {
     setPerfil({
       ...perfil,
@@ -64,7 +52,6 @@ const Perfil = () => {
     });
   };
 
-  // Guardar cambios en el perfil
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -87,7 +74,6 @@ const Perfil = () => {
     }
   };
 
-  // Borrar cuenta (soft delete)
   const handleDelete = async () => {
     if (
       !window.confirm(
@@ -101,7 +87,7 @@ const Perfil = () => {
       setLoading(true);
       await axiosInstance.delete("/profile");
       localStorage.removeItem("token");
-      navigate("/"); // Redirigir al Home tras borrar cuenta
+      navigate("/");
     } catch (err) {
       console.error(err);
       setError(
@@ -113,123 +99,81 @@ const Perfil = () => {
     }
   };
 
-  // Mientras carga datos
   if (loading && !perfil) {
     return (
-      <div className="text-center mt-5">
-        <div className="spinner-border" role="status"></div>
-        <p className="mt-2">Cargando perfil...</p>
+      <div className="perfil-loading">
+        <div className="perfil-spinner"></div>
+        <p>Cargando perfil...</p>
       </div>
     );
   }
 
-  // Si ocurrió un error
   if (error && !perfil) {
-    return <div className="alert alert-danger mt-5 text-center">{error}</div>;
+    return <div className="perfil-error mt-5 text-center">{error}</div>;
   }
 
-  // Si aún no hay datos
   if (!perfil) {
     return null;
   }
 
   return (
-    <div className="container mt-5">
-      <div className="row justify-content-center">
-        <div className="col-md-8">
-          <div className="card shadow">
-            <div className="card-header bg-primary text-white text-center">
-              <h4>Mi Perfil</h4>
-            </div>
-            <div className="card-body">
-              {/* Mensaje de éxito */}
-              {mensaje && <div className="alert alert-success">{mensaje}</div>}
+    <div className="perfil-container">
+      <div className="perfil-card">
+        <h2 className="perfil-title">Mi Perfil</h2>
 
-              {/* Mensaje de error */}
-              {error && <div className="alert alert-danger">{error}</div>}
+        {mensaje && <div className="perfil-success">{mensaje}</div>}
+        {error && <div className="perfil-error">{error}</div>}
 
-              <form onSubmit={handleSubmit}>
-                {/* Teléfono (no editable) */}
-                <div className="mb-3">
-                  <label className="form-label">Teléfono (no editable)</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    value={perfil.telefono}
-                    disabled
-                  />
-                </div>
-
-                {/* Nombre */}
-                <div className="mb-3">
-                  <label className="form-label">Nombre</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="nombre"
-                    value={perfil.nombre || ""}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                {/* Localidad */}
-                <div className="mb-3">
-                  <label className="form-label">Localidad</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="localidad"
-                    value={perfil.localidad || ""}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                {/* Categoría */}
-                <div className="mb-3">
-                  <label className="form-label">Categoría</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    name="categoria"
-                    value={perfil.categoria || ""}
-                    onChange={handleChange}
-                  />
-                </div>
-
-                {/* Otros campos que quieras agregar… */}
-
-                <button
-                  type="submit"
-                  className="btn btn-primary w-100"
-                  disabled={loading}
-                >
-                  {loading ? (
-                    <>
-                      <span
-                        className="spinner-border spinner-border-sm me-2"
-                        role="status"
-                        aria-hidden="true"
-                      ></span>
-                      Guardando...
-                    </>
-                  ) : (
-                    "Guardar cambios"
-                  )}
-                </button>
-              </form>
-
-              <hr />
-
-              <button
-                className="btn btn-danger w-100 mt-2"
-                onClick={handleDelete}
-                disabled={loading}
-              >
-                Eliminar cuenta
-              </button>
-            </div>
+        <form className="perfil-form" onSubmit={handleSubmit}>
+          <div className="perfil-field">
+            <label>Teléfono (no editable)</label>
+            <input type="text" value={perfil.telefono} disabled />
           </div>
-        </div>
+
+          <div className="perfil-field">
+            <label>Nombre</label>
+            <input
+              type="text"
+              name="nombre"
+              value={perfil.nombre || ""}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="perfil-field">
+            <label>Localidad</label>
+            <input
+              type="text"
+              name="localidad"
+              value={perfil.localidad || ""}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="perfil-field">
+            <label>Categoría</label>
+            <input
+              type="text"
+              name="categoria"
+              value={perfil.categoria || ""}
+              onChange={handleChange}
+            />
+          </div>
+
+          <button type="submit" className="perfil-button" disabled={loading}>
+            {loading ? "Guardando..." : "Guardar cambios"}
+          </button>
+        </form>
+
+        <hr className="perfil-divider" />
+
+        <button
+          className="perfil-delete-button"
+          onClick={handleDelete}
+          disabled={loading}
+        >
+          Eliminar cuenta
+        </button>
       </div>
     </div>
   );
