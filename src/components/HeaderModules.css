@@ -24,12 +24,6 @@
     transition: color 0.3s ease;
 }
 
-.app-logo-link:hover {
-    color: #ffc107;
-    /* tono dorado más claro al hover */
-    text-decoration: none;
-}
-
 /* Contenedor links */
 .app-header-links {
     display: flex;
