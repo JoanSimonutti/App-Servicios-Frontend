@@ -39,7 +39,7 @@ const Header = () => {
               Login
             </Link>
             <Link to="/register" className="btn btn-outline-primary">
-              Register
+              Registro
             </Link>
           </>
         ) : (
