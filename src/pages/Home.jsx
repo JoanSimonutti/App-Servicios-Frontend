@@ -139,7 +139,7 @@ export default function Home() {
   ////////////////////////////////////////////////////////////////////////////
 
   return (
-    <div className="container mt-4">
+    <div className="container mt-5">
       {/* Botón flotante de volver arriba */}
       <a
         href="#"
@@ -150,9 +150,9 @@ export default function Home() {
       </a>
 
       {/* Filtros */}
-      <div className="row mb-3">
+      <div className="row mb-3 mt-5">
         {/* Filtro de categoría */}
-        <div className="col-md-6 mb-3">
+        <div className="col-md-6 mb-3 mt-3">
           <select
             className="form-select home-select"
             value={categoriaFiltro}

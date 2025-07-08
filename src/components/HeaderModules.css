@@ -1,12 +1,11 @@
 .app-header {
     background-color: #212529;
-    color: #ffc107;
-    padding: 0.3rem 1rem;
+    /* Fondo oscuro profesional */
+    padding: 12px 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 0 0 0.8rem 0.8rem;
     position: fixed;
     top: 0;
     left: 0;
@@ -14,27 +13,46 @@
     z-index: 999;
 }
 
-.app-header-title {
+/* Logo SERVIPRO */
+.app-logo-link {
+    color: #FFD700;
+    /* Dorado vibrante */
+    text-decoration: none;
     font-size: 1.8rem;
-    font-weight: bold;
-    margin: 0;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: color 0.3s ease;
 }
 
+.app-logo-link:hover {
+    color: #ffc107;
+    /* tono dorado más claro al hover */
+    text-decoration: none;
+}
+
+/* Contenedor links */
 .app-header-links {
     display: flex;
-    gap: 1rem;
+    gap: 1.5rem;
 }
 
-.app-header-links a {
-    color: #fff;
-    font-weight: bold;
+/* Links generales */
+.app-header-link {
+    color: #ffffff;
     text-decoration: none;
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
-    display: flex;
-    align-items: center;
+    font-size: 1.1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
 }
 
-.app-header-links a:active {
-    color: #ffc107;
+.app-header-link:hover,
+.app-header-link:focus {
+    color: #FFD700;
+    text-decoration: underline;
+}
+
+/* Logout específico para tener cursor pointer */
+.app-logout-link {
+    cursor: pointer;
 }

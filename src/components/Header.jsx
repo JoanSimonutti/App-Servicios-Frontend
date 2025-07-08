@@ -2,55 +2,56 @@
 // Header.jsx
 //
 // Qué hace:
-// - Renderiza el header superior con enlaces.
-// - Cambia dinámicamente si el usuario está logueado.
-// - Permite logout eliminando el token.
+// - Renderiza el header superior fijo.
+// - Logo SERVIPRO en dorado, clickeable a home.
+// - Todos los links son texto plano, no botones.
+// - Links en blanco, se subrayan y cambian a dorado al hover.
+// - Incluye Logout como link para coherencia visual.
+// - Diseño limpio y profesional.
 ////////////////////////////////////////////////////////////////////////////////////////
 
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-//import "./HeaderModules.css";
+import "./HeaderModules.css";
 
 const Header = () => {
-  // Obtenemos el token del localStorage
   const token = localStorage.getItem("token");
-
   const navigate = useNavigate();
 
-  // Función para hacer logout
   const handleLogout = () => {
     localStorage.removeItem("token");
     navigate("/login");
   };
 
   return (
-    <header className="app-header d-flex justify-content-between align-items-center p-3">
+    <header className="app-header">
       <h1 className="app-header-title">
-        <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
+        <Link to="/" className="app-logo-link">
           SERVIPRO
         </Link>
       </h1>
 
-      <nav className="app-header-links d-flex gap-3">
+      <nav className="app-header-links">
         {!token ? (
           <>
-            {/* Links si NO hay token */}
-            <Link to="/login" className="btn btn-outline-primary">
+            <Link to="/login" className="app-header-link">
               Login
             </Link>
-            <Link to="/register" className="btn btn-outline-primary">
+            <Link to="/register" className="app-header-link">
               Registro
             </Link>
           </>
         ) : (
           <>
-            {/* Links si hay token */}
-            <Link to="/perfil" className="btn btn-primary">
+            <Link to="/perfil" className="app-header-link">
               Perfil
             </Link>
-            <button onClick={handleLogout} className="btn btn-outline-danger">
+            <span
+              className="app-header-link app-logout-link"
+              onClick={handleLogout}
+            >
               Logout
-            </button>
+            </span>
           </>
         )}
       </nav>

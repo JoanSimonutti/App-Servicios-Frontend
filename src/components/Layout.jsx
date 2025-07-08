@@ -26,7 +26,7 @@ export default function Layout({ children }) {
       <Header />
 
       {/* Contenedor principal de la app */}
-      <main>{children}</main>
+      <main style={{ marginTop: "80px" }}>{children}</main>
 
       {/* Futuro Footer (comentado por ahora) */}
       {/*
