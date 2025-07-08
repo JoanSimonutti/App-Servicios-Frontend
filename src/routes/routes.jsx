@@ -14,7 +14,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 
 // Importamos los componentes de React Router necesarios para crear rutas internas
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 // Importamos las páginas que vamos a mostrar en cada ruta
 import Home from "../pages/Home"; // Página principal de la app (inicio)
@@ -47,32 +47,33 @@ import Perfil from "../pages/Perfil";
 
 export default function AppRoutes() {
   return (
-    // Usamos BrowserRouter para activar el modo SPA (Single Page Application)
-    <BrowserRouter
-      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-    >
-      {/* Dentro de Routes, definimos cada ruta usando <Route> */}
-      <Routes>
-        {/* Ruta raíz "/" → renderiza el componente Home */}
-        <Route path="/" element={<Home />} />
+    // AGREGADO: Eliminamos <BrowserRouter> de acá porque ahora ya está en main.jsx
+    // Si lo dejamos, tendríamos dos Routers anidados, lo cual genera error:
+    // "You cannot render a <Router> inside another <Router>."
+    //
+    // Ahora simplemente devolvemos <Routes />, porque main.jsx
+    // ya se encarga de envolver toda la app con <BrowserRouter>.
 
-        {/*Rutas públicas de autenticación */}
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+    <Routes>
+      {/* Ruta raíz "/" → renderiza el componente Home */}
+      <Route path="/" element={<Home />} />
 
-        {/*Ruta protegida */}
-        <Route
-          path="/perfil"
-          element={
-            <PrivateRoute>
-              <Perfil />
-            </PrivateRoute>
-          }
-        />
+      {/*Rutas públicas de autenticación */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
-        {/* Rutas admin existentes */}
-        <Route path="/admin/clicks" element={<AdminClicks />} />
-      </Routes>
-    </BrowserRouter>
+      {/*Ruta protegida */}
+      <Route
+        path="/perfil"
+        element={
+          <PrivateRoute>
+            <Perfil />
+          </PrivateRoute>
+        }
+      />
+
+      {/* Rutas admin existentes */}
+      <Route path="/admin/clicks" element={<AdminClicks />} />
+    </Routes>
   );
 }

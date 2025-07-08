@@ -1,6 +1,6 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 // Que es App.jsx?
-// Este archivo es el componente raíz de la aplicación React. 
+// Este archivo es el componente raíz de la aplicación React.
 // Se va a renderizar dentro del <div id="root"> que está en index.html.
 // Es el punto de entrada visual donde se conecta todo el sistema de rutas SPA.
 
@@ -15,11 +15,13 @@
 // Si en el futuro querés agregar un layout común (header/footer global), este sería el lugar ideal.
 ///////////////////////////////////////////////////////////////////////////////////////
 
+import Layout from "./components/Layout";
 import AppRoutes from "./routes/routes"; // Importamos el componente que define todas las rutas (routes/routes.jsx → contiene toda la lógica de navegación)
 
 export default function App() {
   return (
-    // Renderizamos el sistema de rutas (SPA)
-    <AppRoutes />
+    <Layout>
+      <AppRoutes />
+    </Layout>
   );
 }

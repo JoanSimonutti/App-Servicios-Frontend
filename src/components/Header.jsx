@@ -26,14 +26,9 @@ const Header = () => {
   return (
     <header className="app-header d-flex justify-content-between align-items-center p-3">
       <h1 className="app-header-title">
-        <a
-          href="https://github.com/JoanSimonutti"
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ color: "inherit", textDecoration: "none" }}
-        >
+        <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
           SERVIPRO
-        </a>
+        </Link>
       </h1>
 
       <nav className="app-header-links d-flex gap-3">
