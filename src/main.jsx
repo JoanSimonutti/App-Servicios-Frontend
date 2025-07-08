@@ -14,7 +14,6 @@
 import { StrictMode } from "react"; // mportamos StrictMode de React. Es una herramienta de desarrollo que te avisa si estás usando código inseguro o pronto obsoleto. No afecta en producción.
 import { createRoot } from "react-dom/client"; // Importamos la función createRoot, que es la nueva forma moderna de arrancar una app React desde React 18 en adelante.
 import { BrowserRouter } from "react-router-dom";
-import "./index.css"; // Importamos un archivo de estilos globales que aplica a toda la app.
 import App from "./App.jsx"; // Importamos tu componente principal App, que es donde se monta todo el sistema de rutas (AppRoutes).
 import "bootstrap/dist/css/bootstrap.min.css"; // mportamos Bootstrap desde node_modules. Esto carga todos los estilos necesarios para usar componentes Bootstrap (grillas, botones, tarjetas, etc).
 

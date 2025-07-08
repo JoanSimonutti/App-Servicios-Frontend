@@ -107,8 +107,6 @@ export default function Home() {
         ↑
       </a>
 
-      <h1 className="home-title">Listado de Servicios</h1>
-
       {/* Filtros */}
       <div className="home-filters">
         <div className="home-filter">
