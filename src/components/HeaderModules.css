@@ -1,7 +1,7 @@
 .app-header {
     background-color: #121212;
     /* Fondo oscuro profesional */
-    padding: 12px 20px;
+    padding: 12px 12px 4px 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: space-between;

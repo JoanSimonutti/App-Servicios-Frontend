@@ -17,22 +17,22 @@
 .detalle-title {
     font-size: 2rem;
     font-weight: 700;
-    text-align: center;
+    text-align: start;
     color: #ffd700;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .detalle-text-1 {
     font-size: 1.4rem;
     color: #ffffff;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
     text-align: start;
 }
 
 .detalle-text {
     font-size: 1.4rem;
     color: #cccccc;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
     text-align: start;
 }
 
