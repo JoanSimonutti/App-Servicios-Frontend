@@ -6,28 +6,32 @@
 // Totalmente responsive.
 //////////////////////////////////////////////////////////////////////////// */
 
+/* Fondo principal de la página Home */
 .home-container {
     background-color: #121212;
     color: #ffffff;
-    padding: 0.5rem;
+    padding: 1rem;
     min-height: calc(100vh - 65px);
 }
 
-.home-filters {
+.home-title {
     display: flex;
-    flex-direction: column;
-    align-content: center;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;
+}
+
+/* Filtros superiores */
+.home-filters {
     margin-bottom: 2rem;
 }
 
+/* Cada select ocupa todo el ancho disponible */
 .home-filter {
     flex: 1;
     min-width: 250px;
 }
 
+/* Selects premium */
 .home-select {
     width: 100%;
     background-color: #1e1e1e;
@@ -36,12 +40,15 @@
     border-radius: 5px;
     padding: 0.75rem 1rem;
     font-size: 1.1rem;
+    appearance: none;
+    /* elimina flecha default en algunos browsers */
 }
 
 .home-select option {
     color: #000000;
 }
 
+/* Texto que indica cuántos servicios se encontraron */
 .home-count-text {
     text-align: center;
     color: #cccccc;
@@ -49,13 +56,7 @@
     margin-bottom: 2rem;
 }
 
-.home-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1rem;
-}
-
-/* Botón flotante */
+/* Botón flotante ↑ */
 .home-btn-floating {
     position: fixed;
     top: 82px;
@@ -103,8 +104,10 @@
     z-index: 9999;
 }
 
+/* Contenido del modal */
 .home-modal-content {
-    background-color: #ffef0a;
+    background-color: #ffd700;
+    color: #ffffff;
     padding: 0.5rem;
     border-radius: 8px;
     max-width: 800px;
@@ -113,6 +116,7 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
+/* Botón de cierre del modal */
 .home-modal-close {
     position: absolute;
     top: 10px;

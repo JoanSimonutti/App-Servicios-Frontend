@@ -1,0 +1,24 @@
+/* ///////////////////////////////////////////////////////////////////////////
+// LayoutModules.css
+//
+// Qué hace este archivo:
+//
+// - Define estilos globales del Layout de la app.
+// - Incluye margen superior para desplazar el contenido por debajo del header fijo.
+// - Permite centralizar estilos en lugar de usar inline styles.
+//
+// Ventajas:
+// - Mantiene el CSS separado del JSX.
+// - Facilita el mantenimiento.
+// - Permite escalar estilos globales sin repetir reglas en cada página.
+//////////////////////////////////////////////////////////////////////////// */
+
+.layout-main {
+    background-color: #121212;
+    margin-top: 65px;
+    /* margen coherente con altura del header fijo */
+}
+
+.container-layout {
+    background-color: #121212;
+}
