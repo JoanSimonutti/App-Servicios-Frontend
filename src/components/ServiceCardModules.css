@@ -23,7 +23,7 @@
 .service-card-title {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #ffa600;
+    color: #FFD700;
     margin-bottom: 0.5rem;
 }
 
@@ -73,7 +73,7 @@
 }
 
 .service-card-btn-info {
-    background-color: #ffa600;
+    background-color: #FFD700;
 }
 
 .service-card-btn-info:hover {

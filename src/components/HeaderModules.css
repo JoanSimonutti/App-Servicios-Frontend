@@ -15,7 +15,7 @@
 
 /* Logo SERVIPRO */
 .app-logo-link {
-    color: #ffa600;
+    color: #FFD700;
     /* Dorado vibrante */
     text-decoration: none;
     font-size: 1.8rem;
@@ -42,7 +42,7 @@
 
 .app-header-link:hover,
 .app-header-link:focus {
-    color: #ffa600;
+    color: #FFD700;
     text-decoration: underline;
 }
 
