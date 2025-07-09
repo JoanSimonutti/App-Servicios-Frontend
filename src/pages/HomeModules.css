@@ -62,15 +62,15 @@
     top: 82px;
     right: 20px;
     background-color: #FFD700;
-    color: #ffffff;
-    border: #ffffff 1px solid;
+    color: #000000;
+    border: #000000 1px solid;
     border-radius: 50%;
     width: 50px;
     height: 50px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     text-decoration: none;
     font-weight: bold;
-    font-size: 1.5rem;
+    font-size: 2rem;
     display: flex;
     justify-content: center;
     align-items: center;
