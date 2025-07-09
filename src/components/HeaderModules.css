@@ -2,7 +2,7 @@
     background-color: #121212;
     /* Fondo oscuro profesional */
     padding: 12px 12px 2px 12px;
-    border-bottom: #ffffff 0.1px solid;
+    border-bottom: #ffffff 0.01px solid;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: space-between;
