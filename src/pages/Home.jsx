@@ -147,7 +147,7 @@ export default function Home() {
         Todas las páginas están envueltas en un <div className="container">
         gracias a Layout.jsx, pero lo mantenemos aquí por flexibilidad.
       */}
-      <div className="container home-container">
+      <div className="home-container">
         {/* Título principal */}
         <h1 className="home-title">Listado de Servicios</h1>
 
