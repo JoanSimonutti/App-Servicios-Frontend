@@ -61,8 +61,8 @@
     position: fixed;
     top: 82px;
     right: 20px;
-    background-color: #ffd700;
-    color: #212529;
+    background-color: #FFD700;
+    color: #ffffff;
     border: none;
     border-radius: 50%;
     width: 50px;
@@ -87,7 +87,6 @@
 
 .home-btn-floating:hover {
     transform: scale(1.1);
-    background-color: #ffc107;
 }
 
 /* Modal overlay */
