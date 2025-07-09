@@ -6,7 +6,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: calc(100vh - 80px);
+    min-height: calc(100vh - 56px);
     background-color: #121212;
     padding: 2rem;
 }
@@ -14,6 +14,7 @@
 .register-card {
     background-color: #1e1e1e;
     padding: 2.5rem;
+    border: #ffffff 0.3px solid;
     border-radius: 8px;
     width: 100%;
     max-width: 500px;
@@ -22,7 +23,7 @@
 
 .register-title {
     text-align: center;
-    color: #ffd700;
+    color: #ffffff;
     margin-bottom: 1.5rem;
     font-size: 2rem;
     font-weight: 700;
@@ -31,7 +32,7 @@
 
 .register-success {
     background-color: #198754;
-    color: #fff;
+    color: #ffffff;
     padding: 0.75rem 1rem;
     border-radius: 5px;
     margin-bottom: 1rem;
@@ -40,7 +41,7 @@
 
 .register-error {
     background-color: #dc3545;
-    color: #fff;
+    color: #ffffff;
     padding: 0.75rem 1rem;
     border-radius: 5px;
     margin-bottom: 1rem;
@@ -66,7 +67,7 @@
     border: none;
     border-radius: 4px;
     background-color: #2a2a2a;
-    color: #fff;
+    color: #ffffff;
     font-size: 1rem;
 }
 
@@ -81,8 +82,8 @@
 }
 
 .register-button {
-    background-color: #ffd700;
-    color: #212529;
+    background-color: #007bff;
+    color: #ffffff;
     border: none;
     padding: 0.75rem;
     border-radius: 5px;
@@ -93,5 +94,5 @@
 }
 
 .register-button:hover {
-    background-color: #ffc107;
+    background-color: #0056b3;
 }
