@@ -10,15 +10,7 @@
     background-color: #121212;
     color: #ffffff;
     padding: 0.5rem;
-    min-height: calc(100vh - 80px);
-}
-
-.home-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-align: center;
-    color: #ffd700;
-    margin-bottom: 2rem;
+    min-height: calc(100vh - 65px);
 }
 
 .home-filters {
@@ -58,7 +50,7 @@
 .home-cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
+    gap: 1rem;
 }
 
 /* Botón flotante */
