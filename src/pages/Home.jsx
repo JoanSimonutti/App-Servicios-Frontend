@@ -60,6 +60,43 @@ export default function Home() {
   // Estado que controla la visibilidad del botón flotante ↑
   const [showButton, setShowButton] = useState(false);
 
+  // NUEVO:
+  // Estado para saber qué slide está activo en el carrusel.
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  // NUEVO:
+  // Array con los datos de cada slide:
+  // - image → nombre del archivo (deberá estar en /public/images o donde lo definas)
+  // - title → título grande.
+  // - subtitle → texto secundario.
+  const slides = [
+    {
+      image: "/images/slide1.jpg",
+      title: "Bienvenido a ServiPro",
+      subtitle: "Tu plataforma de confianza para encontrar servicios.",
+    },
+    {
+      image: "/images/slide2.jpg",
+      title: "Encontrá aquí el servicio que estás buscando",
+      subtitle: "Filtrá, explorá y encontrá profesionales cerca tuyo.",
+    },
+    {
+      image: "/images/slide3.jpg",
+      title: "Unite a nuestra red de prestadores de servicio",
+      subtitle: "Publicá lo que hacés y llegá a más clientes.",
+    },
+  ];
+
+  // NUEVO:
+  // Efecto para ir cambiando de slide cada 5 segundos automáticamente.
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveSlide((prevIndex) => (prevIndex + 1) % slides.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [slides.length]);
+
   // Hook para cargar servicios al inicio
   useEffect(() => {
     obtenerServicios();
@@ -78,7 +115,6 @@ export default function Home() {
       setServices(res.data);
       setTotal(res.data.length);
 
-      // Extraemos listas únicas de categorías y localidades
       const categoriasUnicas = [...new Set(res.data.map((s) => s.categoria))];
       setCategorias(categoriasUnicas);
 
@@ -89,7 +125,6 @@ export default function Home() {
     }
   };
 
-  // Filtramos los servicios según los filtros seleccionados
   const serviciosFiltrados = services.filter((s) => {
     return (
       (categoriaFiltro === "" || s.categoria === categoriaFiltro) &&
@@ -97,19 +132,16 @@ export default function Home() {
     );
   });
 
-  // Manejador para abrir modal de detalle
   const handleVerMas = (service) => {
     setSelectedService(service);
     setShowModal(true);
   };
 
-  // Manejador para cerrar el modal de detalle
   const handleCloseModal = () => {
     setShowModal(false);
     setSelectedService(null);
   };
 
-  // Manejador para detectar si el scroll pasó un límite
   const handleScroll = () => {
     if (window.scrollY > 100) {
       setShowButton(true);
@@ -118,7 +150,6 @@ export default function Home() {
     }
   };
 
-  // Función para scrollear hacia arriba suavemente
   const handleScrollTop = (e) => {
     e.preventDefault();
     window.scrollTo({
@@ -142,21 +173,31 @@ export default function Home() {
         ↑
       </a>
 
-      {/* 
-        Contenedor Bootstrap global.
-        Todas las páginas están envueltas en un <div className="container">
-        gracias a Layout.jsx, pero lo mantenemos aquí por flexibilidad.
-      */}
       <div className="home-container">
+        {/* NUEVO:
+            Carrusel de imágenes.
+            Se coloca antes del título principal para ocupar la parte superior de la página.
+        */}
+        <div
+          className="home-carousel"
+          style={{
+            backgroundImage: `url(${slides[activeSlide].image})`,
+          }}
+        >
+          <div className="home-carousel-overlay">
+            <h2 className="home-carousel-title">{slides[activeSlide].title}</h2>
+            <p className="home-carousel-subtitle">
+              {slides[activeSlide].subtitle}
+            </p>
+          </div>
+        </div>
+
         {/* Título principal */}
         <h1 className="home-title">Listado de Servicios</h1>
 
-        {/* 
-          Filtros en fila.
-          Usamos Bootstrap Grid:
-          - row → crea una fila.
-          - col-12 col-md-6 → en mobile ocupa todo, en desktop mitad de ancho.
-        */}
+        {/* ... (todo tu código original continúa sin cambios) */}
+
+        {/* Resto de tu código original */}
         <div className="row home-filters mb-4">
           <div className="col-12 col-md-6">
             <select
@@ -189,17 +230,10 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Texto de conteo */}
         <p className="home-count-text text-center">
           Se encontraron <strong>{serviciosFiltrados.length}</strong> servicios.
         </p>
 
-        {/* 
-          Grilla de servicios.
-          Usamos Bootstrap Grid:
-          - row → crea filas.
-          - col-12 col-md-6 col-lg-4 → en mobile ocupa todo, en desktop divide en 3 columnas.
-        */}
         <div className="row">
           {serviciosFiltrados.map((service) => (
             <div key={service._id} className="col-12 col-md-6 col-lg-4 mb-4">
@@ -209,7 +243,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Modal para detalle */}
       {showModal && (
         <div className="home-modal-backdrop" onClick={handleCloseModal}>
           <div

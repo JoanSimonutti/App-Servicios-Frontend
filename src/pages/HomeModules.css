@@ -130,3 +130,79 @@
 .home-modal-close:hover {
     color: #ffd700;
 }
+
+/* ==================================================================================
+   NUEVOS ESTILOS PARA EL CARRUSEL EN HOME
+   ================================================================================== */
+
+/* home-carousel
+   Contenedor principal del carrusel.
+   Usamos imagen de fondo + overlay de color oscuro para poder leer el texto. */
+.home-carousel {
+    width: 100%;
+    height: 300px;
+    /* Altura fija, se puede ajustar. */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 2rem;
+    /* Separación debajo del carrusel. */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* home-carousel-overlay
+   Capa semi-transparente oscura para oscurecer la imagen
+   y permitir que el texto se lea bien encima. */
+.home-carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    /* Opacidad ajustable para gusto visual. */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem;
+}
+
+/* Título grande del carrusel */
+.home-carousel-title {
+    color: #FFD700;
+    /* Dorado vibrante para coherencia visual. */
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    /* Para destacar sobre la imagen. */
+}
+
+/* Subtítulo o texto debajo del título */
+.home-carousel-subtitle {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 400;
+    max-width: 800px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Responsive - Mobile
+   Bajamos altura en pantallas chicas. */
+@media (max-width: 768px) {
+    .home-carousel {
+        height: 200px;
+    }
+
+    .home-carousel-title {
+        font-size: 1.5rem;
+    }
+
+    .home-carousel-subtitle {
+        font-size: 1rem;
+    }
+}
