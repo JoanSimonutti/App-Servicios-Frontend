@@ -195,10 +195,8 @@ export default function Home() {
         {/* Título principal */}
         <h1 className="home-title">Listado de Servicios</h1>
 
-        {/* ... (todo tu código original continúa sin cambios) */}
-
         {/* Resto de tu código original */}
-        <div className="row home-filters mb-4">
+        <div className="row home-filters">
           <div className="col-12 col-md-6">
             <select
               className="home-select form-select"
