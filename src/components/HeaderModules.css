@@ -51,3 +51,88 @@
 .app-logout-link {
     cursor: pointer;
 }
+
+/* ==================================================================================
+   NUEVOS ESTILOS PARA HAMBURGUESA Y MENÚ RESPONSIVE
+   ================================================================================== */
+
+/* .app-hamburger
+   Botón de la hamburguesa que aparece en mobile.
+   En desktop está oculto (se muestra solo en media-query más abajo). */
+.app-hamburger {
+    display: none;
+    /* Oculto por defecto (en desktop). */
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    height: 24px;
+    width: 30px;
+    padding: 0;
+    z-index: 1000;
+    /* Asegura que quede por encima del contenido. */
+}
+
+/* .app-hamburger .bar
+   Cada línea de la hamburguesa. Dos en total. */
+.app-hamburger .bar {
+    width: 100%;
+    height: 3px;
+    background-color: #ffffff;
+    margin: 4px 0;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animación hamburguesa → X
+   Cuando el botón tiene la clase .open:
+   - La primera barra se rota en +45°
+   - La segunda barra se rota en -45°
+   Así forman una X. */
+.app-hamburger.open .bar:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.app-hamburger.open .bar:nth-child(2) {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+/* Responsive - Mobile Styles
+   Reglas que solo aplican en pantallas chicas. */
+@media (max-width: 768px) {
+
+    /* Mostrar la hamburguesa en mobile */
+    .app-hamburger {
+        display: flex;
+    }
+
+    /* Ocultar el menú original en mobile por defecto */
+    .app-header-links {
+        display: none;
+        /* Oculto inicialmente. */
+        flex-direction: column;
+        background-color: #121212;
+        /* Mantenemos fondo oscuro en mobile. */
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 100%;
+        padding: 12px 0;
+        border-top: 1px solid #ffffff;
+        z-index: 999;
+    }
+
+    /* Cuando está activo, lo mostramos */
+    .app-header-links.is-active {
+        display: flex;
+    }
+
+    /* Estilo de los links dentro del menú mobile */
+    .app-header-link {
+        padding: 12px;
+        width: 100%;
+        text-align: center;
+        border-bottom: 1px solid #333333;
+    }
+}
