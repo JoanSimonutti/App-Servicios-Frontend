@@ -63,7 +63,7 @@
     position: fixed;
     top: 82px;
     right: 15px;
-    background-color: #1E5AA8;
+    background-color: #007bff;
     color: #ffffff;
     border: #ffffff 0.01px solid;
     border-radius: 50%;
@@ -107,7 +107,7 @@
 
 /* Contenido del modal */
 .home-modal-content {
-    background-color: #1E5AA8;
+    background-color: #007bff;
     color: #424242;
     padding: 0.5rem;
     border-radius: 5px;
@@ -130,7 +130,7 @@
 }
 
 .home-modal-close:hover {
-    color: #1E5AA8;
+    color: #007bff;
 }
 
 

@@ -1,5 +1,5 @@
 .app-header {
-    background-color: #1E5AA8;
+    background-color: #007bff;
     /* Fondo oscuro profesional */
     padding: 12px 12px 2px 12px;
     border-bottom: #ffffff 0.01px solid;
@@ -111,7 +111,7 @@
         display: none;
         /* Oculto inicialmente. */
         flex-direction: column;
-        background-color: #1E5AA8;
+        background-color: #007bff;
         /* Mantenemos fondo oscuro en mobile. */
         position: absolute;
         top: 100%;

@@ -12,8 +12,8 @@
 
 .register-card {
     background-color: #1e1e1e;
-    padding: 2.5rem;
-    border-radius: 8px;
+    padding: 2rem;
+    border-radius: 5px;
     width: 100%;
     max-width: 500px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
@@ -23,7 +23,7 @@
     text-align: center;
     color: #ffffff;
     margin-bottom: 1.5rem;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: 700;
     letter-spacing: 1px;
 }
@@ -52,6 +52,10 @@
     gap: 1.2rem;
 }
 
+.register-field {
+    font-size: 1.4rem;
+}
+
 .register-field label {
     color: #ffffff;
     font-weight: 500;
@@ -66,7 +70,7 @@
     border-radius: 4px;
     background-color: #2a2a2a;
     color: #ffffff;
-    font-size: 1rem;
+    font-size: 1.5rem;
 }
 
 .register-field input::placeholder {
@@ -83,7 +87,8 @@
     background-color: #007bff;
     color: #ffffff;
     border: none;
-    padding: 0.75rem;
+    padding: 1rem;
+    margin-top: 1.5rem;
     border-radius: 5px;
     font-weight: 600;
     font-size: 1.1rem;

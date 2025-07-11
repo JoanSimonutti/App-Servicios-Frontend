@@ -10,7 +10,7 @@
     font-size: 2rem;
     font-weight: 700;
     text-align: start;
-    color: #1E5AA8;
+    color: #007bff;
     margin-bottom: 0.8rem;
 }
 
@@ -52,11 +52,11 @@
 }
 
 .detalle-btn-telefono {
-    background-color: #1E5AA8;
+    background-color: #007bff;
 }
 
 .detalle-btn-telefono:hover {
-    background-color: #164785;
+    background-color: #0056b3;
 }
 
 .detalle-btn-whatsapp {
