@@ -107,7 +107,7 @@
 
 /* Contenido del modal */
 .home-modal-content {
-    background-color: #007bff;
+    background-color: #6C757D;
     color: #424242;
     padding: 0.5rem;
     border-radius: 5px;
@@ -129,9 +129,9 @@
     cursor: pointer;
 }
 
-.home-modal-close:hover {
-    color: #007bff;
-}
+/*.home-modal-close:hover {
+    color: ;
+} */
 
 
 /* ==================================================================================

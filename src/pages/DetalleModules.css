@@ -1,8 +1,9 @@
 .detalle-card {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 2rem 1rem 2rem 1rem;
+    padding: 3rem 1rem 3rem 1rem;
     border-radius: 5px;
-    background-color: #ffffff;
+    background-color: #dbdbdb;
+    ;
     color: #424242;
 }
 
