@@ -127,7 +127,7 @@ const Header = () => {
                 handleLinkClick();
               }}
             >
-              Logout
+              CERRAR SESIÓN
             </span>
           </>
         )}

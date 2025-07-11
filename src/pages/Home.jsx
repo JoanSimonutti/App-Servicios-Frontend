@@ -73,17 +73,17 @@ export default function Home() {
     {
       image: "/images/slide1.jpg",
       title: "BIENVENIDO A SERVIPRO",
-      subtitle: "Tu plataforma de confianza.",
+      subtitle: "Tu plataforma de confianza",
     },
     {
       image: "/images/slide2.jpg",
       title: "ENCONTRÁ TU SERVICIO",
-      subtitle: "Filtrá, explorá y contactá profesionales.",
+      subtitle: "Filtrá, explorá y contactá profesionales",
     },
     {
       image: "/images/slide3.jpg",
       title: "SUMATE COMO PRESTADOR",
-      subtitle: "Publicá y llegá a más clientes.",
+      subtitle: "Publicá y llegá a más clientes",
     },
   ];
 

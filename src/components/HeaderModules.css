@@ -129,9 +129,9 @@
 
     /* Estilo de los links dentro del menú mobile */
     .app-header-link {
-        padding: 10px;
         width: 100%;
-        text-align: center;
+        text-align: end;
+        padding-right: 15px;
         /*border-bottom: 1px solid #ffffff;*/
     }
 }

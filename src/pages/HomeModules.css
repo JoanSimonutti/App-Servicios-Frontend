@@ -196,7 +196,7 @@
    Bajamos altura en pantallas chicas. */
 @media (max-width: 768px) {
     .home-carousel {
-        height: 130px;
+        height: 140px;
     }
 
     .home-carousel-title {
