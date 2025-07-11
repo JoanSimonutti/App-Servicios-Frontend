@@ -9,7 +9,7 @@
 .service-card {
     /* comentario */
     background-color: #eaeaea;
-    padding: 0.8rem;
+    padding: 1rem;
     border: #1E5AA8 1px solid;
     border-radius: 5px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);

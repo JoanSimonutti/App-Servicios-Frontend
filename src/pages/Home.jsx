@@ -25,6 +25,7 @@ import ServiceCard from "../components/ServiceCard";
 import Detalle from "./Detalle";
 
 import "./HomeModules.css";
+import { FaRegWindowClose } from "react-icons/fa";
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // Declaramos constantes globales
@@ -248,7 +249,7 @@ export default function Home() {
             onClick={(e) => e.stopPropagation()}
           >
             <button className="home-modal-close" onClick={handleCloseModal}>
-              ×
+              <FaRegWindowClose />
             </button>
             {selectedService && <Detalle servicio={selectedService} />}
           </div>
