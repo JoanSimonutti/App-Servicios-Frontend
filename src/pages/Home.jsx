@@ -73,18 +73,18 @@ export default function Home() {
   const slides = [
     {
       image: "/images/slide1.jpg",
-      title: "ENCONTRÁ TU SERVICIO",
+      title: "ENCONTRÁ SERVICIOS",
       subtitle: "Filtrá, explorá y contactá!",
     },
     {
       image: "/images/slide2.jpg",
       title: "SUMATE COMO PRESTADOR",
-      subtitle: "Publicá y llegá a más clientes",
+      subtitle: "Publicá y ganá más clientes!",
     },
     {
       image: "/images/slide3.jpg",
-      title: "DISPONIBLE PARA PUBLICIDAD",
-      subtitle: "Impulsá tu local hoy mismo",
+      title: "DISPONIBLE PUBLICIDAD",
+      subtitle: "Impulsá tu local hoy mismo!",
     },
   ];
 
