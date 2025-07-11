@@ -8,9 +8,8 @@
 
 .service-card {
     /* comentario */
-    background-color: #ffffff;
+    background-color: #eaeaea;
     padding: 0.8rem;
-    border: #E0E0E0 1px solid;
     border-radius: 5px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
