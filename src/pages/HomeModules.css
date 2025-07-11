@@ -107,14 +107,14 @@
 
 /* Contenido del modal */
 .home-modal-content {
-    background-color: #ffd700;
-    color: #ffffff;
-    padding: 0.1rem;
+    background-color: #1E5AA8;
+    color: #424242;
+    padding: 1rem;
     border-radius: 8px;
     max-width: 800px;
     width: 90%;
     position: relative;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 /* Botón de cierre del modal */
@@ -125,13 +125,14 @@
     background: none;
     border: none;
     font-size: 2rem;
-    color: #ffffff;
+    color: #424242;
     cursor: pointer;
 }
 
 .home-modal-close:hover {
-    color: #ffd700;
+    color: #1E5AA8;
 }
+
 
 /* ==================================================================================
    ESTILOS PARA EL CARRUSEL
