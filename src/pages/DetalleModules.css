@@ -38,13 +38,13 @@
 
 .detalle-btn {
     border: none;
-    padding: 0.75rem 1rem;
-    font-size: 1.5rem;
+    padding: 0.75rem;
+    font-size: 1.3rem;
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .detalle-btn:hover {

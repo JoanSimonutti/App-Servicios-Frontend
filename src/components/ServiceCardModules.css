@@ -9,7 +9,7 @@
 .service-card {
     /* comentario */
     background-color: #dceafd;
-    padding: 1rem;
+    padding: 0.5rem;
     border-radius: 5px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -29,7 +29,7 @@
 }
 
 .service-card-subtitle {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: #424242;
     margin-bottom: 0.9rem;
 }
@@ -44,7 +44,6 @@
 .service-card-btn {
     border: none;
     padding: 0.5rem 0.7rem;
-    border: #ffffff 0.1px solid;
     border-radius: 5px;
     font-weight: 600;
     font-size: 1.1rem;
