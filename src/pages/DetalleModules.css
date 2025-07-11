@@ -10,8 +10,7 @@
 .detalle-title {
     font-size: 2rem;
     font-weight: 700;
-    text-align: center;
-    text-decoration: underline;
+    text-align: start;
     color: #1E5AA8;
     margin-bottom: 0.5rem;
 }
