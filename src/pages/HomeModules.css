@@ -109,10 +109,10 @@
 .home-modal-content {
     background-color: #1E5AA8;
     color: #424242;
-    padding: 1rem;
+    padding: 0.5rem;
     border-radius: 5px;
     max-width: 800px;
-    width: 90%;
+    width: 100%;
     position: relative;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
@@ -179,7 +179,7 @@
 .home-carousel-title {
     color: #ffffff;
     /* Dorado vibrante para coherencia visual. */
-    font-size: 2rem;
+    font-size: 4.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
@@ -189,7 +189,7 @@
 /* Subtítulo o texto debajo del título */
 .home-carousel-subtitle {
     color: #ffffff;
-    font-size: 1.2rem;
+    font-size: 3rem;
     font-weight: 400;
     max-width: 800px;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
@@ -204,10 +204,10 @@
     }
 
     .home-carousel-title {
-        font-size: 1.5rem;
+        font-size: 2rem;
     }
 
     .home-carousel-subtitle {
-        font-size: 1rem;
+        font-size: 1.4rem;
     }
 }
