@@ -73,7 +73,7 @@ export default function Home() {
   const slides = [
     {
       image: "/images/slide1.jpg",
-      title: "ENCONTRÁ SERVICIOS",
+      title: "BIENVENIDO A SERVIPRO",
       subtitle: "Filtrá, explorá y contactá!",
     },
     {
