@@ -8,9 +8,9 @@
 
 .service-card {
     /* comentario */
-    background-color: #1e1e1e;
+    background-color: #ffffff;
     padding: 0.8rem;
-    /*border: #ffffff 0.01px solid;*/
+    border: #E0E0E0 0.01px solid;
     border-radius: 5px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
     text-align: center;
@@ -25,20 +25,20 @@
 .service-card-title {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #FFD700;
+    color: #1E5AA8;
     margin-bottom: 0.5rem;
 }
 
 .service-card-subtitle {
     font-size: 1.3rem;
-    color: #ffffff;
+    color: #424242;
     margin-bottom: 0.7rem;
     text-decoration: underline;
 }
 
 .service-card-buttons {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     flex-wrap: wrap;
     gap: 1rem;
 }
@@ -59,25 +59,25 @@
 }
 
 .service-card-btn-telefono {
-    background-color: #007bff;
+    background-color: #1E5AA8;
 }
 
 .service-card-btn-telefono:hover {
-    background-color: #0056b3;
+    background-color: #164785;
 }
 
 .service-card-btn-whatsapp {
-    background-color: #25d366;
+    background-color: #4CAF50;
 }
 
 .service-card-btn-whatsapp:hover {
-    background-color: #1a8d48;
+    background-color: #388E3C;
 }
 
 .service-card-btn-info {
-    background-color: #FFD700;
+    background-color: #424242;
 }
 
 .service-card-btn-info:hover {
-    background-color: #c59402;
+    background-color: #333333;
 }
