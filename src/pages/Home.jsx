@@ -73,7 +73,7 @@ export default function Home() {
     {
       image: "/images/slide1.jpg",
       title: "ENCONTRÁ TU SERVICIO",
-      subtitle: "Filtrá, explorá y contactá profesionales",
+      subtitle: "Filtrá, explorá y contactá!",
     },
     {
       image: "/images/slide2.jpg",
