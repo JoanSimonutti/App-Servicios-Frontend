@@ -29,7 +29,7 @@
 }
 
 .service-card-subtitle {
-    font-size: 1.3rem;
+    font-size: 1.6rem;
     color: #424242;
     margin-bottom: 0.9rem;
 }
@@ -43,7 +43,7 @@
 
 .service-card-btn {
     border: none;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0.7rem;
     border: #ffffff 0.1px solid;
     border-radius: 5px;
     font-weight: 600;
