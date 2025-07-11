@@ -1,5 +1,5 @@
 .app-header {
-    background-color: #121212;
+    background-color: #1E5AA8;
     /* Fondo oscuro profesional */
     padding: 12px 12px 2px 12px;
     border-bottom: #ffffff 0.01px solid;
@@ -16,7 +16,7 @@
 
 /* Logo SERVIPRO */
 .app-logo-link {
-    color: #FFD700;
+    color: #ffffff;
     /* Dorado vibrante */
     text-decoration: none;
     font-size: 1.8rem;
@@ -43,7 +43,6 @@
 
 .app-header-link:hover,
 .app-header-link:focus {
-    color: #FFD700;
     text-decoration: underline;
 }
 
@@ -112,7 +111,7 @@
         display: none;
         /* Oculto inicialmente. */
         flex-direction: column;
-        background-color: #121212;
+        background-color: #1E5AA8;
         /* Mantenemos fondo oscuro en mobile. */
         position: absolute;
         top: 100%;
@@ -130,9 +129,9 @@
 
     /* Estilo de los links dentro del menú mobile */
     .app-header-link {
-        padding: 12px;
+        padding: 10px;
         width: 100%;
         text-align: center;
-        border-bottom: 1px solid #333333;
+        /*border-bottom: 1px solid #ffffff;*/
     }
 }

@@ -91,7 +91,7 @@ const Header = () => {
               se cierre la hamburguesa en mobile.
         */}
         <Link to="/" className="app-header-link" onClick={handleLinkClick}>
-          Inicio
+          SERVICIOS
         </Link>
 
         {!token ? (
@@ -101,14 +101,14 @@ const Header = () => {
               className="app-header-link"
               onClick={handleLinkClick}
             >
-              Login
+              INICIAR SESIÓN
             </Link>
             <Link
               to="/register"
               className="app-header-link"
               onClick={handleLinkClick}
             >
-              Registro
+              REGISTRO
             </Link>
           </>
         ) : (
@@ -118,7 +118,7 @@ const Header = () => {
               className="app-header-link"
               onClick={handleLinkClick}
             >
-              Perfil
+              MI CUENTA
             </Link>
             <span
               className="app-header-link app-logout-link"
