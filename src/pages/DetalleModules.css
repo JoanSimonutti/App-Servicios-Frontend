@@ -1,8 +1,8 @@
 .detalle-card {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
+    padding: 4rem 1rem;
     border-radius: 8px;
-    background-color: #FFFFFF;
+    background-color: #eaeaea;
     color: #424242;
     border: 1px solid #E0E0E0;
 }
@@ -24,7 +24,7 @@
 
 .detalle-text {
     font-size: 1.4rem;
-    color: #9E9E9E;
+    color: #424242;
     margin-bottom: 0.5rem;
     text-align: start;
 }
@@ -34,7 +34,7 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
-    margin-top: 2rem;
+    margin-top: 4rem;
 }
 
 .detalle-btn {
