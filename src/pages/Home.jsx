@@ -72,18 +72,18 @@ export default function Home() {
   const slides = [
     {
       image: "/images/slide1.jpg",
-      title: "Bienvenido a ServiPro",
-      subtitle: "Tu plataforma de confianza para encontrar servicios.",
+      title: "BIENVENIDO A SERVIPRO",
+      subtitle: "Tu plataforma de confianza.",
     },
     {
       image: "/images/slide2.jpg",
-      title: "Encontrá aquí el servicio que estás buscando",
-      subtitle: "Filtrá, explorá y encontrá profesionales cerca tuyo.",
+      title: "ENCONTRÁ TU SERVICIO",
+      subtitle: "Filtrá, explorá y contactá profesionales.",
     },
     {
       image: "/images/slide3.jpg",
-      title: "Unite a nuestra red de prestadores de servicio",
-      subtitle: "Publicá lo que hacés y llegá a más clientes.",
+      title: "SUMATE COMO PRESTADOR",
+      subtitle: "Publicá y llegá a más clientes.",
     },
   ];
 

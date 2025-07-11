@@ -8,8 +8,8 @@
 
 /* Fondo principal de la página Home */
 .home-container {
-    background-color: #121212;
-    color: #ffffff;
+    background-color: #ffffff;
+    color: #424242;
     padding: 12px 0;
     min-height: calc(100vh - 56px);
 }
@@ -31,7 +31,7 @@
     min-width: 250px;
 }
 
-/* Selects premium */
+/* Selects*/
 .home-select {
     width: 100%;
     background-color: #1e1e1e;
@@ -45,13 +45,13 @@
 }
 
 .home-select option {
-    color: #000000;
+    color: #424242;
 }
 
 /* Texto que indica cuántos servicios se encontraron */
 .home-count-text {
     text-align: center;
-    color: #cccccc;
+    color: #424242;
     font-size: 1.2rem;
     margin-bottom: 1rem;
 }
@@ -61,15 +61,15 @@
     position: fixed;
     top: 82px;
     right: 15px;
-    background-color: #FFD700;
-    color: #000000;
-    border: #000000 0.01px solid;
+    background-color: #1E5AA8;
+    color: #ffffff;
+    border: #ffffff 0.01px solid;
     border-radius: 50%;
     width: 43px;
     height: 43px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     text-decoration: none;
-    font-weight: bold;
+    font-weight: bolder;
     font-size: 2rem;
     display: flex;
     justify-content: center;
@@ -168,11 +168,12 @@
     justify-content: center;
     align-items: center;
     text-align: center;
+    padding: 3rem;
 }
 
 /* Título grande del carrusel */
 .home-carousel-title {
-    color: #FFD700;
+    color: #ffffff;
     /* Dorado vibrante para coherencia visual. */
     font-size: 2rem;
     font-weight: 700;
@@ -188,13 +189,14 @@
     font-weight: 400;
     max-width: 800px;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+    margin: 0;
 }
 
 /* Responsive - Mobile
    Bajamos altura en pantallas chicas. */
 @media (max-width: 768px) {
     .home-carousel {
-        height: 200px;
+        height: 130px;
     }
 
     .home-carousel-title {
