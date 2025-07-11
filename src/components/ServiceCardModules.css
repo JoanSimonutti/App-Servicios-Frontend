@@ -8,9 +8,8 @@
 
 .service-card {
     /* comentario */
-    background-color: #eaeaea;
+    background-color: #dceafd;
     padding: 1rem;
-    border: #1E5AA8 1px solid;
     border-radius: 5px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
@@ -23,21 +22,21 @@
 }
 
 .service-card-title {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: 700;
     color: #1E5AA8;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.3rem;
 }
 
 .service-card-subtitle {
     font-size: 1.3rem;
     color: #424242;
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.9rem;
 }
 
 .service-card-buttons {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     flex-wrap: wrap;
     gap: 1rem;
 }
@@ -45,6 +44,7 @@
 .service-card-btn {
     border: none;
     padding: 0.5rem;
+    border: #ffffff 0.1px solid;
     border-radius: 5px;
     font-weight: 600;
     font-size: 1.1rem;
