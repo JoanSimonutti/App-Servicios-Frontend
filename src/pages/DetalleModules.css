@@ -12,11 +12,11 @@
     font-weight: 700;
     text-align: start;
     color: #1E5AA8;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.8rem;
 }
 
 .detalle-text-1 {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: #424242;
     margin-bottom: 0.5rem;
     text-align: start;
@@ -34,13 +34,13 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 1rem;
-    margin-top: 2rem;
+    margin-top: 2.5rem;
 }
 
 .detalle-btn {
     border: none;
     padding: 0.75rem 1rem;
-    font-size: 1.1rem;
+    font-size: 1.5rem;
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
