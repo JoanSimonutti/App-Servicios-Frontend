@@ -18,10 +18,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    text-decoration: underline;
 }
 
 /* Filtros superiores */
 .home-filters {
+    padding-top: 1rem;
     margin-bottom: 1rem;
 }
 
@@ -150,6 +152,7 @@
     /* Separación debajo del carrusel. 
     border-radius: 8px;*/
     overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 /* home-carousel-overlay
@@ -196,7 +199,7 @@
    Bajamos altura en pantallas chicas. */
 @media (max-width: 768px) {
     .home-carousel {
-        height: 140px;
+        height: 154.91px;
     }
 
     .home-carousel-title {

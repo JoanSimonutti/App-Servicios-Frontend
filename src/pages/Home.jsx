@@ -72,18 +72,18 @@ export default function Home() {
   const slides = [
     {
       image: "/images/slide1.jpg",
-      title: "BIENVENIDO A SERVIPRO",
-      subtitle: "Tu plataforma de confianza",
-    },
-    {
-      image: "/images/slide2.jpg",
       title: "ENCONTRÁ TU SERVICIO",
       subtitle: "Filtrá, explorá y contactá profesionales",
     },
     {
-      image: "/images/slide3.jpg",
+      image: "/images/slide2.jpg",
       title: "SUMATE COMO PRESTADOR",
       subtitle: "Publicá y llegá a más clientes",
+    },
+    {
+      image: "/images/slide3.jpg",
+      title: "DISPONIBLE PARA PUBLICIDAD",
+      subtitle: "Impulsá tu local hoy mismo",
     },
   ];
 
@@ -192,8 +192,8 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Título principal */}
-        <h1 className="home-title">Listado de Servicios</h1>
+        {/* Título principal
+        <h1 className="home-title">Listado de Servicios</h1> */}
 
         {/* Resto de tu código original */}
         <div className="row home-filters">
@@ -229,7 +229,7 @@ export default function Home() {
         </div>
 
         <p className="home-count-text text-center">
-          Se encontraron <strong>{serviciosFiltrados.length}</strong> servicios.
+          Se encontraron <strong>{serviciosFiltrados.length}</strong> servicios
         </p>
 
         <div className="row">
