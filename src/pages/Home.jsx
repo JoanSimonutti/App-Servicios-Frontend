@@ -26,6 +26,7 @@ import Detalle from "./Detalle";
 
 import "./HomeModules.css";
 import { FaRegWindowClose } from "react-icons/fa";
+import { FaRegArrowAltCircleUp } from "react-icons/fa";
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // Declaramos constantes globales
@@ -171,7 +172,7 @@ export default function Home() {
         className={`home-btn-floating ${showButton ? "visible" : ""}`}
         onClick={handleScrollTop}
       >
-        ↑
+        <FaRegArrowAltCircleUp />
       </a>
 
       <div className="home-container">
@@ -196,7 +197,7 @@ export default function Home() {
         {/* Título principal
         <h1 className="home-title">Listado de Servicios</h1> */}
 
-        {/* Resto de tu código original */}
+        {/* Filtros */}
         <div className="row home-filters">
           <div className="col-12 col-md-6">
             <select
