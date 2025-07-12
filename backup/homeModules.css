@@ -1,0 +1,213 @@
+/* ///////////////////////////////////////////////////////////////////////////
+// HomeModules.css ESTE ARCHIVO ES UN BACK UP DEL DIA SABADO 12 DE JULIO 2025
+//
+// Estilos premium para Home.
+// Esquema dark + dorado, coherente con header y demás.
+// Totalmente responsive.
+//////////////////////////////////////////////////////////////////////////// */
+
+/* Fondo principal de la página Home */
+.home-container {
+    background-color: #ffffff;
+    color: #424242;
+    padding: 12px 0;
+    min-height: calc(100vh - 56px);
+}
+
+.home-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: underline;
+}
+
+/* Filtros superiores */
+.home-filters {
+    padding-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* Cada select ocupa todo el ancho disponible */
+.home-filter {
+    flex: 1;
+    min-width: 250px;
+}
+
+/* Selects*/
+.home-select {
+    width: 100%;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.75rem 1rem;
+    font-size: 1.1rem;
+    appearance: none;
+    /* elimina flecha default en algunos browsers */
+}
+
+.home-select option {
+    color: #424242;
+}
+
+/* Texto que indica cuántos servicios se encontraron */
+.home-count-text {
+    text-align: center;
+    color: #424242;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+/* Botón flotante ↑ */
+.home-btn-floating {
+    position: fixed;
+    top: 82px;
+    right: 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: #ffffff 0.01px solid;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    font-weight: bolder;
+    font-size: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+    z-index: 9999;
+}
+
+.home-btn-floating.visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.home-btn-floating:hover {
+    transform: scale(1.1);
+}
+
+/* Modal overlay */
+.home-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Contenido del modal */
+.home-modal-content {
+    background-color: #6C757D;
+    color: #424242;
+    padding: 0.5rem;
+    border-radius: 5px;
+    max-width: 800px;
+    width: 100%;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Botón de cierre del modal */
+.home-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: #424242;
+    cursor: pointer;
+}
+
+/*.home-modal-close:hover {
+    color: ;
+} */
+
+
+/* ==========================
+   ESTILOS PARA EL CARRUSEL
+   ========================== */
+
+/* home-carousel
+   Contenedor principal del carrusel.
+   Usamos imagen de fondo + overlay de color oscuro para poder leer el texto. */
+.home-carousel {
+    width: 100%;
+    height: 300px;
+    /* Altura fija, se puede ajustar. */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-bottom: 12px;
+    /* Separación debajo del carrusel. */
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* home-carousel-overlay
+   Capa semi-transparente oscura para oscurecer la imagen
+   y permitir que el texto se lea bien encima. */
+.home-carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    /* background: rgba(0, 0, 0, 0.5);
+     Opacidad ajustable para gusto visual. */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+/* Título grande del carrusel */
+.home-carousel-title {
+    color: #ffffff;
+    /* Dorado vibrante para coherencia visual. */
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+    /* Para destacar sobre la imagen. */
+}
+
+/* Subtítulo o texto debajo del título */
+.home-carousel-subtitle {
+    color: #ffffff;
+    font-size: 3rem;
+    font-weight: 400;
+    max-width: 800px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+    margin: 0;
+}
+
+/* Responsive - Mobile
+   Bajamos altura en pantallas chicas. */
+@media (max-width: 768px) {
+    .home-carousel {
+        height: 154.91px;
+    }
+
+    .home-carousel-title {
+        font-size: 1.9rem;
+    }
+
+    .home-carousel-subtitle {
+        font-size: 1.3rem;
+    }
+}

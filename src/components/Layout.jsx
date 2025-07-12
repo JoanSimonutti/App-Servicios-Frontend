@@ -24,6 +24,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////
 
 import Header from "./Header";
+import Footer from "./Footer";
 // Importamos el Header global de la aplicación.
 // Así se renderiza una única vez en todas las páginas.
 
@@ -72,9 +73,8 @@ export default function Layout({ children }) {
       {/* 
         Futuro Footer:
         Aquí podrías incluir un componente Footer si lo deseas.
-        Ejemplo:
-          <Footer />
-      */}
+        Ejemplo:*/}
+      <Footer />
     </>
   );
 }

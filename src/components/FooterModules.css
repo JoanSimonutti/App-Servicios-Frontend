@@ -1,0 +1,73 @@
+/* FooterModules.css */
+
+.footer {
+    background-color: #ffffff;
+    padding: 2.5rem 1rem 1rem 1rem;
+    margin-top: 0.2rem;
+    /* border-top: 1px solid #e0e0e0;*/
+}
+
+.footerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    margin: 1rem;
+    min-width: 150px;
+}
+
+.column-redes-sociales {
+    display: flex;
+    margin-top: 1rem;
+    min-width: 150px;
+}
+
+.brand {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: #4c4c4c;
+}
+
+.item {
+    margin: 0.3rem 0;
+    color: #4c4c4c;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.item:hover {
+    text-decoration: underline;
+    text-underline-offset: 0.5rem;
+    text-decoration-thickness: 2px;
+}
+
+.iconLink {
+    color: #4c4c4c;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    transition: color 0.3s ease;
+}
+
+.iconLink:hover {
+    color: #007bff;
+}
+
+@media (max-width: 768px) {
+    .footerContainer {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .column {
+        margin: 1rem 0;
+        align-items: flex-start;
+    }
+}

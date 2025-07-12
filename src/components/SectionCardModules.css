@@ -1,0 +1,67 @@
+/* SectionCard.module.css */
+
+/* Wrapper que envuelve la card + el texto debajo */
+.cardWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+/* Container de la imagen para permitir overflow hidden */
+.imageContainer {
+    width: 100%;
+    border-radius: 0;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Imagen */
+.image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+/* Hover global sobre toda la tarjeta */
+.cardWrapper:hover .image {
+    transform: scale(1.05);
+}
+
+.cardWrapper:hover .title {
+    text-decoration: underline;
+    text-underline-offset: 0.5rem;
+    text-decoration-thickness: 2px;
+}
+
+/* Título debajo de la imagen */
+.title {
+    margin-top: 12px;
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: #4c4c4c;
+    text-align: center;
+    transition: color 0.3s ease, text-decoration 0.3s ease;
+}
+
+
+/* Desktop (≥ 992px) */
+@media (min-width: 992px) {
+    .cardWrapper {
+        width: 400px;
+    }
+}
+
+/* Mobile (≤ 768px) */
+@media (max-width: 768px) {
+    .cardWrapper {
+        width: 100%;
+        margin: 2.5%;
+    }
+
+    .title {
+        font-size: 1rem;
+    }
+}
