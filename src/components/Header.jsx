@@ -105,6 +105,11 @@ const Header = () => {
           )}
         </nav>
       </div>
+      {/* Overlay */}
+      <div
+        className={`app-header-overlay ${menuOpen ? "visible" : ""}`}
+        onClick={toggleMenu}
+      ></div>
     </header>
   );
 };
