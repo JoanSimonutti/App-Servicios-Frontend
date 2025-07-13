@@ -24,21 +24,8 @@ const Footer = () => {
   return (
     <footer className="footer">
       <div className="footerContainer">
-        {/* Columna 1 - Marca */}
-        <div className="column">
-          <span className="brand">SERVIPRO © 2025</span>
-        </div>
-
-        {/* Columna 2 - Redes Sociales */}
+        {/* Columna 1 - Redes Sociales */}
         <div className="column-redes-sociales">
-          <a
-            href="https://github.com/JoanSimonutti"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="iconLink"
-          >
-            <FaGithub />
-          </a>
           <a
             href="https://www.instagram.com/"
             target="_blank"
@@ -63,12 +50,24 @@ const Footer = () => {
           >
             <SiLinkedin />
           </a>
+          <a
+            href="https://github.com/JoanSimonutti"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="iconLink"
+          >
+            <FaGithub />
+          </a>
         </div>
-        {/* Columna 3 - Contacto */}
+        {/* Columna 2 - Contacto */}
         <div className="column">
           <span className="item">Política de privacidad</span>
           <span className="item">Condiciones de uso</span>
-          {/*<span className="item">Trabajá con nosotros</span>*/}
+          <span className="item">Trabaja con nosotros</span>
+        </div>
+        {/* Columna 3 - Marca */}
+        <div className="column">
+          <span className="brand">SERVIPRO © 2025</span>
         </div>
       </div>
     </footer>
