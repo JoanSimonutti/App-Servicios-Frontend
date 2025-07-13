@@ -61,9 +61,9 @@ const Footer = () => {
         </div>
         {/* Columna 2 - Contacto */}
         <div className="column">
-          <span className="item">Política de privacidad</span>
           <span className="item">Condiciones de uso</span>
           <span className="item">Trabaja con nosotros</span>
+          <span className="item">Política de privacidad</span>
         </div>
         {/* Columna 3 - Marca */}
         <div className="column">
