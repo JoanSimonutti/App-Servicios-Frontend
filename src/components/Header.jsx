@@ -63,7 +63,7 @@ const Header = () => {
 
         <nav className={`app-header-links ${menuOpen ? "is-active" : ""}`}>
           <Link to="/" className="app-header-link" onClick={handleLinkClick}>
-            HOME
+            INICIO
           </Link>
 
           {!token ? (
