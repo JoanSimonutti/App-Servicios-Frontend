@@ -46,7 +46,7 @@ const Home = () => {
         </h1>*/}
 
         {/* Grilla Bootstrap */}
-        <div className="row g-4">
+        <div className="row row-pricipal-grilla">
           {Object.entries(CATEGORY_GROUPS).map(([seccion, categorias]) => (
             <div
               key={seccion}
