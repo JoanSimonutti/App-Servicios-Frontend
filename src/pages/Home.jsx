@@ -39,7 +39,7 @@ const Home = () => {
   return (
     <>
       {/* Contenedor Bootstrap */}
-      <div className="container py-4">
+      <div className="container container-principal">
         {/* Título grande 
         <h1 className="text-center mb-4 home-title">
           Nuestras Secciones de Servicios

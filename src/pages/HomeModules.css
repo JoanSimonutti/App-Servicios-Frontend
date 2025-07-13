@@ -199,7 +199,8 @@
 /* Responsive - Mobile
    Bajamos altura en pantallas chicas. */
 @media (max-width: 768px) {
-    .home-carousel {
+
+    /* .home-carousel {
         height: 154.91px;
     }
 
@@ -209,5 +210,26 @@
 
     .home-carousel-subtitle {
         font-size: 1.3rem;
+    } */
+    .container-principal {
+        padding: 12px 0px 0px 0px;
+    }
+
+    .row-pricipal-grilla {
+        gap: 0;
+        margin: 0;
+    }
+}
+
+/* Responsive - Desktop */
+
+@media (min-width: 769px) {
+    .container-principal {
+        padding: 35px 0px 35px 0px;
+    }
+
+    .row-pricipal-grilla {
+        gap: 0;
+        margin: 0;
     }
 }
