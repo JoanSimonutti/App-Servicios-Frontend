@@ -26,7 +26,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 
 export const CATEGORY_GROUPS = {
-    "Hogar": [
+    "HOGAR": [
         "Plomería",
         "Electricidad",
         "Herrería",
@@ -47,7 +47,7 @@ export const CATEGORY_GROUPS = {
         "Persianas y toldos"
     ],
 
-    "Familia": [
+    "FAMILIA": [
         "Enfermería",
         "Medicina a domicilio",
         "Niñeras",
@@ -66,7 +66,7 @@ export const CATEGORY_GROUPS = {
         "Asistencia escolar a domicilio"
     ],
 
-    "Profesionales": [
+    "PROFESIONALES": [
         "Abogados",
         "Contadores",
         "Traductores",
@@ -92,7 +92,7 @@ export const CATEGORY_GROUPS = {
         "Fotógrafos profesionales"
     ],
 
-    "Estética": [
+    "ESTÉTICA": [
         "Peluquería hombre, mujer y niños",
         "Barberías",
         "Cosmetología",
@@ -114,7 +114,7 @@ export const CATEGORY_GROUPS = {
         "Diseño de sonrisa estética"
     ],
 
-    "Animales": [
+    "ANIMALES": [
         "Paseadores de perros",
         "Peluquería canina / felina",
         "Adiestradores",
@@ -131,7 +131,7 @@ export const CATEGORY_GROUPS = {
         "Adiestramiento felino"
     ],
 
-    "Lavadero": [
+    "LAVADERO": [
         "Lavadero de ropa",
         "Lavadero de coches",
         "Tintorerías",
@@ -148,7 +148,7 @@ export const CATEGORY_GROUPS = {
         "Limpieza de tanques de agua"
     ],
 
-    "Eventos": [
+    "EVENTOS": [
         "Fotografía y video de eventos",
         "Música en vivo",
         "Animadores infantiles",
@@ -169,7 +169,7 @@ export const CATEGORY_GROUPS = {
         "Escenografía para eventos"
     ],
 
-    "Transporte": [
+    "TRANSPORTE": [
         "Fletes",
         "Mudanzas",
         "Moto mensajería",
