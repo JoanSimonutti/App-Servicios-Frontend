@@ -66,23 +66,6 @@ export const CATEGORY_GROUPS = {
         "Asistencia escolar a domicilio"
     ],
 
-    "Lavadero": [
-        "Lavadero de ropa",
-        "Lavadero de coches",
-        "Tintorerías",
-        "Limpieza de alfombras y tapizados",
-        "Limpieza industrial / comercial",
-        "Lavado de sillones",
-        "Limpieza de cortinas",
-        "Servicios de planchado",
-        "Lavado de colchones",
-        "Limpieza post obra",
-        "Limpieza de piletas",
-        "Limpieza de vidrios en altura",
-        "Lavado de tapizados de autos",
-        "Limpieza de tanques de agua"
-    ],
-
     "Profesionales": [
         "Abogados",
         "Contadores",
@@ -107,6 +90,62 @@ export const CATEGORY_GROUPS = {
         "Agrimensores",
         "Topógrafos",
         "Fotógrafos profesionales"
+    ],
+
+    "Estética": [
+        "Peluquería hombre, mujer y niños",
+        "Barberías",
+        "Cosmetología",
+        "Manicura / Pedicura",
+        "Maquillaje profesional",
+        "Depilación",
+        "Masajes estéticos",
+        "Spa a domicilio",
+        "Estética corporal",
+        "Tratamientos faciales",
+        "Microblading",
+        "Diseño de cejas",
+        "Peinados para eventos",
+        "Uñas esculpidas",
+        "Extensiones de pestañas",
+        "Micropigmentación",
+        "Limpieza facial profunda",
+        "Bronceado sin sol",
+        "Diseño de sonrisa estética"
+    ],
+
+    "Animales": [
+        "Paseadores de perros",
+        "Peluquería canina / felina",
+        "Adiestradores",
+        "Veterinarios a domicilio",
+        "Guarderías caninas",
+        "Venta de alimentos y accesorios",
+        "Educación canina",
+        "Etología animal",
+        "Adopciones responsables",
+        "Fotografía de mascotas",
+        "Hospedaje para mascotas",
+        "Terapias alternativas animales",
+        "Spa para mascotas",
+        "Adiestramiento felino"
+    ],
+
+    "Lavadero": [
+        "Lavadero de ropa",
+        "Lavadero de coches",
+        "Tintorerías",
+        "Limpieza de alfombras y tapizados",
+        "Limpieza industrial / comercial",
+        "Lavado de sillones",
+        "Limpieza de cortinas",
+        "Servicios de planchado",
+        "Lavado de colchones",
+        "Limpieza post obra",
+        "Limpieza de piletas",
+        "Limpieza de vidrios en altura",
+        "Lavado de tapizados de autos",
+        "Limpieza de tanques de agua"
     ],
 
     "Eventos": [
@@ -149,44 +188,7 @@ export const CATEGORY_GROUPS = {
         "Camiones con hidrogrúa"
     ],
 
-    "Animales": [
-        "Paseadores de perros",
-        "Peluquería canina / felina",
-        "Adiestradores",
-        "Veterinarios a domicilio",
-        "Guarderías caninas",
-        "Venta de alimentos y accesorios",
-        "Educación canina",
-        "Etología animal",
-        "Adopciones responsables",
-        "Fotografía de mascotas",
-        "Hospedaje para mascotas",
-        "Terapias alternativas animales",
-        "Spa para mascotas",
-        "Adiestramiento felino"
-    ],
 
-    "Estética": [
-        "Peluquería hombre, mujer y niños",
-        "Barberías",
-        "Cosmetología",
-        "Manicura / Pedicura",
-        "Maquillaje profesional",
-        "Depilación",
-        "Masajes estéticos",
-        "Spa a domicilio",
-        "Estética corporal",
-        "Tratamientos faciales",
-        "Microblading",
-        "Diseño de cejas",
-        "Peinados para eventos",
-        "Uñas esculpidas",
-        "Extensiones de pestañas",
-        "Micropigmentación",
-        "Limpieza facial profunda",
-        "Bronceado sin sol",
-        "Diseño de sonrisa estética"
-    ]
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////
