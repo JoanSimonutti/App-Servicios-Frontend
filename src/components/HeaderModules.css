@@ -54,7 +54,7 @@
 }
 
 /* ==================================================================================
-   NUEVOS ESTILOS PARA HAMBURGUESA Y MENÚ RESPONSIVE
+   ESTILOS PARA HAMBURGUESA Y MENÚ RESPONSIVE
    ================================================================================== */
 
 /* .app-hamburger
@@ -103,7 +103,7 @@
    Reglas que solo aplican en pantallas chicas. */
 @media (max-width: 768px) {
 
-    /* NUEVO:
+    /* 
        Mantener fila para que hamburguesa quede al costado
        y no se vaya debajo del logo.
     */
@@ -178,7 +178,7 @@
 
 
 /* ------------------------------------------------------------------------
-   NUEVO: Centrar contenido en desktop
+   Centrar contenido en desktop
    ------------------------------------------------------------------------ */
 
 @media (min-width: 769px) {
@@ -195,7 +195,7 @@
 
 
 /* ============================================================================
-   NUEVO: OVERLAY NEGRO POLARIZADO PARA MOBILE MENU
+   OVERLAY NEGRO POLARIZADO PARA MOBILE MENU
    ============================================================================ */
 
 /* .app-header-overlay
