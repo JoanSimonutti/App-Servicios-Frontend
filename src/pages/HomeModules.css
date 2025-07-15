@@ -195,6 +195,22 @@
     .home-carousel-subtitle {
         font-size: 1.3rem;
     }
+
+    .home-search-form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .home-search-select,
+    .home-search-button {
+        width: 100%;
+    }
+
+    .home-search-bar {
+        padding: 2rem;
+        margin-bottom: 3rem;
+    }
+
 }
 
 /* Responsive - Desktop */
@@ -210,14 +226,25 @@
 }
 
 /* ================================================================
-   NUEVO: Estilos para home-search-bar (barra de búsqueda en Home)
+  Estilos para home-search-bar (barra de búsqueda en Home)
    ================================================================ */
 
 .home-search-bar {
-    background-color: #f8f9fa;
+    background-color: #99ff00;
     padding: 2rem;
-    border-radius: 8px;
+    margin-bottom: 1rem;
+    border-radius: 0;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.home-search-titulo {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #212529;
+    text-align: center;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .home-search-input {
@@ -270,4 +297,22 @@
     background-color: #007bff;
     color: #ffffff;
     cursor: pointer;
+}
+
+/* ================================================================
+   NUEVO: Estilos para el formulario de búsqueda rápida en Home
+   ================================================================ */
+
+.home-search-form {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.home-search-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
 }

@@ -26,6 +26,7 @@
 ///////////////////////////////////////////////////////////////////////////////////////
 
 export const CATEGORY_GROUPS = {
+
     "HOGAR": [
         "Plomería",
         "Electricidad",
@@ -66,7 +67,47 @@ export const CATEGORY_GROUPS = {
         "Asistencia escolar a domicilio"
     ],
 
-    "PROFESIONALES": [
+    "MASCOTAS": [
+        "Paseadores de perros",
+        "Peluquería canina / felina",
+        "Adiestradores",
+        "Veterinarios a domicilio",
+        "Guarderías caninas",
+        "Venta de alimentos y accesorios",
+        "Educación canina",
+        "Etología animal",
+        "Adopciones responsables",
+        "Fotografía de mascotas",
+        "Hospedaje para mascotas",
+        "Terapias alternativas animales",
+        "Spa para mascotas",
+        "Adiestramiento felino"
+    ],
+
+    "ESTÉTICA": [
+        "Peluquería hombre, mujer y niños",
+        "Barberías",
+        "Cosmetología",
+        "Manicura / Pedicura",
+        "Maquillaje profesional",
+        "Depilación",
+        "Masajes estéticos",
+        "Spa a domicilio",
+        "Estética corporal",
+        "Tratamientos faciales",
+        "Microblading",
+        "Diseño de cejas",
+        "Peinados para eventos",
+        "Uñas esculpidas",
+        "Extensiones de pestañas",
+        "Micropigmentación",
+        "Limpieza facial profunda",
+        "Bronceado sin sol",
+        "Diseño de sonrisa estética"
+    ],
+
+
+    "EMPRESA": [
         "Abogados",
         "Contadores",
         "Traductores",
@@ -92,44 +133,25 @@ export const CATEGORY_GROUPS = {
         "Fotógrafos profesionales"
     ],
 
-    "ESTÉTICA": [
-        "Peluquería hombre, mujer y niños",
-        "Barberías",
-        "Cosmetología",
-        "Manicura / Pedicura",
-        "Maquillaje profesional",
-        "Depilación",
-        "Masajes estéticos",
-        "Spa a domicilio",
-        "Estética corporal",
-        "Tratamientos faciales",
-        "Microblading",
-        "Diseño de cejas",
-        "Peinados para eventos",
-        "Uñas esculpidas",
-        "Extensiones de pestañas",
-        "Micropigmentación",
-        "Limpieza facial profunda",
-        "Bronceado sin sol",
-        "Diseño de sonrisa estética"
+    "TRANSPORTE": [
+        "Fletes",
+        "Mudanzas",
+        "Moto mensajería",
+        "Chofer particular",
+        "Transportes especiales",
+        "Delivery de productos voluminosos",
+        "Transporte de personas",
+        "Transporte de mascotas",
+        "Cargas refrigeradas",
+        "Transporte escolar",
+        "Courier internacional",
+        "Alquiler de camionetas",
+        "Chofer profesional para empresas",
+        "Distribución de correspondencia",
+        "Traslados corporativos",
+        "Camiones con hidrogrúa"
     ],
 
-    "ANIMALES": [
-        "Paseadores de perros",
-        "Peluquería canina / felina",
-        "Adiestradores",
-        "Veterinarios a domicilio",
-        "Guarderías caninas",
-        "Venta de alimentos y accesorios",
-        "Educación canina",
-        "Etología animal",
-        "Adopciones responsables",
-        "Fotografía de mascotas",
-        "Hospedaje para mascotas",
-        "Terapias alternativas animales",
-        "Spa para mascotas",
-        "Adiestramiento felino"
-    ],
 
     "LAVADERO": [
         "Lavadero de ropa",
@@ -168,27 +190,6 @@ export const CATEGORY_GROUPS = {
         "Cotillón personalizado",
         "Escenografía para eventos"
     ],
-
-    "TRANSPORTE": [
-        "Fletes",
-        "Mudanzas",
-        "Moto mensajería",
-        "Chofer particular",
-        "Transportes especiales",
-        "Delivery de productos voluminosos",
-        "Transporte de personas",
-        "Transporte de mascotas",
-        "Cargas refrigeradas",
-        "Transporte escolar",
-        "Courier internacional",
-        "Alquiler de camionetas",
-        "Chofer profesional para empresas",
-        "Distribución de correspondencia",
-        "Traslados corporativos",
-        "Camiones con hidrogrúa"
-    ],
-
-
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////

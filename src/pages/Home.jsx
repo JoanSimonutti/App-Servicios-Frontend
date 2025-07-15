@@ -1,16 +1,17 @@
 ///////////////////////////////////////////////////////////////////////////////////////
-// Home.jsx (modificado con bloque de BÚSQUEDA + GRID)
+// Home.jsx (modificado - ahora obtiene categorías y localidades del backend)
 //
 // Qué hace ahora:
-// - Muestra una barra de búsqueda arriba de la grilla.
-// - Renderiza SOLO las 8 tarjetas grandes en grilla Bootstrap.
-// - Web → 4 columnas (4 x 2 = 8)
-// - Mobile → 2 columnas (2 x 4 = 8)
-// - Usa SectionCard.
+// - Trae categorías y localidades dinámicamente desde /serv.
+// - Elimina los valores hardcodeados de los select.
+// - Aplica estilos únicamente desde HomeModules.css.
+// - Mantiene tu lógica original intacta.
+// - Código limpio, profesional y escalable.
 ///////////////////////////////////////////////////////////////////////////////////////
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../api";
 
 // Importamos SectionCard
 import SectionCard from "../components/SectionCard";
@@ -18,13 +19,80 @@ import SectionCard from "../components/SectionCard";
 // Importamos los datos de las secciones
 import { CATEGORY_GROUPS } from "../constants/categoryGroups";
 
-// Importamos tu CSS global
+// Importamos CSS de Home
 import "./HomeModules.css";
 
 const Home = () => {
   const navigate = useNavigate();
 
+  /////////////////////////////////////////////////////////////////////////////
+  // Estados locales para Búsqueda Rápida:
+  /////////////////////////////////////////////////////////////////////////////
+
+  // Guarda la categoría seleccionada por el usuario
+  const [categoria, setCategoria] = useState("");
+
+  // Guarda la localidad seleccionada por el usuario
+  const [localidad, setLocalidad] = useState("");
+
+  // Guarda el valor del checkbox urgencias
+  const [urgencias, setUrgencias] = useState(false);
+
+  // Listado dinámico de categorías
+  const [categorias, setCategorias] = useState([]);
+
+  // Listado dinámico de localidades
+  const [localidades, setLocalidades] = useState([]);
+
+  /////////////////////////////////////////////////////////////////////////////
+  // useEffect → Ejecuta al montar el componente
+  /////////////////////////////////////////////////////////////////////////////
+
+  useEffect(() => {
+    // Llamamos al backend para obtener todos los servicios
+    const fetchData = async () => {
+      try {
+        const res = await api.get("/serv");
+
+        // Obtenemos categorías únicas
+        const categoriasUnicas = [...new Set(res.data.map((s) => s.categoria))];
+        setCategorias(categoriasUnicas);
+
+        // Obtenemos localidades únicas
+        const localidadesUnicas = [
+          ...new Set(res.data.map((s) => s.localidad)),
+        ];
+        setLocalidades(localidadesUnicas);
+      } catch (err) {
+        console.error("Error al traer servicios:", err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  /////////////////////////////////////////////////////////////////////////////
+  // Handler para el submit del formulario de búsqueda
+  /////////////////////////////////////////////////////////////////////////////
+
+  const handleBuscar = (e) => {
+    e.preventDefault();
+
+    // Construimos query params dinámicamente
+    const params = new URLSearchParams();
+
+    if (categoria) params.append("categoria", categoria);
+    if (localidad) params.append("localidad", localidad);
+    if (urgencias) params.append("urgencias24hs", true);
+
+    // Navegamos a la página de resultados
+    navigate(`/services?${params.toString()}`);
+  };
+
+  /////////////////////////////////////////////////////////////////////////////
   // Convierte texto de sección en slug para URL
+  /////////////////////////////////////////////////////////////////////////////
+
   const handleSeccionClick = (seccion) => {
     const slug = seccion
       .toLowerCase()
@@ -34,107 +102,67 @@ const Home = () => {
     navigate(`/services/${slug}`);
   };
 
-  // ---------------------------------------------------------------------------
-  // AGREGADO JOAN - BLOQUE DE BÚSQUEDA
-  // Declaramos estados locales para los filtros:
-  // - categoria → almacena categoría seleccionada
-  // - localidad → almacena localidad seleccionada
-  // - urgencias → true/false según el checkbox
-  // ---------------------------------------------------------------------------
-
-  const [categoria, setCategoria] = useState("");
-  const [localidad, setLocalidad] = useState("");
-  const [urgencias, setUrgencias] = useState(false);
-
-  // Handler que se dispara al hacer submit en el formulario:
-  const handleBuscar = (e) => {
-    e.preventDefault();
-
-    // Construimos los parámetros de búsqueda como query params:
-    const params = new URLSearchParams();
-
-    if (categoria) params.append("categoria", categoria);
-    if (localidad) params.append("localidad", localidad);
-    if (urgencias) params.append("urgencias24hs", true);
-
-    // Navegamos a la página de resultados con esos filtros:
-    navigate(`/services?${params.toString()}`);
-  };
+  /////////////////////////////////////////////////////////////////////////////
+  // Render
+  /////////////////////////////////////////////////////////////////////////////
 
   return (
     <>
-      {/* ---------------------------------------------------------------------
-          AGREGADO JOAN - BLOQUE DE BÚSQUEDA
-          Este bloque se ubica arriba de tu grilla original.
-      --------------------------------------------------------------------- */}
-      <section className="container home-search-bar">
-        <form
-          onSubmit={handleBuscar}
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "1rem",
-            justifyContent: "center",
-          }}
-        >
-          {/* SELECT - Categoría */}
-          <select
-            className="home-search-select"
-            value={categoria}
-            onChange={(e) => setCategoria(e.target.value)}
-          >
-            <option value="">Seleccionar Categoría</option>
-            <option value="Electricidad">Electricidad</option>
-            <option value="Plomería">Plomería</option>
-            <option value="Gasista">Gasista</option>
-            <option value="Carpintería">Carpintería</option>
-            {/* Agregar más categorías aquí si lo deseas */}
-          </select>
-
-          {/* SELECT - Localidad */}
-          <select
-            className="home-search-select"
-            value={localidad}
-            onChange={(e) => setLocalidad(e.target.value)}
-          >
-            <option value="">Seleccionar Localidad</option>
-            <option value="Valencia">Valencia</option>
-            <option value="Madrid">Madrid</option>
-            <option value="Barcelona">Barcelona</option>
-            {/* Agregar más localidades aquí si lo deseas */}
-          </select>
-
-          {/* CHECKBOX - Urgencias 24hs */}
-          <label
-            style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
-          >
-            <input
-              type="checkbox"
-              checked={urgencias}
-              onChange={(e) => setUrgencias(e.target.checked)}
-            />
-            Urgencias 24hs
-          </label>
-
-          {/* BOTÓN - Buscar ahora */}
-          <button type="submit" className="home-search-button">
-            Buscar ahora
-          </button>
-        </form>
-      </section>
-
-      {/* ---------------------------------------------------------------------
-          TU CÓDIGO ORIGINAL DE HOME → NO SE TOCA
-      --------------------------------------------------------------------- */}
-
-      {/* Contenedor Bootstrap */}
       <div className="container container-principal">
-        {/* Título grande 
-        <h1 className="text-center mb-4 home-title">
-          Nuestras Secciones de Servicios
-        </h1>*/}
+        {/* ============================================================
+         SECCIÓN: BÚSQUEDA RÁPIDA
+         ============================================================ */}
+        <section className="container home-search-bar">
+          <p className="home-search-titulo">BÚSQUEDA RÁPIDA</p>
+          <form onSubmit={handleBuscar} className="home-search-form">
+            {/* SELECT - Categoría */}
+            <select
+              className="home-search-select"
+              value={categoria}
+              onChange={(e) => setCategoria(e.target.value)}
+            >
+              <option value="">Seleccionar Categoría</option>
+              {categorias.map((cat) => (
+                <option key={cat} value={cat}>
+                  {cat}
+                </option>
+              ))}
+            </select>
 
-        {/* Grilla Bootstrap */}
+            {/* SELECT - Localidad */}
+            <select
+              className="home-search-select"
+              value={localidad}
+              onChange={(e) => setLocalidad(e.target.value)}
+            >
+              <option value="">Seleccionar Localidad</option>
+              {localidades.map((loc) => (
+                <option key={loc} value={loc}>
+                  {loc}
+                </option>
+              ))}
+            </select>
+
+            {/* CHECKBOX - Urgencias 24hs */}
+            <label className="home-search-checkbox">
+              <input
+                type="checkbox"
+                checked={urgencias}
+                onChange={(e) => setUrgencias(e.target.checked)}
+              />
+              URGENCIAS 24HS
+            </label>
+
+            {/* BOTÓN - Buscar ahora */}
+            <button type="submit" className="home-search-button">
+              BUSCAR
+            </button>
+          </form>
+        </section>
+
+        {/* ============================================================
+         SECCIÓN: SECCIONES DE SERVICIOS
+         ============================================================ */}
         <div className="row row-pricipal-grilla">
           {Object.entries(CATEGORY_GROUPS).map(([seccion, categorias]) => (
             <div
