@@ -110,60 +110,66 @@ const Home = () => {
     <>
       <div className="container container-principal">
         {/* ============================================================
-         SECCIÓN: BÚSQUEDA RÁPIDA
-         ============================================================ */}
+   SECCIÓN: BÚSQUEDA RÁPIDA
+============================================================ */}
         <section className="container home-search-bar">
-          <p className="home-search-titulo">BÚSQUEDA RÁPIDA</p>
-          <form onSubmit={handleBuscar} className="home-search-form">
-            {/* SELECT - Categoría */}
-            <select
-              className="home-search-select"
-              value={categoria}
-              onChange={(e) => setCategoria(e.target.value)}
-            >
-              <option value="">Seleccionar Categoría</option>
-              {categorias.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
+          {/*<p className="home-search-titulo">BÚSQUEDA RÁPIDA</p>*/}
 
-            {/* SELECT - Localidad */}
-            <select
-              className="home-search-select"
-              value={localidad}
-              onChange={(e) => setLocalidad(e.target.value)}
-            >
-              <option value="">Seleccionar Localidad</option>
-              {localidades.map((loc) => (
-                <option key={loc} value={loc}>
-                  {loc}
-                </option>
-              ))}
-            </select>
+          <div className="home-search-content">
+            {/* IMAGEN A LA IZQUIERDA 
+            <div className="home-search-img">
+              <img src="/images/busqueda.png" alt="Búsqueda rápida" />
+            </div>*/}
 
-            {/* CHECKBOX - Urgencias 24hs */}
-            <label className="home-search-checkbox">
-              <input
-                type="checkbox"
-                checked={urgencias}
-                onChange={(e) => setUrgencias(e.target.checked)}
-              />
-              URGENCIAS 24HS
-            </label>
+            {/* CAMPOS DEL FORMULARIO */}
+            <form onSubmit={handleBuscar} className="home-search-fields">
+              <select
+                className="home-search-select"
+                value={categoria}
+                onChange={(e) => setCategoria(e.target.value)}
+              >
+                <option value="">Seleccionar Categoría</option>
+                {categorias.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
 
-            {/* BOTÓN - Buscar ahora */}
-            <button type="submit" className="home-search-button">
-              BUSCAR
-            </button>
-          </form>
+              <select
+                className="home-search-select"
+                value={localidad}
+                onChange={(e) => setLocalidad(e.target.value)}
+              >
+                <option value="">Seleccionar Localidad</option>
+                {localidades.map((loc) => (
+                  <option key={loc} value={loc}>
+                    {loc}
+                  </option>
+                ))}
+              </select>
+
+              <label className="home-search-checkbox">
+                <input
+                  type="checkbox"
+                  checked={urgencias}
+                  onChange={(e) => setUrgencias(e.target.checked)}
+                />
+                URGENCIAS 24HS
+              </label>
+
+              <button type="submit" className="home-search-button">
+                BUSCAR AHORA
+              </button>
+            </form>
+          </div>
         </section>
 
         {/* ============================================================
          SECCIÓN: SECCIONES DE SERVICIOS
          ============================================================ */}
         <div className="row row-pricipal-grilla">
+          <p className="home-titulo">NUESTROS SERVICIOS</p>
           {Object.entries(CATEGORY_GROUPS).map(([seccion, categorias]) => (
             <div
               key={seccion}
