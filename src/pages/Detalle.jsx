@@ -5,12 +5,6 @@
 // - Muestra los datos de un servicio en detalle.
 // - Incluye botones Teléfono y WhatsApp.
 // - Registra clics en backend.
-//
-// Rediseñado:
-// - Elimina Bootstrap.
-// - Usa clases propias coherentes con header, login, etc.
-// - Diseño dark+gold profesional.
-// - Completamente responsive.
 ////////////////////////////////////////////////////////////////////////////////////////
 
 import React from "react";

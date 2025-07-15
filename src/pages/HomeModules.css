@@ -1,9 +1,5 @@
 /* ///////////////////////////////////////////////////////////////////////////
 // HomeModules.css
-//
-// Estilos premium para Home.
-// Esquema dark + dorado, coherente con header y demás.
-// Totalmente responsive.
 //////////////////////////////////////////////////////////////////////////// */
 
 /* Fondo principal de la página Home */
@@ -33,7 +29,7 @@
     min-width: 250px;
 }
 
-/* Selects*/
+/* Selects */
 .home-select {
     width: 100%;
     background-color: #1e1e1e;
@@ -129,44 +125,29 @@
     cursor: pointer;
 }
 
-/*.home-modal-close:hover {
-    color: ;
-} */
-
-
 /* ==========================
    ESTILOS PARA EL CARRUSEL
    ========================== */
 
-/* home-carousel
-   Contenedor principal del carrusel.
-   Usamos imagen de fondo + overlay de color oscuro para poder leer el texto. */
 .home-carousel {
     width: 100%;
     height: 300px;
-    /* Altura fija, se puede ajustar. */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     position: relative;
     margin-bottom: 12px;
-    /* Separación debajo del carrusel. */
     border-radius: 5px;
     overflow: hidden;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* home-carousel-overlay
-   Capa semi-transparente oscura para oscurecer la imagen
-   y permitir que el texto se lea bien encima. */
 .home-carousel-overlay {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    /* background: rgba(0, 0, 0, 0.5);
-     Opacidad ajustable para gusto visual. */
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -175,18 +156,14 @@
     padding: 2rem;
 }
 
-/* Título grande del carrusel */
 .home-carousel-title {
     color: #ffffff;
-    /* Dorado vibrante para coherencia visual. */
     font-size: 4.5rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
     text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
-    /* Para destacar sobre la imagen. */
 }
 
-/* Subtítulo o texto debajo del título */
 .home-carousel-subtitle {
     color: #ffffff;
     font-size: 3rem;
@@ -196,11 +173,18 @@
     margin: 0;
 }
 
-/* Responsive - Mobile
-   Bajamos altura en pantallas chicas. */
+/* Responsive - Mobile */
 @media (max-width: 768px) {
+    .container-principal {
+        padding: 12px 0px 0px 0px;
+    }
 
-    /* .home-carousel {
+    .row-pricipal-grilla {
+        gap: 0;
+        margin: 0;
+    }
+
+    .home-carousel {
         height: 154.91px;
     }
 
@@ -210,19 +194,10 @@
 
     .home-carousel-subtitle {
         font-size: 1.3rem;
-    } */
-    .container-principal {
-        padding: 12px 0px 0px 0px;
-    }
-
-    .row-pricipal-grilla {
-        gap: 0;
-        margin: 0;
     }
 }
 
 /* Responsive - Desktop */
-
 @media (min-width: 769px) {
     .container-principal {
         padding: 35px 0px 35px 0px;
@@ -232,4 +207,67 @@
         gap: 0;
         margin: 0;
     }
+}
+
+/* ================================================================
+   NUEVO: Estilos para home-search-bar (barra de búsqueda en Home)
+   ================================================================ */
+
+.home-search-bar {
+    background-color: #f8f9fa;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.home-search-input {
+    font-size: 1.2rem;
+    padding: 0.75rem 1rem;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    color: #212529;
+}
+
+.home-search-select {
+    font-size: 1.1rem;
+    padding: 0.65rem 1rem;
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    color: #212529;
+    background-color: #ffffff;
+}
+
+.home-search-button {
+    background-color: #007bff;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.home-search-button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilos para lista de sugerencias del auto-complete */
+.home-search-bar .list-group {
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    margin-top: 0.25rem;
+}
+
+.home-search-bar .list-group-item {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+}
+
+.home-search-bar .list-group-item:hover {
+    background-color: #007bff;
+    color: #ffffff;
+    cursor: pointer;
 }

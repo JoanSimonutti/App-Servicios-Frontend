@@ -1,0 +1,20 @@
+/* ServicesListModules.css */
+/* Estilos específicos para la vista de listado de servicios */
+
+.services-list-loading {
+    text-align: center;
+    margin-top: 2rem;
+    font-weight: bold;
+}
+
+.services-list-error {
+    text-align: center;
+    margin-top: 2rem;
+    color: red;
+    font-weight: bold;
+}
+
+.services-list-container {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}

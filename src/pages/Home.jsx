@@ -1,17 +1,15 @@
 ///////////////////////////////////////////////////////////////////////////////////////
-// Home.jsx (modificado con GRID)
+// Home.jsx (modificado con bloque de BÚSQUEDA + GRID)
 //
 // Qué hace ahora:
+// - Muestra una barra de búsqueda arriba de la grilla.
 // - Renderiza SOLO las 8 tarjetas grandes en grilla Bootstrap.
 // - Web → 4 columnas (4 x 2 = 8)
 // - Mobile → 2 columnas (2 x 4 = 8)
 // - Usa SectionCard.
-// - Todo tu código original sigue comentado al final.
-//
-// Este archivo es 100% listo para reemplazar el tuyo.
 ///////////////////////////////////////////////////////////////////////////////////////
 
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 // Importamos SectionCard
@@ -36,8 +34,99 @@ const Home = () => {
     navigate(`/services/${slug}`);
   };
 
+  // ---------------------------------------------------------------------------
+  // AGREGADO JOAN - BLOQUE DE BÚSQUEDA
+  // Declaramos estados locales para los filtros:
+  // - categoria → almacena categoría seleccionada
+  // - localidad → almacena localidad seleccionada
+  // - urgencias → true/false según el checkbox
+  // ---------------------------------------------------------------------------
+
+  const [categoria, setCategoria] = useState("");
+  const [localidad, setLocalidad] = useState("");
+  const [urgencias, setUrgencias] = useState(false);
+
+  // Handler que se dispara al hacer submit en el formulario:
+  const handleBuscar = (e) => {
+    e.preventDefault();
+
+    // Construimos los parámetros de búsqueda como query params:
+    const params = new URLSearchParams();
+
+    if (categoria) params.append("categoria", categoria);
+    if (localidad) params.append("localidad", localidad);
+    if (urgencias) params.append("urgencias24hs", true);
+
+    // Navegamos a la página de resultados con esos filtros:
+    navigate(`/services?${params.toString()}`);
+  };
+
   return (
     <>
+      {/* ---------------------------------------------------------------------
+          AGREGADO JOAN - BLOQUE DE BÚSQUEDA
+          Este bloque se ubica arriba de tu grilla original.
+      --------------------------------------------------------------------- */}
+      <section className="container home-search-bar">
+        <form
+          onSubmit={handleBuscar}
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "1rem",
+            justifyContent: "center",
+          }}
+        >
+          {/* SELECT - Categoría */}
+          <select
+            className="home-search-select"
+            value={categoria}
+            onChange={(e) => setCategoria(e.target.value)}
+          >
+            <option value="">Seleccionar Categoría</option>
+            <option value="Electricidad">Electricidad</option>
+            <option value="Plomería">Plomería</option>
+            <option value="Gasista">Gasista</option>
+            <option value="Carpintería">Carpintería</option>
+            {/* Agregar más categorías aquí si lo deseas */}
+          </select>
+
+          {/* SELECT - Localidad */}
+          <select
+            className="home-search-select"
+            value={localidad}
+            onChange={(e) => setLocalidad(e.target.value)}
+          >
+            <option value="">Seleccionar Localidad</option>
+            <option value="Valencia">Valencia</option>
+            <option value="Madrid">Madrid</option>
+            <option value="Barcelona">Barcelona</option>
+            {/* Agregar más localidades aquí si lo deseas */}
+          </select>
+
+          {/* CHECKBOX - Urgencias 24hs */}
+          <label
+            style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}
+          >
+            <input
+              type="checkbox"
+              checked={urgencias}
+              onChange={(e) => setUrgencias(e.target.checked)}
+            />
+            Urgencias 24hs
+          </label>
+
+          {/* BOTÓN - Buscar ahora */}
+          <button type="submit" className="home-search-button">
+            Buscar ahora
+          </button>
+        </form>
+      </section>
+
+      {/* ---------------------------------------------------------------------
+          TU CÓDIGO ORIGINAL DE HOME → NO SE TOCA
+      --------------------------------------------------------------------- */}
+
       {/* Contenedor Bootstrap */}
       <div className="container container-principal">
         {/* Título grande 

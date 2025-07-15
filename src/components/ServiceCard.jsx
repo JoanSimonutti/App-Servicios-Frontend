@@ -7,12 +7,6 @@
 //   - Teléfono (abre enlace + registra clic)
 //   - WhatsApp (abre enlace + registra clic)
 //   - Ver más detalles
-//
-// Rediseñado:
-// - Elimina Bootstrap.
-// - Usa clases propias coherentes con header, login, home, etc.
-// - Diseño dark+gold profesional.
-// - Completamente responsive.
 ///////////////////////////////////////////////////////////////////////////////////////
 
 import React from "react";

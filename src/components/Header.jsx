@@ -3,9 +3,8 @@
 //
 // Qué hace:
 // - Renderiza el header superior fijo.
-// - Logo SERVIPRO en dorado, clickeable a home.
 // - Todos los links son texto plano, no botones.
-// - Links en blanco, se subrayan y cambian a dorado al hover.
+// - Links en blanco y se subrayan.
 // - Incluye Logout como link para coherencia visual.
 // - Diseño limpio y profesional.
 //

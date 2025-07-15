@@ -20,6 +20,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "../pages/Home"; // Página principal de la app (inicio)
 import Detalle from "../pages/Detalle"; // Página de detalle de un servicio
 import AdminClicks from "../pages/AdminClicks"; // Página de vista de admin
+import ServicesList from "../pages/ServicesList";
 
 ///////////////////////////////////////////////////////////////////////////////////////
 // PrivateRoute y páginas de auth
@@ -57,6 +58,7 @@ export default function AppRoutes() {
     <Routes>
       {/* Ruta raíz "/" → renderiza el componente Home */}
       <Route path="/" element={<Home />} />
+      <Route path="/services" element={<ServicesList />} />
 
       {/*Rutas públicas de autenticación */}
       <Route path="/login" element={<Login />} />
