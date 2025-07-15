@@ -108,7 +108,7 @@ const ServicesList = () => {
   return (
     <>
       {/* Contenido principal */}
-      <div className="container services-list-container">
+      <div className="services-list-container">
         {/* Título de la página */}
         <h1 className="text-center my-4">Resultados de búsqueda</h1>
 
