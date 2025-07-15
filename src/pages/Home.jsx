@@ -125,19 +125,6 @@ const Home = () => {
             <form onSubmit={handleBuscar} className="home-search-fields">
               <select
                 className="home-search-select"
-                value={categoria}
-                onChange={(e) => setCategoria(e.target.value)}
-              >
-                <option value="">Seleccionar Categoría</option>
-                {categorias.map((cat) => (
-                  <option key={cat} value={cat}>
-                    {cat}
-                  </option>
-                ))}
-              </select>
-
-              <select
-                className="home-search-select"
                 value={localidad}
                 onChange={(e) => setLocalidad(e.target.value)}
               >
@@ -145,6 +132,18 @@ const Home = () => {
                 {localidades.map((loc) => (
                   <option key={loc} value={loc}>
                     {loc}
+                  </option>
+                ))}
+              </select>
+              <select
+                className="home-search-select"
+                value={categoria}
+                onChange={(e) => setCategoria(e.target.value)}
+              >
+                <option value="">Seleccionar Categoría</option>
+                {categorias.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
                   </option>
                 ))}
               </select>

@@ -3,7 +3,8 @@
 //////////////////////////////////////////////////////////////////////////// */
 
 .service-card {
-    background-color: #dbdbdb;
+    background-color: #f6ca7d;
+    /*    background-color: #dbdbdb;*/
     padding: 0.8rem;
     border-radius: 5px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);

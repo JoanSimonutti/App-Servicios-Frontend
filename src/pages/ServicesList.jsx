@@ -108,10 +108,12 @@ const ServicesList = () => {
   return (
     <>
       {/* Contenido principal */}
-      <div className="services-list-container">
+      <div className="container services-list-container">
         {/* Título de la página */}
-        <h1 className="text-center my-4">Resultados de búsqueda</h1>
-
+        <p className="text-center">
+          {" "}
+          Se encontraron <strong>{services.length}</strong> servicios
+        </p>
         {/* Si no hay resultados */}
         {services.length === 0 && (
           <p className="text-center">
@@ -129,7 +131,7 @@ const ServicesList = () => {
             .map((servicio) => (
               <div
                 key={servicio._id}
-                className="col-12 col-sm-6 col-lg-4 d-flex justify-content-center mb-4"
+                className="col-12 col-sm-12 col-lg-4 d-flex justify-content-center mb-4"
               >
                 <ServiceCard service={servicio} onVerMas={handleVerMas} />
               </div>
