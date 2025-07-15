@@ -108,7 +108,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="container container-principal">
+      <div className="container-principal">
         {/* ============================================================
    SECCIÓN: BÚSQUEDA RÁPIDA
 ============================================================ */}
