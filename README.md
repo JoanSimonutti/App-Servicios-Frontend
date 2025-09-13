@@ -9,7 +9,7 @@
 
 ## Sobre este proyecto
 
-- Frontend diseñado para consumir y visualizar los servicios gestionados por [App-Servicios-Backend](https://github.com/JoanSimonutti/App-Servicios-Backend)
+- Frontend responsivo diseñado para consumir y visualizar los servicios gestionados por [App-Servicios-Backend](https://github.com/JoanSimonutti/App-Servicios-Backend)
 - Permite a los usuarios:
   - Buscar y filtrar prestadores por categoría y localidad.
   - Ver detalles ampliados de cada servicio.
@@ -57,6 +57,8 @@
   - Clics en WhatsApp.
   - Clics en Teléfono.
   - Total de interacciones por prestador.
+
+### [VIsitar este proyecto](https://app-servicios-frontend.vercel.app)
 
 ---
 
