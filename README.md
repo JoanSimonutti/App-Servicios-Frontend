@@ -58,7 +58,7 @@
   - Clics en Teléfono.
   - Total de interacciones por prestador.
 
-### [VIsitar este proyecto](https://app-servicios-frontend.vercel.app)
+### [Ir a esta app](https://servipro-es.vercel.app/)
 
 ---
 
